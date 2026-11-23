@@ -73,6 +73,7 @@ nav.top .brand img{width:30px;height:auto}
 nav.top .links{display:flex;gap:22px;margin-left:auto;font-size:14.5px}
 nav.top .links a{text-decoration:none;color:#a5b3c2}
 nav.top .links a:hover{color:#fff}
+@media (max-width:1180px){nav.top .links .opt{display:none}nav.top .links{gap:18px}}
 nav.top .gh{display:inline-flex;align-items:center;gap:8px;font:500 13px/1 var(--f-m);text-decoration:none;padding:8px 12px;border:1px solid rgba(170,200,240,.3);border-radius:999px}
 nav.top .gh svg{width:16px;height:16px}
 @media (max-width:860px){nav.top .links{display:none}nav.top .gh{margin-left:auto}}
@@ -364,6 +365,32 @@ footer a:first-child{margin-left:0}
 .wm-close{margin-top:28px;max-width:860px;font:500 clamp(18px,1.6vw,22px)/1.45 var(--f-d);color:var(--fg)}
 @media (max-width:960px){.firsts,.stack4{grid-template-columns:repeat(2,minmax(0,1fr))}.stack4 div:nth-child(3){border-left:0}.stack4 div:nth-child(n+3){border-top:1px solid var(--line)}}
 @media (max-width:560px){.firsts,.stack4{grid-template-columns:minmax(0,1fr)}.stack4 div{border-left:0;border-top:1px solid var(--line)}.stack4 div:first-child{border-top:0}}
+
+/* team */
+.proof{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border:1px solid rgba(255,255,255,.1);border-radius:var(--r);overflow:hidden;margin-bottom:16px}
+.proof div{padding:22px 22px 24px;border-left:1px solid rgba(255,255,255,.1)}
+.proof div:first-child{border-left:0}
+.proof b{display:block;font:600 clamp(30px,3.2vw,44px)/1 var(--f-d);letter-spacing:-.02em;background:linear-gradient(95deg,#7aa8ff,#46e0cf 55%,#a8f04c);-webkit-background-clip:text;background-clip:text;color:transparent}
+.proof span{display:block;margin-top:10px;font-size:14px;line-height:1.45;color:#a5b3c2}
+.people{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.person{display:grid;grid-template-columns:88px minmax(0,1fr);gap:18px;align-items:start;padding:22px;border-radius:var(--r);border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.03)}
+.person img{width:88px;height:88px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 2px rgba(70,224,207,.35)}
+.person .role{font:500 11.5px/1.3 var(--f-m);letter-spacing:.1em;text-transform:uppercase;color:#46e0cf}
+.person h3{font:600 20px/1.2 var(--f-d);color:#fff;margin:6px 0 8px}
+.person p{font-size:14.5px;line-height:1.5;color:#a5b3c2;margin:0}
+.team-note{margin-top:18px;font:500 12px/1.5 var(--f-m);letter-spacing:.06em;color:#7a8593;text-transform:uppercase}
+@media (max-width:1000px){.people{grid-template-columns:repeat(2,minmax(0,1fr))}.proof{grid-template-columns:repeat(2,minmax(0,1fr))}.proof div:nth-child(3){border-left:0}.proof div:nth-child(n+3){border-top:1px solid rgba(255,255,255,.1)}}
+@media (max-width:620px){.people,.proof{grid-template-columns:minmax(0,1fr)}.proof div{border-left:0;border-top:1px solid rgba(255,255,255,.1)}.proof div:first-child{border-top:0}.person{grid-template-columns:64px minmax(0,1fr)}.person img{width:64px;height:64px}}
+/* faq */
+.faq{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;align-items:start}
+.faq details{border:1px solid var(--line);border-radius:14px;background:var(--ink-2);padding:0 22px}
+.faq summary{list-style:none;cursor:pointer;padding:20px 32px 20px 0;position:relative;font:600 17px/1.35 var(--f-d);color:var(--fg)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";position:absolute;right:0;top:16px;font:400 24px/1 var(--f-d);color:var(--cy);transition:transform .2s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{margin:0 0 20px;font-size:15px;line-height:1.6;color:var(--mute)}
+.faq details p b{color:var(--fg)}
+@media (max-width:860px){.faq{grid-template-columns:minmax(0,1fr)}}
 /* sdk ide */
 .ide{display:grid;grid-template-columns:230px minmax(0,1fr);border-radius:var(--r);border:1px solid var(--line);overflow:hidden;background:#0b111a}
 .tree{border-right:1px solid var(--line);padding:16px 0;font:13px/1.9 var(--f-m);color:#8796a8;background:#080d15}
@@ -431,15 +458,15 @@ footer a:first-child{margin-left:0}
   <div class="wrap">
     <a class="brand" href="#top"><img src="assets/logo-mark.png" alt="">Deep World Model</a>
     <div class="links">
-      <a href="#mission">Mission</a>
       <a href="#world-models">World models</a>
       <a href="#how">How it works</a>
-      <a href="#brain">Spatial Brain</a>
       <a href="#living">Living model</a>
-      <a href="#research">Research</a>
+      <a class="opt" href="#research">Research</a>
       <a href="#build">Build</a>
       <a href="#live">Deployments</a>
-      <a href="#roadmap">Roadmap</a>
+      <a href="#team">Team</a>
+      <a href="#faq">FAQ</a>
+      <a class="opt" href="#roadmap">Roadmap</a>
     </div>
     <a class="gh" href="https://github.com/collectiv-co/deep-world-model"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>GitHub</a>
   </div>
@@ -466,7 +493,7 @@ footer a:first-child{margin-left:0}
     <div class="stats">
       <div class="stat"><div class="n" data-count="35" data-suf="B">35B</div><div class="l">parameter spatial‑semantic model</div></div>
       <div class="stat"><div class="n" data-count="1200" data-pre="~">~1,200</div><div class="l">semantic base classes</div></div>
-      <div class="stat"><div class="n">2<span style="font-size:.5em"> cm</span> / 5<span style="font-size:.5em"> cm</span></div><div class="l">geometry / semantic resolution</div></div>
+      <div class="stat"><div class="n">3<span style="font-size:.5em"> cm</span> / 5<span style="font-size:.5em"> cm</span></div><div class="l">geometry / semantic resolution, priority zones</div></div>
       <div class="stat"><div class="n">&lt;10<span style="font-size:.5em"> h</span></div><div class="l">to model a 170,000 m² live airport terminal</div></div>
       <div class="stat"><div class="n">&lt;1<span style="font-size:.5em"> h</span></div><div class="l">micro‑zone self‑healing, building open</div></div>
     </div>
@@ -1056,7 +1083,30 @@ $ dwm changes metro-central --follow
   </div>
 </section>
 
-<section class="sec" id="horizon" style="padding-top:0">
+<section class="sec dark" id="team">
+  <div class="wrap">
+    <div class="head rv">
+      <div><p class="eb">Team · shipped spatial at city scale</p><h2>Shipped to a whole city.<br><span class="gt">Now, every building.</span></h2></div>
+      <p class="lede">Twenty years of location intelligence across Hong Kong and Macao is what the Deep World Model stands on. 20+ specialists in signal processing, graph neural networks, machine learning, location intelligence and generative AI, with city‑scale deployments behind them.</p>
+    </div>
+    <div class="proof rv">
+      <div><b>9.5M+</b><span>downloads of Hong Kong's citywide contact‑tracing app, in a city of 7.5M people</span></div>
+      <div><b>99</b><span>metro stations with inclusive in‑station navigation</span></div>
+      <div><b>5</b><span>integrated resorts with venue‑wide navigation on Asia's leading resort strip</span></div>
+      <div><b>3M+</b><span>active users on a bank‑grade digital wallet, across 54,000+ merchants</span></div>
+    </div>
+    <div class="people rv">
+      <article class="person"><img src="assets/team/jason.jpg" alt="Jason Chiu" loading="lazy" width="88" height="88"><div><p class="role">Founder · Executive Chairman</p><h3>Jason Chiu</h3><p>Serial entrepreneur with two exits. Angel investor with four more across AI, web3 and deep tech, returning 3× to 30×.</p></div></article>
+      <article class="person"><img src="assets/team/matthew.jpg" alt="Matthew Ng" loading="lazy" width="88" height="88"><div><p class="role">Founder · CEO</p><h3>Matthew Ng</h3><p>Zero‑to‑scale operator. Led the creation of Hong Kong's citywide contact‑tracing app, the city's largest spatial app at 7.5M users, and the customer team behind its #1 social‑payment app.</p></div></article>
+      <article class="person"><img src="assets/team/andrew.jpg" alt="Andrew Fong" loading="lazy" width="88" height="88"><div><p class="role">Founder · CTO</p><h3>Andrew Fong</h3><p>Data‑infrastructure architect for large‑scale enterprise and financial apps, including Hong Kong's #1 social‑payment app and its citywide contact‑tracing app.</p></div></article>
+      <article class="person"><img src="assets/team/janet.jpg" alt="Janet Chan" loading="lazy" width="88" height="88"><div><p class="role">Founder · COO</p><h3>Janet Chan</h3><p>Product design and UX leader. Shipped award‑winning gaming and edtech products in Hong Kong, the US and Europe, and ran operations for the citywide contact‑tracing app.</p></div></article>
+      <article class="person"><img src="assets/team/anton.jpg" alt="Anton Wong" loading="lazy" width="88" height="88"><div><p class="role">Founder · CIO</p><h3>Anton Wong</h3><p>Spatial AI application expert, with large‑scale deployments of spatial AI and 3D reconstruction across Hong Kong, Macao and mainland China.</p></div></article>
+      <article class="person"><img src="assets/team/gary.jpg" alt="Prof. Gary Chan" loading="lazy" width="88" height="88"><div><p class="role">Co‑founder · Chief Scientist</p><h3>Prof. Gary Chan</h3><p>Professor of Computer Science and Engineering at HKUST. Distinguished expert in location intelligence, smart sensing, 3D models and video AI. Princeton and Stanford (PhD). Led the creation of a city‑scale public‑health location platform.</p></div></article>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="horizon">
   <div class="wrap">
     <div class="head rv">
       <div><p class="eb">From one building to every building</p><h2>The ground truth <span class="gt">physical AI runs on.</span></h2></div>
@@ -1093,6 +1143,30 @@ $ dwm changes metro-central --follow
         <li>Community venue contributions</li></ul></div>
     </div>
   </div>
+</section>
+
+<section class="sec" id="faq" style="padding-top:0">
+  <div class="wrap">
+    <div class="head rv">
+      <div><p class="eb">FAQ</p><h2>Straight answers.</h2></div>
+      <p class="lede">What the Deep World Model is, what it is not, and what it takes to put one in your building.</p>
+    </div>
+    <div class="faq rv">
+      <details open><summary>What is the Deep World Model?</summary><p>The world's first real‑time 3D world model for complex physical infrastructure. It turns a building into a photoreal, labelled 3D model that keeps itself current, so robots, AI agents and people can ask it where things are, what they are and what just changed. It is built by Collectiv and runs in production across 100+ venues.</p></details>
+      <details><summary>What makes it the world's first?</summary><p>It is the first system to combine three things, live, in large and busy multi‑level infrastructure such as airports, metro stations and resorts: <b>signal‑first grounding</b> (ambient Wi‑Fi, Bluetooth and geomagnetic signals fused with vision), <b>localised voxel patching</b> (only the changed micro‑zone is rebuilt, from a phone or an existing camera) and <b>machine‑readable semantics</b> served to robots and agents through one API.</p></details>
+      <details><summary>Isn't this just a digital twin?</summary><p>No. A digital twin is a snapshot: accurate on the day of the survey, stale within days, and mostly geometry. The Deep World Model heals itself as the building changes, knows what every object is, and exposes geometry, semantics, routing and a change feed to machines in real time.</p></details>
+      <details><summary>How is it different from generative world models?</summary><p>Generative world models learn from video to imagine plausible worlds, which is valuable for simulating and training agents. The Deep World Model is a world model of real places: measured, labelled and current. The two are complementary: our real geometry gives simulation and training ground truth to start from.</p></details>
+      <details><summary>What does it take to capture a building?</summary><p>Ordinary phones during normal operations. Photos, video, 360° imagery and the ambient signals already in the air are captured passively, and walk‑throughs can be crowdsourced through the Beetle app. No laser rigs, no survey crews, no closures. A new space can start from as few as two photos, because the signals already encode its structure.</p></details>
+      <details><summary>How fast is it?</summary><p>A 170,000 m² airport terminal was modelled in under 10 hours during full passenger operations: about 3 hours of passive capture and 6 hours of neural reconstruction. After that, a changed micro‑zone is regenerated in under an hour while the building stays open, the fastest self‑healing of any 3D world model we know of.</p></details>
+      <details><summary>How accurate is it?</summary><p>Up to 3 cm geometry and 5 cm semantics in priority zones. Resolution is set per zone, so lower‑priority areas can be coarser, up to about 1 m. The semantic layer covers about 1,200 base classes, plus domain extensions for aviation, rail, campus, retail and government.</p></details>
+      <details><summary>How does CCTV keep the model live, and what about privacy?</summary><p>Each existing camera is registered into the model once. Live frames are compared with what the model expects to see, and only persistent changes such as a new barrier or a moved kiosk trigger a rebuild. The model needs geometry and change, not identities: people and passing motion are filtered out before anything is rebuilt, and the activity layer carries anonymous counts and flows on top of the geometry, never baked into it. Where video is processed is agreed with each venue to meet its data‑protection requirements.</p></details>
+      <details><summary>What can robots and AI agents do with it?</summary><p>Localise, route and act on the same live model. Fleets connect through VDA 5050, Open‑RMF and ROS 2; 3D exports use OpenUSD; AI agents call it through MCP‑style tools for spatial lookup and routing. A change feed tells every connected machine the moment a space changes, so no one acts on a stale world model.</p></details>
+      <details><summary>Where is it running today?</summary><p>Across 100+ venues in Asia, including one of the world's busiest international airports, one of the world's largest metro networks, a cross‑border high‑speed rail terminus, one of the world's largest cultural districts, a top‑ranked research university, integrated resorts and landmark malls. More than 5M people a day move through spaces the model sees.</p></details>
+      <details><summary>Who builds it, and how does HKUST fit in?</summary><p>Collectiv designs, builds and runs the Deep World Model. Collectiv's co‑founder and Chief Scientist, Prof. Gary Chan, leads a research group at HKUST that publishes peer‑reviewed work in neighbouring areas. That research sharpens our thinking; the model, its methods and the production system are Collectiv's own engineering.</p></details>
+      <details><summary>Can I use it, and is it open source?</summary><p>The API is available by invitation today; email info@collectiv.co. Python and TypeScript SDKs, an MCP server and a ROS 2 package are next on the roadmap. The model and this repository are proprietary today (see LICENSE); each SDK will carry its own licence when it is published here.</p></details>
+    </div>
+  </div>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is the Deep World Model?", "acceptedAnswer": {"@type": "Answer", "text": "The world's first real‑time 3D world model for complex physical infrastructure. It turns a building into a photoreal, labelled 3D model that keeps itself current, so robots, AI agents and people can ask it where things are, what they are and what just changed. It is built by Collectiv and runs in production across 100+ venues."}}, {"@type": "Question", "name": "What makes it the world's first?", "acceptedAnswer": {"@type": "Answer", "text": "It is the first system to combine three things, live, in large and busy multi‑level infrastructure such as airports, metro stations and resorts: signal‑first grounding (ambient Wi‑Fi, Bluetooth and geomagnetic signals fused with vision), localised voxel patching (only the changed micro‑zone is rebuilt, from a phone or an existing camera) and machine‑readable semantics served to robots and agents through one API."}}, {"@type": "Question", "name": "Isn't this just a digital twin?", "acceptedAnswer": {"@type": "Answer", "text": "No. A digital twin is a snapshot: accurate on the day of the survey, stale within days, and mostly geometry. The Deep World Model heals itself as the building changes, knows what every object is, and exposes geometry, semantics, routing and a change feed to machines in real time."}}, {"@type": "Question", "name": "How is it different from generative world models?", "acceptedAnswer": {"@type": "Answer", "text": "Generative world models learn from video to imagine plausible worlds, which is valuable for simulating and training agents. The Deep World Model is a world model of real places: measured, labelled and current. The two are complementary: our real geometry gives simulation and training ground truth to start from."}}, {"@type": "Question", "name": "What does it take to capture a building?", "acceptedAnswer": {"@type": "Answer", "text": "Ordinary phones during normal operations. Photos, video, 360° imagery and the ambient signals already in the air are captured passively, and walk‑throughs can be crowdsourced through the Beetle app. No laser rigs, no survey crews, no closures. A new space can start from as few as two photos, because the signals already encode its structure."}}, {"@type": "Question", "name": "How fast is it?", "acceptedAnswer": {"@type": "Answer", "text": "A 170,000 m² airport terminal was modelled in under 10 hours during full passenger operations: about 3 hours of passive capture and 6 hours of neural reconstruction. After that, a changed micro‑zone is regenerated in under an hour while the building stays open, the fastest self‑healing of any 3D world model we know of."}}, {"@type": "Question", "name": "How accurate is it?", "acceptedAnswer": {"@type": "Answer", "text": "Up to 3 cm geometry and 5 cm semantics in priority zones. Resolution is set per zone, so lower‑priority areas can be coarser, up to about 1 m. The semantic layer covers about 1,200 base classes, plus domain extensions for aviation, rail, campus, retail and government."}}, {"@type": "Question", "name": "How does CCTV keep the model live, and what about privacy?", "acceptedAnswer": {"@type": "Answer", "text": "Each existing camera is registered into the model once. Live frames are compared with what the model expects to see, and only persistent changes such as a new barrier or a moved kiosk trigger a rebuild. The model needs geometry and change, not identities: people and passing motion are filtered out before anything is rebuilt, and the activity layer carries anonymous counts and flows on top of the geometry, never baked into it. Where video is processed is agreed with each venue to meet its data‑protection requirements."}}, {"@type": "Question", "name": "What can robots and AI agents do with it?", "acceptedAnswer": {"@type": "Answer", "text": "Localise, route and act on the same live model. Fleets connect through VDA 5050, Open‑RMF and ROS 2; 3D exports use OpenUSD; AI agents call it through MCP‑style tools for spatial lookup and routing. A change feed tells every connected machine the moment a space changes, so no one acts on a stale world model."}}, {"@type": "Question", "name": "Where is it running today?", "acceptedAnswer": {"@type": "Answer", "text": "Across 100+ venues in Asia, including one of the world's busiest international airports, one of the world's largest metro networks, a cross‑border high‑speed rail terminus, one of the world's largest cultural districts, a top‑ranked research university, integrated resorts and landmark malls. More than 5M people a day move through spaces the model sees."}}, {"@type": "Question", "name": "Who builds it, and how does HKUST fit in?", "acceptedAnswer": {"@type": "Answer", "text": "Collectiv designs, builds and runs the Deep World Model. Collectiv's co‑founder and Chief Scientist, Prof. Gary Chan, leads a research group at HKUST that publishes peer‑reviewed work in neighbouring areas. That research sharpens our thinking; the model, its methods and the production system are Collectiv's own engineering."}}, {"@type": "Question", "name": "Can I use it, and is it open source?", "acceptedAnswer": {"@type": "Answer", "text": "The API is available by invitation today; email info@collectiv.co. Python and TypeScript SDKs, an MCP server and a ROS 2 package are next on the roadmap. The model and this repository are proprietary today (see LICENSE); each SDK will carry its own licence when it is published here."}}]}</script>
 </section>
 
 <section class="sec" style="padding-top:0">

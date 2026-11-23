@@ -14,6 +14,8 @@
 [**World models**](#where-dwm-sits-among-world-models) ·
 [**Living model**](#a-living-world-model) ·
 [**Research**](#science-and-research) ·
+[**Team**](#team) ·
+[**FAQ**](#faq) ·
 [**SDK preview**](#sdk-preview) ·
 [**API access**](mailto:info@collectiv.co?subject=Deep%20World%20Model%20API%20access) ·
 [**Collectiv**](https://collectiv.co)
@@ -82,7 +84,7 @@ The **Deep World Model (DWM)** turns any building into a living, machine‑reada
 <tr>
 <td align="center" width="20%"><h3>35B</h3><sub>parameter spatial‑semantic model</sub></td>
 <td align="center" width="20%"><h3>~1,200</h3><sub>semantic base classes</sub></td>
-<td align="center" width="20%"><h3>2 cm / 5 cm</h3><sub>geometry / semantic resolution</sub></td>
+<td align="center" width="20%"><h3>3 cm / 5 cm</h3><sub>geometry / semantic resolution, priority zones</sub></td>
 <td align="center" width="20%"><h3>&lt;10 h</h3><sub>to model a 170,000 m² terminal in live operation</sub></td>
 <td align="center" width="20%"><h3>&lt;1 h</h3><sub>micro‑zone self‑healing</sub></td>
 </tr>
@@ -575,6 +577,34 @@ $ dwm changes metro-central --follow
 | **Next** | Every major airport, station and campus: SDKs, an MCP server and open exporters so any robot or agent can plug in |
 | **Ultimately** | A planet‑scale, continuously updated world model of the built environment: the ground truth physical AI runs on |
 
+## Team
+
+> **Shipped to a whole city. Now, every building.**
+
+Twenty years of location intelligence across Hong Kong and Macao is what the Deep World Model stands on. 20+ specialists in signal processing, graph neural networks, machine learning, location intelligence and generative AI, with city‑scale deployments behind them.
+
+<table>
+<tr>
+<td align="center" width="25%"><h3>9.5M+</h3><sub>downloads of Hong Kong's citywide contact‑tracing app, in a city of 7.5M people</sub></td>
+<td align="center" width="25%"><h3>99</h3><sub>metro stations with inclusive in‑station navigation</sub></td>
+<td align="center" width="25%"><h3>5</h3><sub>integrated resorts with venue‑wide navigation on Asia's leading resort strip</sub></td>
+<td align="center" width="25%"><h3>3M+</h3><sub>active users on a bank‑grade digital wallet, across 54,000+ merchants</sub></td>
+</tr>
+</table>
+
+<table>
+<tr>
+<td width="33%" valign="top" align="center"><img src="docs/assets/team/jason.jpg" width="120" alt="Jason Chiu"><br><b>Jason Chiu</b><br><sub>FOUNDER · EXECUTIVE CHAIRMAN</sub><br><br><sub>Serial entrepreneur with two exits. Angel investor with four more across AI, web3 and deep tech, returning 3× to 30×.</sub></td>
+<td width="33%" valign="top" align="center"><img src="docs/assets/team/matthew.jpg" width="120" alt="Matthew Ng"><br><b>Matthew Ng</b><br><sub>FOUNDER · CEO</sub><br><br><sub>Zero‑to‑scale operator. Led the creation of Hong Kong's citywide contact‑tracing app, the city's largest spatial app at 7.5M users, and the customer team behind its #1 social‑payment app.</sub></td>
+<td width="33%" valign="top" align="center"><img src="docs/assets/team/andrew.jpg" width="120" alt="Andrew Fong"><br><b>Andrew Fong</b><br><sub>FOUNDER · CTO</sub><br><br><sub>Data‑infrastructure architect for large‑scale enterprise and financial apps, including Hong Kong's #1 social‑payment app and its citywide contact‑tracing app.</sub></td>
+</tr>
+<tr>
+<td width="33%" valign="top" align="center"><img src="docs/assets/team/janet.jpg" width="120" alt="Janet Chan"><br><b>Janet Chan</b><br><sub>FOUNDER · COO</sub><br><br><sub>Product design and UX leader. Shipped award‑winning gaming and edtech products in Hong Kong, the US and Europe, and ran operations for the citywide contact‑tracing app.</sub></td>
+<td width="33%" valign="top" align="center"><img src="docs/assets/team/anton.jpg" width="120" alt="Anton Wong"><br><b>Anton Wong</b><br><sub>FOUNDER · CIO</sub><br><br><sub>Spatial AI application expert, with large‑scale deployments of spatial AI and 3D reconstruction across Hong Kong, Macao and mainland China.</sub></td>
+<td width="33%" valign="top" align="center"><img src="docs/assets/team/gary.jpg" width="120" alt="Prof. Gary Chan"><br><b>Prof. Gary Chan</b><br><sub>CO‑FOUNDER · CHIEF SCIENTIST</sub><br><br><sub>Professor of Computer Science and Engineering at HKUST. Distinguished expert in location intelligence, smart sensing, 3D models and video AI. Princeton and Stanford (PhD). Led the creation of a city‑scale public‑health location platform.</sub></td>
+</tr>
+</table>
+
 ## Roadmap
 
 **Shipped**
@@ -593,6 +623,92 @@ $ dwm changes metro-central --follow
 - [ ] Sample datasets and evaluation scripts
 - [ ] Technical report and model card
 - [ ] Community venue contributions
+
+## FAQ
+
+<details>
+<summary><b>What is the Deep World Model?</b></summary>
+
+The world's first real‑time 3D world model for complex physical infrastructure. It turns a building into a photoreal, labelled 3D model that keeps itself current, so robots, AI agents and people can ask it where things are, what they are and what just changed. It is built by Collectiv and runs in production across 100+ venues.
+
+</details>
+
+<details>
+<summary><b>What makes it the world's first?</b></summary>
+
+It is the first system to combine three things, live, in large and busy multi‑level infrastructure such as airports, metro stations and resorts: <b>signal‑first grounding</b> (ambient Wi‑Fi, Bluetooth and geomagnetic signals fused with vision), <b>localised voxel patching</b> (only the changed micro‑zone is rebuilt, from a phone or an existing camera) and <b>machine‑readable semantics</b> served to robots and agents through one API.
+
+</details>
+
+<details>
+<summary><b>Isn't this just a digital twin?</b></summary>
+
+No. A digital twin is a snapshot: accurate on the day of the survey, stale within days, and mostly geometry. The Deep World Model heals itself as the building changes, knows what every object is, and exposes geometry, semantics, routing and a change feed to machines in real time.
+
+</details>
+
+<details>
+<summary><b>How is it different from generative world models?</b></summary>
+
+Generative world models learn from video to imagine plausible worlds, which is valuable for simulating and training agents. The Deep World Model is a world model of real places: measured, labelled and current. The two are complementary: our real geometry gives simulation and training ground truth to start from.
+
+</details>
+
+<details>
+<summary><b>What does it take to capture a building?</b></summary>
+
+Ordinary phones during normal operations. Photos, video, 360° imagery and the ambient signals already in the air are captured passively, and walk‑throughs can be crowdsourced through the Beetle app. No laser rigs, no survey crews, no closures. A new space can start from as few as two photos, because the signals already encode its structure.
+
+</details>
+
+<details>
+<summary><b>How fast is it?</b></summary>
+
+A 170,000 m² airport terminal was modelled in under 10 hours during full passenger operations: about 3 hours of passive capture and 6 hours of neural reconstruction. After that, a changed micro‑zone is regenerated in under an hour while the building stays open, the fastest self‑healing of any 3D world model we know of.
+
+</details>
+
+<details>
+<summary><b>How accurate is it?</b></summary>
+
+Up to 3 cm geometry and 5 cm semantics in priority zones. Resolution is set per zone, so lower‑priority areas can be coarser, up to about 1 m. The semantic layer covers about 1,200 base classes, plus domain extensions for aviation, rail, campus, retail and government.
+
+</details>
+
+<details>
+<summary><b>How does CCTV keep the model live, and what about privacy?</b></summary>
+
+Each existing camera is registered into the model once. Live frames are compared with what the model expects to see, and only persistent changes such as a new barrier or a moved kiosk trigger a rebuild. The model needs geometry and change, not identities: people and passing motion are filtered out before anything is rebuilt, and the activity layer carries anonymous counts and flows on top of the geometry, never baked into it. Where video is processed is agreed with each venue to meet its data‑protection requirements.
+
+</details>
+
+<details>
+<summary><b>What can robots and AI agents do with it?</b></summary>
+
+Localise, route and act on the same live model. Fleets connect through VDA 5050, Open‑RMF and ROS 2; 3D exports use OpenUSD; AI agents call it through MCP‑style tools for spatial lookup and routing. A change feed tells every connected machine the moment a space changes, so no one acts on a stale world model.
+
+</details>
+
+<details>
+<summary><b>Where is it running today?</b></summary>
+
+Across 100+ venues in Asia, including one of the world's busiest international airports, one of the world's largest metro networks, a cross‑border high‑speed rail terminus, one of the world's largest cultural districts, a top‑ranked research university, integrated resorts and landmark malls. More than 5M people a day move through spaces the model sees.
+
+</details>
+
+<details>
+<summary><b>Who builds it, and how does HKUST fit in?</b></summary>
+
+Collectiv designs, builds and runs the Deep World Model. Collectiv's co‑founder and Chief Scientist, Prof. Gary Chan, leads a research group at HKUST that publishes peer‑reviewed work in neighbouring areas. That research sharpens our thinking; the model, its methods and the production system are Collectiv's own engineering.
+
+</details>
+
+<details>
+<summary><b>Can I use it, and is it open source?</b></summary>
+
+The API is available by invitation today; email info@collectiv.co. Python and TypeScript SDKs, an MCP server and a ROS 2 package are next on the roadmap. The model and this repository are proprietary today (see LICENSE); each SDK will carry its own licence when it is published here.
+
+</details>
 
 ## Repository layout
 
