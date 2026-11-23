@@ -1,0 +1,1308 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Deep World Model · The Spatial Brain</title>
+<meta name="description" content="Every building deserves a brain. The Deep World Model is the spatial layer of physical AI: a living, real-time 3D memory of the world's buildings for people, robot fleets and AI agents.">
+<meta property="og:title" content="Deep World Model · The Spatial Brain">
+<meta property="og:description" content="Real-time 3D of any indoor space from two photos and ambient signals. Self-healing, semantic, machine-readable.">
+<meta property="og:image" content="assets/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#f3f4ef;--ink-2:#fff;--ink-3:#e7eae4;
+  --line:rgba(12,22,38,.11);--line-2:rgba(12,22,38,.22);
+  --fg:#0c1626;--mute:#4b5869;--dim:#7a8593;
+  --cy:#2156f5;--tl:#0b9f90;--lm:#4f9a12;--or:#c4701c;
+  --grad:linear-gradient(95deg,#2156f5,#0aa39a 58%,#4fae17);
+  --f-d:"Space Grotesk","Avenir Next",system-ui,sans-serif;
+  --f-b:"IBM Plex Sans","Helvetica Neue",system-ui,sans-serif;
+  --f-m:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,monospace;
+  --g:clamp(16px,4vw,56px);--max:1280px;--r:16px;
+  color-scheme:light;
+}
+.dark{
+  --ink:#05080e;--ink-2:#0b111a;--ink-3:#131c28;
+  --line:rgba(170,200,240,.14);--line-2:rgba(170,200,240,.3);
+  --fg:#f1f6fb;--mute:#a5b3c2;--dim:#6c7a8a;
+  --cy:#5cc8ff;--tl:#2fd6c0;--lm:#9df03c;--or:#ffb45c;
+  --grad:linear-gradient(95deg,#7aa8ff,#46e0cf 55%,#a8f04c);
+  background:var(--ink);color:var(--fg);color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:72px;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{margin:0;background:var(--ink);color:var(--fg);font:17px/1.55 var(--f-b);-webkit-font-smoothing:antialiased;overflow-x:clip;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:56px 56px;background-attachment:fixed}
+img{max-width:100%;display:block}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--cy);outline-offset:3px;border-radius:4px}
+.wrap{max-width:var(--max);margin:0 auto;padding-inline:var(--g)}
+h1,h2,h3{font-family:var(--f-d);font-weight:700;letter-spacing:-.03em;line-height:1;margin:0;text-wrap:balance}
+h1{font-size:clamp(44px,8vw,112px);line-height:.95}
+h2{font-size:clamp(34px,5.2vw,72px)}
+h3{font-size:clamp(19px,1.7vw,24px);letter-spacing:-.015em;line-height:1.15}
+p{margin:0}
+.gt{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.eb{font:500 13px/1.4 var(--f-m);letter-spacing:.12em;text-transform:uppercase;color:var(--cy);margin:0 0 18px}
+.lede{font-size:clamp(17px,1.45vw,21px);color:var(--mute);max-width:58ch}
+.note{font:500 11.5px/1.5 var(--f-m);letter-spacing:.06em;text-transform:uppercase;color:var(--dim)}
+.sec{padding-block:clamp(72px,9vw,140px)}
+.head{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:20px 48px;align-items:end;margin-bottom:clamp(32px,4.5vw,60px)}
+@media (max-width:860px){.head{grid-template-columns:1fr}}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:13px 20px;border-radius:999px;font:600 15px/1 var(--f-b);text-decoration:none;border:1px solid var(--line-2);background:rgba(255,255,255,.06);backdrop-filter:blur(8px);transition:transform .2s,border-color .2s}
+.btn:hover{transform:translateY(-1px);border-color:var(--fg)}
+.btn.pri{background:var(--fg);color:var(--ink);border-color:var(--fg)}
+.btn svg{width:18px;height:18px}
+
+/* nav */
+nav.top{position:sticky;top:0;z-index:50;background:rgba(5,8,14,.72);backdrop-filter:blur(14px) saturate(1.4);border-bottom:1px solid rgba(170,200,240,.12);color:#f1f6fb}
+nav.top .wrap{display:flex;align-items:center;gap:24px;height:60px}
+nav.top .brand{display:flex;align-items:center;gap:10px;font:700 16px/1 var(--f-d);letter-spacing:-.01em;text-decoration:none;white-space:nowrap}
+nav.top .brand img{width:30px;height:auto}
+nav.top .links{display:flex;gap:22px;margin-left:auto;font-size:14.5px}
+nav.top .links a{text-decoration:none;color:#a5b3c2}
+nav.top .links a:hover{color:#fff}
+nav.top .gh{display:inline-flex;align-items:center;gap:8px;font:500 13px/1 var(--f-m);text-decoration:none;padding:8px 12px;border:1px solid rgba(170,200,240,.3);border-radius:999px}
+nav.top .gh svg{width:16px;height:16px}
+@media (max-width:860px){nav.top .links{display:none}nav.top .gh{margin-left:auto}}
+
+/* hero */
+.hero{position:relative;min-height:min(92vh,900px);display:flex;align-items:flex-end;overflow:hidden;isolation:isolate}
+.hero .bg{position:absolute;inset:0;z-index:-2;background:url(assets/og.jpg) 100% 0%/auto 260% no-repeat;opacity:.4;transform:scale(1.04)}
+@media (max-aspect-ratio:1/1){.hero .bg{background-size:auto 200%;background-position:100% 0%}}
+.hero canvas{position:absolute;inset:0;z-index:-1;width:100%;height:100%}
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(120% 80% at 70% 20%,transparent,rgba(5,8,14,.55) 60%,#05080e),linear-gradient(transparent 55%,#05080e)}
+.hero .wrap{width:100%;padding-block:clamp(110px,14vh,180px) clamp(48px,7vh,88px)}
+.hero .lede{margin-top:28px;max-width:60ch}
+.hero .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:36px}
+.pill{display:inline-flex;align-items:center;gap:10px;padding:7px 14px 7px 8px;border:1px solid var(--line-2);border-radius:999px;font:500 12.5px/1 var(--f-m);letter-spacing:.04em;color:var(--mute);margin-bottom:28px;background:rgba(5,8,14,.5)}
+.pill b{background:var(--grad);color:#05080e;padding:5px 8px;border-radius:999px;font-weight:600}
+.dot{width:8px;height:8px;border-radius:50%;background:#2fd6c0;box-shadow:0 0 0 0 rgba(47,214,192,.6);animation:pulse 2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 10px rgba(47,214,192,0)}100%{box-shadow:0 0 0 0 rgba(47,214,192,0)}}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.stat{padding:28px clamp(12px,1.6vw,24px);border-left:1px solid var(--line)}
+.stat:first-child{border-left:0}
+.stat .n{font:700 clamp(30px,3.4vw,52px)/1 var(--f-d);letter-spacing:-.03em}
+.stat .l{margin-top:10px;font-size:14px;color:var(--mute);line-height:1.35}
+@media (max-width:900px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.stat{border-left:0;border-top:1px solid var(--line)}.stat:nth-child(even){border-left:1px solid var(--line)}.stat:nth-child(-n+2){border-top:0}.stat:last-child{grid-column:1/-1}}
+
+/* problem */
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.vs .card{padding:clamp(24px,3vw,40px);border-radius:var(--r);border:1px solid var(--line);background:var(--ink-2)}
+.vs .card.good{background:#05080e;color:#f1f6fb;border-color:#05080e;position:relative;overflow:hidden}
+.vs .card.good::before{content:"";position:absolute;inset:auto -20% -60% -20%;height:120%;background:radial-gradient(closest-side,rgba(70,224,207,.22),transparent)}
+.vs .big{font:700 clamp(40px,5.5vw,80px)/1 var(--f-d);letter-spacing:-.04em;margin:14px 0 14px}
+.vs .card p{color:var(--mute)}
+.vs .card.good p{color:#a5b3c2}
+@media (max-width:760px){.vs{grid-template-columns:1fr}}
+
+/* pipeline */
+.pipe{border-radius:calc(var(--r) + 4px);overflow:hidden;border:1px solid var(--line)}
+.pipe-stage{position:relative;aspect-ratio:16/8;background:#05080e}
+.pipe-stage img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .7s,transform 6s linear;transform:scale(1.04)}
+.pipe-stage img.on{opacity:1;transform:scale(1)}
+.pipe-stage .cap{position:absolute;left:16px;bottom:16px;font:500 12px/1 var(--f-m);letter-spacing:.06em;text-transform:uppercase;color:#f1f6fb;background:rgba(5,8,14,.7);padding:8px 10px;border-radius:8px;backdrop-filter:blur(6px)}
+.pipe-stage .bar{position:absolute;left:0;top:0;height:3px;background:var(--grad);width:0}
+.steps{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));background:var(--ink-2)}
+.step{all:unset;cursor:pointer;padding:20px clamp(12px,1.4vw,20px) 22px;border-left:1px solid var(--line);border-top:3px solid transparent;transition:background .2s}
+.step:first-child{border-left:0}
+.step:hover{background:var(--ink-3)}
+.step[aria-selected=true]{border-top-color:var(--cy);background:var(--ink)}
+.step .k{font:500 12px/1 var(--f-m);color:var(--dim);letter-spacing:.08em}
+.step h3{margin:10px 0 8px;font-size:18px}
+.step p{font-size:14px;color:var(--mute);line-height:1.45}
+@media (max-width:960px){.steps{grid-template-columns:repeat(3,minmax(0,1fr))}.step:nth-child(4){border-left:0}.step:nth-child(n+4){border-top-width:3px;box-shadow:inset 0 1px 0 var(--line)}.pipe-stage{aspect-ratio:4/3}}
+@media (max-width:560px){.steps{grid-template-columns:1fr 1fr}.step:nth-child(4){border-left:1px solid var(--line)}.step:nth-child(odd){border-left:0}.step p{display:none}}
+
+/* capabilities */
+.caps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.cap{padding:28px;border-radius:var(--r);border:1px solid var(--line);background:var(--ink-2);position:relative;overflow:hidden;transition:transform .25s,border-color .25s}
+.cap:hover{transform:translateY(-3px);border-color:var(--line-2)}
+.cap .tag{font:500 11.5px/1 var(--f-m);letter-spacing:.12em;color:var(--tl);text-transform:uppercase}
+.cap h3{margin:16px 0 10px}
+.cap p{font-size:15.5px;color:var(--mute)}
+.cap .ico{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:var(--ink);border:1px solid var(--line);margin-bottom:22px}
+.cap .ico svg{width:22px;height:22px;stroke:var(--cy);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+@media (max-width:960px){.caps{grid-template-columns:1fr 1fr}}
+@media (max-width:620px){.caps{grid-template-columns:1fr}}
+
+/* compare slider */
+.cmp{position:relative;aspect-ratio:16/9;border-radius:var(--r);overflow:hidden;user-select:none;touch-action:pan-y;background:#05080e;cursor:ew-resize}
+.cmp img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
+.cmp .after{clip-path:inset(0 0 0 var(--x,50%))}
+.cmp .h{position:absolute;top:0;bottom:0;left:var(--x,50%);width:2px;background:#fff;transform:translateX(-1px);box-shadow:0 0 18px rgba(70,224,207,.8)}
+.cmp .h::after{content:"⟷";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:#fff;color:#05080e;display:grid;place-items:center;font-size:18px;font-weight:700}
+.cmp .lb{position:absolute;top:14px;font:500 12px/1 var(--f-m);letter-spacing:.06em;text-transform:uppercase;color:#fff;background:rgba(5,8,14,.7);padding:8px 10px;border-radius:8px}
+.cmp .lb.l{left:14px}.cmp .lb.r{right:14px}
+.cmp input{position:absolute;inset:0;opacity:0;width:100%;height:100%;cursor:ew-resize;margin:0}
+.two{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(24px,4vw,64px);align-items:center}
+@media (max-width:860px){.two{grid-template-columns:1fr}}
+.kv{margin-top:28px;display:grid;gap:0}
+.kv div{display:flex;justify-content:space-between;gap:16px;padding:14px 0;border-top:1px solid var(--line);font-size:15px}
+.kv div span:first-child{color:var(--mute)}
+.kv div span:last-child{font-weight:600;text-align:right}
+
+/* table */
+.tbl{width:100%;border-collapse:collapse;font-size:15.5px;background:var(--ink-2);border-radius:var(--r);overflow:hidden;border:1px solid var(--line)}
+.tbl th,.tbl td{text-align:left;padding:16px 20px;border-top:1px solid var(--line);vertical-align:top}
+.tbl thead th{border-top:0;font:500 12px/1.3 var(--f-m);letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+.tbl td:first-child{color:var(--mute);width:28%}
+.tbl td:nth-child(2){color:var(--mute)}
+.tbl td:last-child{font-weight:600}
+.tbl thead th:last-child{color:var(--tl)}
+.tblw{overflow-x:auto;border-radius:var(--r)}
+@media (max-width:620px){.tbl{font-size:14px}.tbl th,.tbl td{padding:12px 12px}}
+
+/* api */
+.api{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(24px,4vw,64px);align-items:start}
+@media (max-width:960px){.api{grid-template-columns:1fr}}
+.surf{display:grid;gap:10px}
+.surf button{all:unset;cursor:pointer;display:grid;grid-template-columns:40px 1fr;gap:4px 14px;padding:18px 20px;border:1px solid var(--line);border-radius:14px;background:var(--ink-2);transition:border-color .2s,background .2s}
+.surf button:hover{border-color:var(--line-2)}
+.surf button[aria-selected=true]{border-color:var(--cy);background:var(--ink)}
+.surf .k{grid-row:1/3;font:500 13px/1 var(--f-m);color:var(--dim);padding-top:4px}
+.surf b{font:600 18px/1.2 var(--f-d)}
+.surf span:last-child{font-size:14.5px;color:var(--mute)}
+.code{border-radius:var(--r);overflow:hidden;border:1px solid var(--line)}
+.code .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);font:500 12px/1 var(--f-m);color:var(--dim)}
+.code .bar i{width:10px;height:10px;border-radius:50%;background:var(--ink-3);display:inline-block}
+.code .bar .t{margin-left:8px}
+.code pre{margin:0;padding:20px;overflow-x:auto;font:13.5px/1.65 var(--f-m);color:#d6e2ee;min-height:330px}
+.code .c{color:#6c7a8a}.code .s{color:#46e0cf}.code .n{color:#a8f04c}.code .m{color:#7aa8ff;font-weight:500}.code .kk{color:#f1f6fb}
+
+/* venues */
+.venues{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.venue{position:relative;border-radius:14px;overflow:hidden;aspect-ratio:4/5;background:#05080e;color:#fff}
+.venue img{width:100%;height:100%;object-fit:cover;transition:transform .8s}
+.venue:hover img{transform:scale(1.05)}
+.venue::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 45%,rgba(5,8,14,.92))}
+.venue div{position:absolute;left:18px;right:18px;bottom:16px;z-index:1}
+.venue .note{color:#46e0cf}
+.venue b{display:block;font:600 19px/1.2 var(--f-d);margin-top:6px}
+.venue small{display:block;color:#a5b3c2;font-size:13.5px;margin-top:4px}
+@media (max-width:960px){.venues{grid-template-columns:1fr 1fr}}
+.logos{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.logos span{padding:10px 14px;border:1px solid var(--line-2);border-radius:999px;font:500 13.5px/1 var(--f-b);color:var(--mute);background:var(--ink-2)}
+.logos span b{color:var(--fg);font-weight:600}
+
+/* roadmap */
+.road{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.road .col{padding:26px;border-radius:var(--r);border:1px solid var(--line);background:var(--ink-2)}
+.road .col.now{background:#05080e;color:#f1f6fb;border-color:#05080e}
+.road .col.now li{color:#a5b3c2}
+.road ul{list-style:none;padding:0;margin:18px 0 0;display:grid;gap:12px}
+.road li{display:flex;gap:12px;font-size:15px;color:var(--mute);line-height:1.4}
+.road li::before{content:"";flex:0 0 14px;height:14px;margin-top:3px;border-radius:50%;border:1.5px solid var(--line-2)}
+.road .col.now li::before{background:#2fd6c0;border-color:#2fd6c0}
+.road .col.next li::before{border-color:var(--cy);background:radial-gradient(circle,var(--cy) 35%,transparent 40%)}
+.road h3{display:flex;align-items:center;gap:10px}
+@media (max-width:860px){.road{grid-template-columns:1fr}}
+
+/* cite + cta */
+.cite{position:relative}
+.cite pre{margin:0;padding:24px;border-radius:var(--r);background:#05080e;color:#d6e2ee;font:13.5px/1.7 var(--f-m);overflow-x:auto;border:1px solid var(--line)}
+.cite button{position:absolute;top:12px;right:12px;font:500 12px/1 var(--f-m);padding:9px 12px;border-radius:8px;border:1px solid rgba(170,200,240,.3);background:#0b111a;color:#f1f6fb;cursor:pointer}
+.cta-band{position:relative;overflow:hidden;border-radius:calc(var(--r) + 8px);padding:clamp(40px,7vw,96px);background:#05080e;color:#f1f6fb;isolation:isolate}
+.cta-band::before{content:"";position:absolute;inset:0;z-index:-1;background:url(assets/splat_render.jpg) center/cover;opacity:.35}
+.cta-band::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,#05080e 30%,rgba(5,8,14,.4))}
+.cta-band .lede{color:#a5b3c2;margin-top:20px}
+.cta-band .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.cta-band .btn{color:#f1f6fb;border-color:rgba(170,200,240,.3)}
+.cta-band .btn.pri{background:#f1f6fb;color:#05080e}
+footer{padding:48px 0 64px;color:var(--mute);font-size:14px}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;border-top:1px solid var(--line);padding-top:28px}
+footer a{color:var(--fg);text-decoration:none;margin-left:18px}
+footer a:first-child{margin-left:0}
+
+/* mission & vision */
+.mission{background:#05080e;position:relative;overflow:hidden}
+.mission::before{content:"";position:absolute;inset:-20% -10% auto auto;width:70vw;height:70vw;background:radial-gradient(closest-side,rgba(70,224,207,.14),transparent);pointer-events:none}
+.manifesto{font:700 clamp(36px,6.2vw,96px)/1.02 var(--f-d);letter-spacing:-.035em;max-width:18ch;text-wrap:balance;margin:0}
+.mv{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(32px,6vw,96px);margin-top:clamp(56px,7vw,110px);align-items:start}
+.vis{font:600 clamp(22px,2.2vw,32px)/1.25 var(--f-d);letter-spacing:-.02em}
+.vis strong{color:#fff}
+.vis-sub{color:var(--mute);margin-top:18px;font-size:17px;max-width:62ch}
+.vis-sub strong{color:var(--fg)}
+.ladder{display:grid;gap:0;border-left:1px solid var(--line-2)}
+.ladder div{padding:22px 0 22px 26px;position:relative}
+.ladder div::before{content:"";position:absolute;left:-5px;top:30px;width:9px;height:9px;border-radius:50%;background:var(--dim)}
+.ladder .now::before{background:#2fd6c0;box-shadow:0 0 0 6px rgba(47,214,192,.18)}
+.ladder b{display:block;font:600 clamp(20px,2vw,28px)/1.2 var(--f-d);letter-spacing:-.02em;margin-top:8px;color:var(--mute)}
+.ladder .now b{color:var(--fg);font-size:clamp(26px,2.8vw,40px)}
+@media (max-width:900px){.mv{grid-template-columns:1fr}}
+.why{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.why article{padding:26px;border-radius:var(--r);border:1px solid var(--line);background:var(--ink-2)}
+.why .k{font:500 12px/1 var(--f-m);color:var(--cy);letter-spacing:.1em}
+.why h3{margin:14px 0 10px}
+.why p{font-size:15px;color:var(--mute)}
+@media (max-width:960px){.why{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.why{grid-template-columns:1fr}}
+.sectors{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:14px}
+.sectors>div{padding:22px;border-radius:14px;border:1px solid var(--line);background:var(--ink-2)}
+.sectors .note{color:var(--tl)}
+.sectors b{display:block;font:600 18px/1.25 var(--f-d);margin-top:8px}
+.sectors small{display:block;color:var(--mute);font-size:14px;margin-top:6px;line-height:1.45}
+@media (max-width:900px){.sectors{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.sectors{grid-template-columns:1fr}}
+.hz{display:grid;grid-template-columns:1fr 1fr 1.3fr;gap:16px}
+.hz>div{padding:30px;border-radius:var(--r);border:1px solid var(--line);background:var(--ink-2)}
+.hz h3{margin:12px 0 10px;font-size:clamp(22px,2.2vw,30px)}
+.hz p{color:var(--mute);font-size:15.5px}
+.hz .big{background:#05080e;color:#f1f6fb;border-color:#05080e;background-image:radial-gradient(120% 120% at 100% 0%,rgba(70,224,207,.22),transparent 60%)}
+.hz .big p{color:#a5b3c2}.hz .big .note{color:#46e0cf}
+@media (max-width:860px){.hz{grid-template-columns:1fr}}
+
+/* 3D tour */
+.tour{background:#05080e}
+.viewer{position:relative;aspect-ratio:16/9;max-height:82vh;width:100%;border-radius:calc(var(--r) + 6px);overflow:hidden;background:#05080e;border:1px solid rgba(170,200,240,.16);box-shadow:0 40px 120px -40px rgba(70,224,207,.35)}
+.viewer canvas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none;cursor:grab}
+.viewer canvas:active{cursor:grabbing}
+.viewer .poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .8s;filter:saturate(1.05)}
+.viewer.ready .poster{opacity:0;pointer-events:none}
+.v-top{position:absolute;top:14px;left:14px;right:14px;display:flex;justify-content:space-between;align-items:center;gap:10px;pointer-events:none}
+.v-tabs{display:flex;gap:6px;padding:4px;border-radius:999px;background:rgba(5,8,14,.72);backdrop-filter:blur(10px);border:1px solid rgba(170,200,240,.2);pointer-events:auto}
+.v-tabs button{all:unset;cursor:pointer;padding:8px 14px;border-radius:999px;font:500 13px/1 var(--f-b);color:#a5b3c2;white-space:nowrap}
+.v-tabs button[aria-selected=true]{background:#f1f6fb;color:#05080e}
+.v-live{display:inline-flex;align-items:center;gap:8px;font:500 12px/1 var(--f-m);letter-spacing:.08em;text-transform:uppercase;color:#f1f6fb;background:rgba(5,8,14,.72);padding:9px 12px;border-radius:999px;border:1px solid rgba(170,200,240,.2)}
+.v-load{position:absolute;inset:0;display:none;place-items:center;align-content:center;gap:16px;background:rgba(5,8,14,.55);color:#f1f6fb;font:500 13px/1 var(--f-m);letter-spacing:.06em}
+.viewer.loading .v-load{display:grid}
+.ring{width:44px;height:44px;border-radius:50%;border:3px solid rgba(170,200,240,.2);border-top-color:#46e0cf;animation:spin 1s linear infinite;justify-self:center}
+@keyframes spin{to{transform:rotate(360deg)}}
+.v-start{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);border:0;cursor:pointer;padding:18px 26px;border-radius:999px;background:#f1f6fb;color:#05080e;font:600 17px/1 var(--f-b);box-shadow:0 10px 40px rgba(0,0,0,.4);display:flex;align-items:center;gap:12px;white-space:nowrap}
+.v-start small{font:500 12px/1 var(--f-m);color:#4b5869}
+.viewer.started .v-start{display:none}
+.v-bot{position:absolute;left:14px;right:14px;bottom:14px;display:flex;align-items:center;gap:12px;padding:8px 14px 8px 8px;border-radius:999px;background:rgba(5,8,14,.72);backdrop-filter:blur(10px);border:1px solid rgba(170,200,240,.2);opacity:0;transition:opacity .4s}
+.viewer.ready .v-bot{opacity:1}
+.v-play{all:unset;cursor:pointer;width:34px;height:34px;border-radius:50%;background:#f1f6fb;color:#05080e;display:grid;place-items:center;font-size:12px;flex:0 0 34px}
+.v-bot input{flex:1;accent-color:#46e0cf;min-width:60px}
+.v-hint{font:500 12px/1 var(--f-m);color:#a5b3c2;white-space:nowrap}
+.v-meta{position:absolute;right:16px;bottom:64px;font:500 11.5px/1.4 var(--f-m);letter-spacing:.04em;color:rgba(241,246,251,.75);text-shadow:0 1px 8px rgba(0,0,0,.8);opacity:0;transition:opacity .4s}
+.viewer.ready .v-meta{opacity:1}
+@media (max-width:760px){.viewer{aspect-ratio:3/4;max-height:none}.ready .v-meta,.v-meta{display:none}.v-start{padding:15px 20px;font-size:15px;gap:9px}.v-hint,.v-live{display:none}.v-tabs button{padding:8px 10px;font-size:12px}.v-meta{bottom:62px;left:16px}}
+
+.rv{opacity:0;transform:translateY(18px);transition:opacity .8s,transform .8s}
+.rv.in{opacity:1;transform:none}
+/* living model */
+.clocks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.clk{padding:26px;border-radius:var(--r);border:1px solid var(--line);background:var(--ink-2);display:flex;flex-direction:column;gap:12px}
+.clk h3{margin:0;font-size:21px}
+.clk p{margin:0;color:var(--mute);font-size:15.5px;flex:1}
+.clk b{font:600 13px/1 var(--f-m);letter-spacing:.06em;text-transform:uppercase;color:var(--tl)}
+.clk.hot{border-color:rgba(70,224,207,.55);box-shadow:0 0 0 1px rgba(70,224,207,.25),0 20px 60px -30px rgba(70,224,207,.5)}
+.loop{margin-top:16px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.lp{padding:24px;border-left:1px solid var(--line);position:relative}
+.lp:first-child{border-left:0}
+.lp .k{font:500 12px/1 var(--f-m);color:var(--dim)}
+.lp b{display:block;margin:12px 0 8px;font:600 19px/1.2 var(--f-d)}
+.lp p{margin:0;color:var(--mute);font-size:14.5px}
+.lp:not(:last-child)::after{content:"→";position:absolute;right:-9px;top:22px;z-index:1;font:600 15px/1 var(--f-m);color:var(--tl);background:var(--ink);padding:2px 0}
+.living-cmp{margin-top:clamp(40px,5vw,72px);align-items:start}
+.tiles{position:relative;display:grid;grid-template-columns:repeat(8,1fr);gap:5px;padding:18px;border-radius:var(--r);border:1px solid var(--line);background:var(--ink-2)}
+.tiles i{aspect-ratio:1;border-radius:4px;background:rgba(120,160,210,.12);border:1px solid rgba(120,160,210,.18)}
+.tiles i.on{background:rgba(70,224,207,.35);border-color:#46e0cf;animation:tp 2.4s ease-in-out infinite}
+@keyframes tp{0%,100%{box-shadow:0 0 0 0 rgba(70,224,207,.0)}50%{box-shadow:0 0 0 6px rgba(70,224,207,.25)}}
+.tiles .cam{position:absolute;width:10px;height:10px;border-radius:50%;background:#5cc8ff;box-shadow:0 0 0 4px rgba(92,200,255,.18)}
+.tiles .c1{left:8px;top:8px}.tiles .c2{right:8px;top:46%}.tiles .c3{left:38%;bottom:8px}
+.tcap{margin:12px 0 0;font:500 12.5px/1.4 var(--f-m);color:var(--dim)}
+/* research */
+.prof{display:grid;grid-template-columns:auto 1fr auto;gap:24px;align-items:center;padding:26px 28px;border-radius:var(--r);border:1px solid var(--line);background:var(--ink-2);margin-bottom:16px}
+.pmark{width:72px;height:72px;border-radius:50%;display:grid;place-items:center;background:var(--grad);color:#fff;font:700 24px/1 var(--f-d)}
+.prof h3{margin:0 0 6px;font-size:24px}
+.prof p{margin:0;color:var(--mute);font-size:15px}
+.pfacts{list-style:none;margin:12px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.pfacts li{font:500 12px/1 var(--f-m);letter-spacing:.03em;padding:7px 10px;border-radius:999px;border:1px solid var(--line);color:var(--mute)}
+.prof .btn{color:var(--fg);border-color:var(--line-2);background:transparent;white-space:nowrap}
+.rgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.rcol{padding:26px;border-radius:var(--r);border:1px solid var(--line);background:var(--ink-2)}
+.rcol .tag{font:500 11.5px/1 var(--f-m);letter-spacing:.12em;color:var(--tl);text-transform:uppercase}
+.rcol h3{margin:12px 0 8px;font-size:22px}
+.rcol>p{margin:0 0 16px;color:var(--mute);font-size:15px}
+.rcol ol{margin:0;padding:0;list-style:none;counter-reset:r}
+.rcol li{counter-increment:r;position:relative;padding:12px 0 12px 34px;border-top:1px solid var(--line)}
+.rcol li::before{content:counter(r,decimal-leading-zero);position:absolute;left:0;top:14px;font:500 12px/1 var(--f-m);color:var(--dim)}
+.rcol li a{color:var(--fg);font-weight:600;text-decoration:none;font-size:15px;line-height:1.4}
+.rcol li a:hover{color:var(--cy);text-decoration:underline}
+.rcol li small{display:block;margin-top:4px;color:var(--dim);font-size:12.5px;line-height:1.5}
+.rcol li small b{color:var(--mute);font-weight:600}
+.rcol li em{font-style:normal;color:var(--cy);font-family:var(--f-m);font-size:12px}
+/* sdk ide */
+.ide{display:grid;grid-template-columns:230px minmax(0,1fr);border-radius:var(--r);border:1px solid var(--line);overflow:hidden;background:#0b111a}
+.tree{border-right:1px solid var(--line);padding:16px 0;font:13px/1.9 var(--f-m);color:#8796a8;background:#080d15}
+.tree .tt{padding:0 18px 8px;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:#6c7a8a}
+.tree ul{list-style:none;margin:0;padding:0}
+.tree li{padding:0 18px;white-space:nowrap}
+.tree li.d{color:#b7c4d3}.tree li.d::before{content:"▸ ";color:#6c7a8a}
+.tree li.i1{padding-left:34px}
+.tree button{all:unset;cursor:pointer;color:#8796a8}
+.tree button:hover,.tree button.on{color:#46e0cf}
+.ed{min-width:0;display:flex;flex-direction:column}
+.etabs{display:flex;overflow-x:auto;border-bottom:1px solid var(--line);background:#080d15;scrollbar-width:none}
+.etabs button{all:unset;cursor:pointer;padding:11px 16px;font:500 12.5px/1 var(--f-m);color:#6c7a8a;border-right:1px solid var(--line);white-space:nowrap}
+.etabs button[aria-selected=true]{color:#e6eef7;background:#0b111a;box-shadow:inset 0 2px 0 #46e0cf}
+.src{margin:0;padding:20px 22px;overflow:auto;font:13.5px/1.7 var(--f-m);color:#d6e2ee;height:520px;counter-reset:ln}
+.src .ln{counter-increment:ln}
+.src .ln::before{content:counter(ln);display:inline-block;width:2.4em;margin-right:14px;text-align:right;color:#3a4756;user-select:none}
+.src .c{color:#6c7a8a}.src .s{color:#46e0cf}.src .n{color:#a8f04c}.src .kw{color:#7aa8ff}.src .p{color:#f0b35c}
+.estat{display:flex;gap:16px;align-items:center;padding:9px 16px;border-top:1px solid var(--line);font:500 12px/1 var(--f-m);color:#6c7a8a;background:#080d15}
+.estat #edesc{flex:1}
+.estat button{all:unset;cursor:pointer;color:#b7c4d3;padding:5px 10px;border:1px solid var(--line);border-radius:6px}
+@media (max-width:1020px){.clocks{grid-template-columns:1fr}.loop{grid-template-columns:1fr 1fr}.lp:nth-child(3){border-left:0}.lp:nth-child(n+3){border-top:1px solid var(--line)}.lp:nth-child(2)::after{display:none}.rgrid{grid-template-columns:1fr}.prof{grid-template-columns:auto 1fr}.prof .btn{grid-column:1/-1;justify-self:start}}
+@media (max-width:760px){.loop{grid-template-columns:1fr}.lp{border-left:0;border-top:1px solid var(--line)}.lp:first-child{border-top:0}.lp::after{display:none}.ide{grid-template-columns:1fr}.tree{display:none}.src{height:440px;font-size:12px;padding:16px 12px}.src .ln::before{width:1.8em;margin-right:10px}.prof{grid-template-columns:1fr;padding:22px}.pmark{width:56px;height:56px;font-size:19px}}
+.prof .role{display:inline-block;margin-bottom:10px;font:600 12px/1 var(--f-m);letter-spacing:.1em;text-transform:uppercase;color:#fff;background:var(--grad);padding:7px 11px;border-radius:999px}
+/* paper to product */
+.p2p{margin:clamp(40px,5vw,72px) 0 clamp(40px,5vw,64px)}
+.p2h{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:12px 48px;align-items:end;margin-bottom:24px}
+.p2h h3{margin:0;font-size:clamp(26px,2.6vw,36px)}
+.p2h p{margin:0;color:var(--mute)}
+.stages{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.stages button{all:unset;cursor:pointer;font:500 13px/1 var(--f-m);padding:9px 14px;border-radius:999px;border:1px solid var(--line-2);color:var(--mute)}
+.stages button b{color:var(--dim);font-weight:500;margin-right:4px}
+.stages button[aria-selected=true]{background:var(--fg);color:var(--ink);border-color:var(--fg)}
+.stages button[aria-selected=true] b{color:inherit;opacity:.6}
+.pfs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.pf{margin:0;border-radius:var(--r);border:1px solid var(--line);background:var(--ink-2);overflow:hidden;display:flex;flex-direction:column}
+.pf[hidden]{display:none}
+.pimg{all:unset;cursor:zoom-in;display:block;box-sizing:border-box;background:#fff;border-bottom:1px solid var(--line);padding:18px;height:270px}
+.pimg img{display:block;width:100%;height:100%;object-fit:contain;transition:transform .3s}
+.pimg:hover img{transform:scale(1.03)}
+.pf figcaption{padding:20px 22px 22px;display:flex;flex-direction:column;gap:6px;flex:1}
+.stg{font:500 11.5px/1 var(--f-m);letter-spacing:.1em;text-transform:uppercase;color:var(--tl)}
+.stg b{display:inline-grid;place-items:center;min-width:24px;height:20px;margin-right:6px;border-radius:6px;background:var(--grad);color:#fff;font-weight:600}
+.pt{color:var(--fg);font:600 17px/1.35 var(--f-d);text-decoration:none;margin-top:6px}
+.pt:hover{color:var(--cy);text-decoration:underline}
+.pf small{color:var(--dim);font:500 12px/1.4 var(--f-m)}
+.pf p{margin:8px 0 0;font-size:14.5px;color:var(--mute)}
+.pf p span{display:block;font:500 11px/1 var(--f-m);letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:5px}
+.pf p.dw{padding:12px 14px;border-radius:10px;background:var(--ink);border-left:3px solid var(--tl);color:var(--fg)}
+.pf p.dw span{color:var(--tl)}
+.rlist{margin:0 0 18px;font-size:clamp(22px,2.2vw,30px)}
+.lb{border:0;padding:0;border-radius:14px;max-width:min(1200px,94vw);background:#fff;box-shadow:0 30px 120px rgba(0,0,0,.5)}
+.lb::backdrop{background:rgba(5,8,14,.78);backdrop-filter:blur(4px)}
+.lb img{display:block;max-width:100%;max-height:80vh;margin:0 auto;padding:22px}
+.lb p{margin:0;padding:0 22px 18px;font:500 13px/1.5 var(--f-m);color:#4b5869}
+.lb button{position:absolute;right:10px;top:8px;all:unset;cursor:pointer;font:400 28px/1 var(--f-b);color:#4b5869;padding:6px 12px}
+.lb>button{position:absolute;right:8px;top:6px}
+@media (max-width:1020px){.p2h{grid-template-columns:1fr}.pfs{grid-template-columns:1fr}}
+@media (max-width:760px){.pimg{height:200px;padding:12px}.pf figcaption{padding:16px}}
+</style>
+</head>
+<body>
+
+<nav class="top dark" aria-label="Primary">
+  <div class="wrap">
+    <a class="brand" href="#top"><img src="assets/logo-mark.png" alt="">Deep World Model</a>
+    <div class="links">
+      <a href="#mission">Mission</a>
+      <a href="#how">How it works</a>
+      <a href="#brain">Spatial Brain</a>
+      <a href="#living">Living model</a>
+      <a href="#research">Research</a>
+      <a href="#build">Build</a>
+      <a href="#live">Deployments</a>
+      <a href="#roadmap">Roadmap</a>
+    </div>
+    <a class="gh" href="https://github.com/collectiv-co/deep-world-model"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>GitHub</a>
+  </div>
+</nav>
+
+<header class="hero dark" id="top">
+  <div class="bg" aria-hidden="true"></div>
+  <canvas id="field" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div class="pill"><b>LIVE</b><span class="dot"></span>100+ venues across Asia</div>
+    <p class="eb" style="color:#5cc8ff">Deep World Model · The Spatial Brain for the physical world</p>
+    <h1>Every building<br>deserves a <span class="gt">brain.</span></h1>
+    <p class="lede">We are building the spatial layer of physical AI: a living, real‑time 3D memory of the world's buildings, grown from ordinary phones and the signals already in the air, and shared by <strong style="color:#f1f6fb">people, robot fleets and AI agents</strong>.</p>
+    <div class="cta">
+      <a class="btn pri" href="#how">See how it works <span aria-hidden="true">↓</span></a>
+      <a class="btn" href="https://github.com/collectiv-co/deep-world-model"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2l3 6.5 7 .9-5.1 4.8 1.3 7L12 17.8 5.8 21.2l1.3-7L2 9.4l7-.9z"/></svg>Star on GitHub</a>
+      <a class="btn" href="https://deep3d.world/#demos">Live demos ↗</a>
+    </div>
+  </div>
+</header>
+
+<section class="dark" aria-label="Key numbers">
+  <div class="wrap">
+    <div class="stats">
+      <div class="stat"><div class="n" data-count="35" data-suf="B">35B</div><div class="l">parameter spatial‑semantic model</div></div>
+      <div class="stat"><div class="n" data-count="1200" data-pre="~">~1,200</div><div class="l">semantic base classes</div></div>
+      <div class="stat"><div class="n">2<span style="font-size:.5em"> cm</span> / 5<span style="font-size:.5em"> cm</span></div><div class="l">geometry / semantic resolution</div></div>
+      <div class="stat"><div class="n">&lt;10<span style="font-size:.5em"> h</span></div><div class="l">to model a 170,000 m² live airport terminal</div></div>
+      <div class="stat"><div class="n">&lt;1<span style="font-size:.5em"> h</span></div><div class="l">micro‑zone self‑healing, building open</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec dark mission" id="mission">
+  <div class="wrap">
+    <p class="eb rv">Our mission</p>
+    <p class="manifesto rv">Give every physical space a <span class="gt">living memory</span> that people, robots and AI agents can share.</p>
+    <div class="mv">
+      <div class="rv">
+        <p class="eb" style="margin-top:0">Our vision</p>
+        <p class="vis">AI has learned to read, write, see and reason. It still does not know <strong>where it is</strong>.</p>
+        <p class="vis-sub">A language model can plan a journey but cannot see the closed escalator. A delivery robot can walk, but not past last night's new hoarding. A digital twin is out of date the morning after it is delivered. Every machine entering the physical world needs the same missing piece: a model of the space that is true <em>right now</em>.</p>
+        <p class="vis-sub">We believe that model should be <strong>one shared brain per building</strong>, not a hundred private maps: grown from the devices already in people's pockets, grounded in physics, kept current by everyone who walks through, and open to every robot, agent and app.</p>
+        <p class="vis" style="margin-top:28px">A world where every machine, in every building on Earth, knows <span class="gt">where it is, what is around it, and what just changed.</span></p>
+      </div>
+      <div class="ladder rv" aria-label="Indexing the world">
+        <div><span class="note">1990s</span><b>The web indexed information.</b></div>
+        <div><span class="note">2000s</span><b>Maps indexed the streets.</b></div>
+        <div class="now"><span class="note">Now</span><b>We are indexing the <span class="gt">indoors.</span></b></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec dark tour" id="inside">
+  <div class="wrap">
+    <div class="head rv">
+      <div><p class="eb">Step inside · real captures, not renders</p><h2>Walk through a <span class="gt">living memory.</span></h2></div>
+      <p class="lede">Two of the busiest indoor spaces in Asia, reconstructed by the Deep World Model as photoreal Gaussian splats. Running live in your browser. Drag to look around, scroll to move.</p>
+    </div>
+    <div class="viewer rv" id="viewer">
+      <canvas id="gs" aria-label="Interactive 3D reconstruction"></canvas>
+      <img class="poster" id="poster" src="assets/splat_render.jpg" alt="">
+      <div class="v-top">
+        <div class="v-tabs" role="tablist" aria-label="Scenes">
+          <button role="tab" aria-selected="true" data-scene="airport">Airport · check‑in hall</button>
+          <button role="tab" aria-selected="false" data-scene="station">Metro station · concourse</button>
+        </div>
+        <span class="v-live"><span class="dot"></span>Live 3D</span>
+      </div>
+      <div class="v-load" id="vload"><div class="ring"></div><span id="vmsg">Loading 4 million splats…</span></div>
+      <button class="v-start" id="vstart" type="button">▶ Enter the 3D scene <small>about 45 MB</small></button>
+      <div class="v-bot">
+        <button class="v-play" id="vplay" type="button" aria-label="Pause tour">❚❚</button>
+        <input type="range" id="vscrub" min="0" max="1000" value="0" aria-label="Position along the tour">
+        <span class="v-hint">Drag to look · scroll or pinch to move</span>
+      </div>
+      <div class="v-meta"><span id="vstat">4M Gaussian splats</span> · <span>captured with phones during live operations</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="why" style="padding-bottom:0">
+  <div class="wrap">
+    <div class="head rv">
+      <div><p class="eb">Why now</p><h2>Physical AI is coming indoors. <span class="gt">It needs a map.</span></h2></div>
+      <p class="lede">Four shifts are converging, and the spaces we live in are the last unmapped frontier.</p>
+    </div>
+    <div class="why">
+      <article class="rv"><span class="k">01</span><h3>AI is moving into the physical world</h3><p>Robots, autonomous fleets and AI agents are leaving the lab for airports, stations, hospitals and malls: spaces that change every day.</p></article>
+      <article class="rv"><span class="k">02</span><h3>GPS stops at the door</h3><p>People spend roughly 90% of their lives indoors, yet the indoors is the least mapped, least current part of the world.</p></article>
+      <article class="rv"><span class="k">03</span><h3>Static scans cannot keep up</h3><p>A laser scan costs about $100K and three weeks per zone, and starts going stale the day it is delivered.</p></article>
+      <article class="rv"><span class="k">04</span><h3>The signals are already there</h3><p>Every building is full of Wi‑Fi, Bluetooth and geomagnetic fields that encode its shape, and every visitor carries a sensor.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="head rv">
+      <div><p class="eb">The problem</p><h2>Everyone can scan a building <span class="gt">once.</span></h2></div>
+      <p class="lede">Robots and AI agents need a map that is true <em>right now</em>. Laser scans and BIM files go stale within days, and stale maps make robots crash and queries fail, confidently.</p>
+    </div>
+    <div class="vs rv">
+      <div class="card">
+        <p class="note">Static scans · BIM · point clouds</p>
+        <div class="big">$100K <span style="color:var(--dim)">/</span> 3 wks</div>
+        <p>to refresh a single zone, with laser rigs, survey crews and closures. Out of date by the time it ships.</p>
+      </div>
+      <div class="card good">
+        <p class="note" style="color:#46e0cf">Deep World Model</p>
+        <div class="big"><span class="gt" style="background:linear-gradient(95deg,#7aa8ff,#46e0cf 55%,#a8f04c);-webkit-background-clip:text;background-clip:text">&lt; 1 hour</span></div>
+        <p>to regenerate a changed micro‑zone from a phone, with the building open. The model grows in accuracy and semantic value the longer it runs.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="how" style="padding-top:0">
+  <div class="wrap">
+    <div class="head rv">
+      <div><p class="eb">How it works · Signal‑to‑Structure</p><h2>From two photos<br>to a <span class="gt">living world.</span></h2></div>
+      <p class="lede">Most 3D capture needs laser scanners or thousands of images. DWM starts with the invisible: the Wi‑Fi, Bluetooth and geomagnetic signals that already encode a building's layout. Vision is layered on physics, not the other way round.</p>
+    </div>
+    <div class="pipe rv">
+      <div class="pipe-stage dark" id="stage">
+        <img src="assets/capture_photo.jpg" alt="Input photo from an ordinary phone" class="on">
+        <img src="assets/capture_fingerprint.jpg" alt="Signal fingerprint of the venue">
+        <img src="assets/capture_floorplan.jpg" alt="Floor plan inferred from signals and photo cues">
+        <img src="assets/capture_pointcloud.jpg" alt="Signal-guided point cloud">
+        <img src="assets/splat_render.jpg" alt="Photoreal reconstruction rendered with Gaussian splats">
+        <img src="assets/station_labels.jpg" alt="Labelled metro station with detected objects">
+        <div class="bar" id="bar"></div>
+        <div class="cap" id="cap">Input · performing‑arts venue · 2 photos</div>
+      </div>
+      <div class="steps" role="tablist" aria-label="Pipeline steps">
+        <button class="step" role="tab" aria-selected="true"><span class="k">01</span><h3>Capture</h3><p>Two ordinary photos from any phone. No rig, no crew, no closure.</p></button>
+        <button class="step" role="tab" aria-selected="false"><span class="k">02</span><h3>Sense</h3><p>How signals travel and reflect yields a fingerprint of the layout.</p></button>
+        <button class="step" role="tab" aria-selected="false"><span class="k">03</span><h3>Structure</h3><p>Boundaries, openings and scale inferred before most of it is seen.</p></button>
+        <button class="step" role="tab" aria-selected="false"><span class="k">04</span><h3>Points</h3><p>Visual and structural evidence fused into a dense 3D cloud.</p></button>
+        <button class="step" role="tab" aria-selected="false"><span class="k">05</span><h3>Splats</h3><p>Photoreal Gaussian splatting, rendered and refined in real time.</p></button>
+        <button class="step" role="tab" aria-selected="false"><span class="k">06</span><h3>Understand</h3><p>Doors, lifts, signs and exits found, named and kept current.</p></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="brain" style="padding-top:0">
+  <div class="wrap">
+    <div class="head rv">
+      <div><p class="eb">What's inside the Spatial Brain</p><h2>Grounded. Current.<br><span class="gt">Machine‑readable.</span></h2></div>
+      <p class="lede">Six properties that separate a living world model from a 3D snapshot.</p>
+    </div>
+    <div class="caps">
+      <article class="cap rv"><div class="ico"><svg viewBox="0 0 24 24"><path d="M5 12a7 7 0 0114 0M8.5 12a3.5 3.5 0 017 0"/><circle cx="12" cy="12" r="1"/><path d="M12 13v8"/></svg></div><span class="tag">Signal‑first</span><h3>Multimodal grounding</h3><p>Fuses ambient Wi‑Fi, BLE and geomagnetic signals with vision, so reconstruction rests on physical measurement and pure‑vision hallucinations drop sharply.</p></article>
+      <article class="cap rv"><div class="ico"><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 11-2.3-5.7M20 4v5h-5"/></svg></div><span class="tag">Currency</span><h3>Micro‑zone self‑healing</h3><p>Detects local changes from a phone or CCTV feed and regenerates only the altered zone in under an hour, with no full‑building rescan.</p></article>
+      <article class="cap rv"><div class="ico"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.4"/><path d="M3 20c.6-3.4 3-5 6-5s5.4 1.6 6 5M15 15.5c2.6-.4 5 .9 6 4.5"/></svg></div><span class="tag">Crowd ingest</span><h3>Zero‑downtime capture</h3><p>Built from mobile devices and crowd motion during normal operating hours, through the Beetle app. Zero closures, zero laser rigs.</p></article>
+      <article class="cap rv"><div class="ico"><svg viewBox="0 0 24 24"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 12l9 4 9-4M3 17l9 4 9-4"/></svg></div><span class="tag">Semantics</span><h3>Machine‑readable world</h3><p>Knows what every voxel is: exits, fare gates, clearance limits, step‑free paths. Vertical heads pretrained for aviation, rail, campus, retail and government.</p></article>
+      <article class="cap rv"><div class="ico"><svg viewBox="0 0 24 24"><rect x="5" y="7" width="14" height="11" rx="3"/><path d="M12 3v4M9 12h.01M15 12h.01M9.5 15h5"/></svg></div><span class="tag">Agentic API</span><h3>One brain for all</h3><p>Natural‑language spatial query and routing for staff and AI agents, exposed through MCP‑style tools for planning and lookup.</p></article>
+      <article class="cap rv"><div class="ico"><svg viewBox="0 0 24 24"><path d="M8 3v5M16 3v5M6 8h12v3a6 6 0 01-12 0V8zM12 17v4"/></svg></div><span class="tag">Interop</span><h3>Open fleet standards</h3><p>VDA 5050 and Open‑RMF for fleets, OpenUSD for 3D, ROS 2 for motion. One shared map instead of ten vendor silos.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="sec dark living" id="living">
+  <div class="wrap">
+    <div class="head rv">
+      <div><p class="eb">Living World Model · always current</p><h2>Most maps are memories.<br><span class="gt">Ours is alive.</span></h2></div>
+      <p class="lede">A scan records how a building looked on the day of the survey. The Deep World Model keeps watching. The CCTV cameras a venue already runs become its eyes. Each camera is registered into the model, each frame is checked against what the model expects to see, and only the part that changed is rebuilt. The building stays open and the map stays current.</p>
+    </div>
+
+    <div class="clocks">
+      <div class="clk rv"><span class="note">Structure</span><h3>Walls, floors, columns, stairs</h3><p>The skeleton. Built once from ambient signals and phones, and rebuilt only when the building is renovated.</p><b>Rarely changes</b></div>
+      <div class="clk rv hot"><span class="note">Layout</span><h3>Kiosks, barriers, signage, seating, queues</h3><p>What operations move every day. Detected on CCTV and patched as a partial update to the affected micro‑zone.</p><b>Healed in under an hour</b></div>
+      <div class="clk rv"><span class="note">Activity</span><h3>People flow, crowd density, occupancy</h3><p>The pulse of the space. Streamed as an anonymous live layer on top of the geometry, never baked into it.</p><b>Live</b></div>
+    </div>
+
+    <div class="loop rv">
+      <div class="lp"><span class="k">01</span><b>Register</b><p>Each existing camera is solved to a 6‑DoF pose inside the model, once, from its own footage. No calibration targets, no site visit.</p></div>
+      <div class="lp"><span class="k">02</span><b>Compare</b><p>The model renders what that camera should see. Live frames are compared with it, and people and passing motion are filtered out so only persistent change counts.</p></div>
+      <div class="lp"><span class="k">03</span><b>Localise</b><p>Each confirmed difference is lifted into 3D and snapped to the micro‑zone tiles it touches. The rest of the building is left untouched.</p></div>
+      <div class="lp"><span class="k">04</span><b>Regenerate &amp; publish</b><p>Only those tiles are re‑optimised, versioned and pushed to the change feed, so robots, agents and apps act on the new reality.</p></div>
+    </div>
+
+    <div class="two living-cmp">
+      <div class="rv">
+        <div class="tiles" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><span class="cam c1"></span><span class="cam c2"></span><span class="cam c3"></span></div>
+        <p class="tcap">One tile changes, so one tile is rebuilt.</p>
+        <div class="kv">
+          <div><span>Eyes</span><span>Existing CCTV, plus phone walk‑throughs</span></div>
+          <div><span>Update scope</span><span>Only the altered micro‑zone</span></div>
+          <div><span>Turnaround</span><span>Under an hour</span></div>
+          <div><span>Downtime</span><span>None</span></div>
+          <div><span>Output</span><span>Versioned model + change‑feed event</span></div>
+        </div>
+      </div>
+      <div class="rv">
+        <div class="cmp" id="cmp">
+          <img src="assets/change_before.jpg" alt="Departure hall before the change, as captured">
+          <img class="after" src="assets/change_after.jpg" alt="Same hall after regeneration, showing the new layout">
+          <span class="lb l">Before · captured</span><span class="lb r">After · regenerated</span>
+          <div class="h" aria-hidden="true"></div>
+          <input type="range" min="0" max="100" value="50" aria-label="Compare before and after">
+        </div>
+        <p class="note" style="margin-top:14px">A departure hall after an overnight layout change, with only the changed zone regenerated. Drag to compare.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec research" id="research">
+  <div class="wrap">
+    <div class="head rv">
+      <div><p class="eb">Research foundations</p><h2>Informed by two decades of<br><span class="gt">spatial science.</span></h2></div>
+      <p class="lede">The Deep World Model is informed by the research of Collectiv's co‑founder and Chief Scientist, Professor S.‑H. Gary Chan, and his Smart IoT and Sensing Systems Group at HKUST. The work covers ambient‑signal positioning, learning from unlabelled crowd data, people sensing from video, and camera‑based 3D localisation. Each strand relates to a layer of the model.</p>
+    </div>
+    <div class="prof rv">
+      <div class="pmark" aria-hidden="true">GC</div>
+      <div>
+        <span class="role">Co‑founder &amp; Chief Scientist · Collectiv</span>
+        <h3>Professor S.‑H. Gary Chan</h3>
+        <p>Professor, Department of Computer Science and Engineering, The Hong Kong University of Science and Technology · Associate Director, GREAT Smart Cities Institute</p>
+        <ul class="pfacts"><li>PhD, Stanford University</li><li>Fellow of Sigma Xi</li><li>World's Top 2% Scientists</li><li>Indoor positioning · IoT sensing · video analytics · edge AI</li></ul>
+      </div>
+      <a class="btn" href="https://cse.hkust.edu.hk/~gchan/garypub.html" target="_blank" rel="noopener">All publications ↗</a>
+    </div>
+    <div class="p2p">
+      <div class="p2h rv">
+        <h3>Research behind the ideas</h3>
+        <p>Selected figures from Professor Chan's peer‑reviewed research, shown next to the parts of the Deep World Model they relate to. They illustrate the problems and ideas that shape our approach. The Deep World Model is its own system, and its methods may differ from those published. Click any figure to enlarge it.</p>
+        <div class="stages" role="tablist" aria-label="Filter by related stage">
+          <button aria-selected="true" data-s="all">All</button><button aria-selected="false" data-s="capture"><b>01</b> Capture</button><button aria-selected="false" data-s="structure"><b>02</b> Structure</button><button aria-selected="false" data-s="living"><b>03</b> Living</button><button aria-selected="false" data-s="activity"><b>04</b> Activity</button>
+        </div>
+      </div>
+      <div class="pfs">
+      <figure class="pf rv" data-stage="capture">
+        <button class="pimg" type="button" aria-label="Enlarge Fig. 1 from Implicit Multimodal Crowdsourcing for Joint RF and Geomagnetic Fingerprinting"><img src="assets/research/ubifin.jpg" alt="Fig. 1 from Implicit Multimodal Crowdsourcing for Joint RF and Geomagnetic Fingerprinting" loading="lazy"></button>
+        <figcaption>
+          <span class="stg"><b>01</b> Capture</span>
+          <a class="pt" href="https://cse.hkust.edu.hk/~gchan/papers/TMC23_ubifin.pdf" target="_blank" rel="noopener">Implicit Multimodal Crowdsourcing for Joint RF and Geomagnetic Fingerprinting</a>
+          <small>Fig. 1 · Tan et al., IEEE TMC 2023</small>
+          <p><span>In the paper</span>Phones' RF, magnetometer, accelerometer and gyroscope streams are mapped onto a floor-plan graph to build RF and geomagnetic fingerprints, with no one labelling anything.</p>
+          <p class="dw"><span>Why it matters to us</span>Related to how we approach capture: everyday phones, ambient signals first, pixels second.</p>
+        </figcaption>
+      </figure>
+      <figure class="pf rv" data-stage="capture">
+        <button class="pimg" type="button" aria-label="Enlarge Fig. 2 from Leto: Crowdsourced Radio Map Construction with Learned Topology and A Few Landmarks"><img src="assets/research/leto.jpg" alt="Fig. 2 from Leto: Crowdsourced Radio Map Construction with Learned Topology and A Few Landmarks" loading="lazy"></button>
+        <figcaption>
+          <span class="stg"><b>01</b> Capture</span>
+          <a class="pt" href="https://cse.hkust.edu.hk/~gchan/papers/TMC24_leto.pdf" target="_blank" rel="noopener">Leto: Crowdsourced Radio Map Construction with Learned Topology and A Few Landmarks</a>
+          <small>Fig. 2 · Wang et al., IEEE TMC 2024</small>
+          <p><span>In the paper</span>Accelerometer and Wi‑Fi traces from ordinary walkers, plus a handful of landmarks, are turned into a full radio map through learned topology.</p>
+          <p class="dw"><span>Why it matters to us</span>Shares an idea behind Signal‑to‑Structure: crowd traces as low‑cost anchors in place of a site survey.</p>
+        </figcaption>
+      </figure>
+      <figure class="pf rv" data-stage="structure">
+        <button class="pimg" type="button" aria-label="Enlarge Fig. 6 from GRAFICS: Graph Embedding-based Floor Identification Using Crowdsourced RF Signals"><img src="assets/research/grafics.jpg" alt="Fig. 6 from GRAFICS: Graph Embedding-based Floor Identification Using Crowdsourced RF Signals" loading="lazy"></button>
+        <figcaption>
+          <span class="stg"><b>02</b> Structure</span>
+          <a class="pt" href="https://cse.hkust.edu.hk/~gchan/papers/ICDCS22_GRAFICS.pdf" target="_blank" rel="noopener">GRAFICS: Graph Embedding-based Floor Identification Using Crowdsourced RF Signals</a>
+          <small>Fig. 6 · Zhuo et al., IEEE ICDCS 2022</small>
+          <p><span>In the paper</span>Graph embeddings of crowdsourced RF samples separate cleanly by floor (a), where MDS and autoencoder baselines blur together (b, c).</p>
+          <p class="dw"><span>Why it matters to us</span>Relevant to a problem we also face: placing crowd samples and photos on the right floor of a multi‑level venue.</p>
+        </figcaption>
+      </figure>
+      <figure class="pf rv" data-stage="structure">
+        <button class="pimg" type="button" aria-label="Enlarge Fig. 2 from SiteBuilder: Sitemap-Grounded 3D Completion for Atrium Scene"><img src="assets/research/sitebuilder.jpg" alt="Fig. 2 from SiteBuilder: Sitemap-Grounded 3D Completion for Atrium Scene" loading="lazy"></button>
+        <figcaption>
+          <span class="stg"><b>02</b> Structure</span>
+          <a class="pt" href="https://cse.hkust.edu.hk/~gchan/papers/MM26_SiteBuilder.pdf" target="_blank" rel="noopener">SiteBuilder: Sitemap-Grounded 3D Completion for Atrium Scene</a>
+          <small>Fig. 2 · Song &amp; Chan, ACM Multimedia 2026</small>
+          <p><span>In the paper</span>A sitemap is lifted into a bootstrap mesh, and depth and semantic conditions then guide video diffusion to complete a multi‑storey atrium in 3D.</p>
+          <p class="dw"><span>Why it matters to us</span>Explores a challenge close to ours: completing large atria and concourses consistently across levels.</p>
+        </figcaption>
+      </figure>
+      <figure class="pf rv" data-stage="living">
+        <button class="pimg" type="button" aria-label="Enlarge Fig. 6 from 3DFA: Aligning the Features Between Point Cloud and Query Image for Scene-Specific Visual Localization"><img src="assets/research/3dfa.jpg" alt="Fig. 6 from 3DFA: Aligning the Features Between Point Cloud and Query Image for Scene-Specific Visual Localization" loading="lazy"></button>
+        <figcaption>
+          <span class="stg"><b>03</b> Living</span>
+          <a class="pt" href="https://cse.hkust.edu.hk/~gchan/papers/CVPRF26_3DFA.pdf" target="_blank" rel="noopener">3DFA: Aligning the Features Between Point Cloud and Query Image for Scene-Specific Visual Localization</a>
+          <small>Fig. 6 · Song et al., CVPR 2026 Findings</small>
+          <p><span>In the paper</span>2D image features are aligned directly with the 3D point cloud. Ambiguous matches (red triangles, ellipses) become correct ones (blue).</p>
+          <p class="dw"><span>Why it matters to us</span>Closely related to the first step of the living loop: estimating where a camera sits inside a 3D model.</p>
+        </figcaption>
+      </figure>
+      <figure class="pf rv" data-stage="living">
+        <button class="pimg" type="button" aria-label="Enlarge Fig. 3 from SweepLoc: Automatic Video-based Indoor Localization by Camera Sweeping"><img src="assets/research/sweeploc.jpg" alt="Fig. 3 from SweepLoc: Automatic Video-based Indoor Localization by Camera Sweeping" loading="lazy"></button>
+        <figcaption>
+          <span class="stg"><b>03</b> Living</span>
+          <a class="pt" href="https://cse.hkust.edu.hk/~gchan/papers/IMWUT18_sweeploc.pdf" target="_blank" rel="noopener">SweepLoc: Automatic Video-based Indoor Localization by Camera Sweeping</a>
+          <small>Fig. 3 · Li et al., ACM IMWUT 2018</small>
+          <p><span>In the paper</span>Faster R‑CNN detects landmarks in video, and a KCF tracker follows them across frames, so only key frames need full detection.</p>
+          <p class="dw"><span>Why it matters to us</span>An early example of the detect‑and‑track pattern for turning video into named, placed objects.</p>
+        </figcaption>
+      </figure>
+      <figure class="pf rv" data-stage="living">
+        <button class="pimg" type="button" aria-label="Enlarge Fig. 1 from Graph-based Fingerprint Update Using Unlabelled WiFi Signals"><img src="assets/research/gufu.jpg" alt="Fig. 1 from Graph-based Fingerprint Update Using Unlabelled WiFi Signals" loading="lazy"></button>
+        <figcaption>
+          <span class="stg"><b>03</b> Living</span>
+          <a class="pt" href="https://cse.hkust.edu.hk/~gchan/papers/IMWUT25_GUFU.pdf" target="_blank" rel="noopener">Graph-based Fingerprint Update Using Unlabelled WiFi Signals</a>
+          <small>Fig. 1 · Chiu et al., ACM IMWUT 2025</small>
+          <p><span>In the paper</span>The same access point's signal map on a campus, two months apart. Buildings change, signals drift, and a map built once goes stale.</p>
+          <p class="dw"><span>Why it matters to us</span>Illustrates why a spatial model has to keep updating: physical signals drift as buildings change.</p>
+        </figcaption>
+      </figure>
+      <figure class="pf rv" data-stage="activity">
+        <button class="pimg" type="button" aria-label="Enlarge Fig. 5 from Single Domain Generalization for Crowd Counting"><img src="assets/research/mpcount.jpg" alt="Fig. 5 from Single Domain Generalization for Crowd Counting" loading="lazy"></button>
+        <figcaption>
+          <span class="stg"><b>04</b> Activity</span>
+          <a class="pt" href="https://cse.hkust.edu.hk/~gchan/papers/CVPR24_SDG.pdf" target="_blank" rel="noopener">Single Domain Generalization for Crowd Counting</a>
+          <small>Fig. 5 · Peng &amp; Chan, CVPR 2024</small>
+          <p><span>In the paper</span>Crowd density maps on domains never seen in training. MPCount's counts stay close to ground truth where a prior method overshoots.</p>
+          <p class="dw"><span>Why it matters to us</span>Relevant to the activity layer: estimating crowd density from cameras in unfamiliar venues.</p>
+        </figcaption>
+      </figure>
+      </div>
+      <p class="note" style="margin-top:14px">Figures reproduced from the cited publications for reference and commentary · © the respective authors and publishers · Inclusion does not imply that the Deep World Model implements the published method</p>
+    </div>
+    <dialog class="lb" id="lb"><button type="button" aria-label="Close">×</button><img alt=""><p></p></dialog>
+    <h3 class="rlist">Selected publications</h3>
+    <div class="rgrid">
+<div class="rcol rv"><span class="tag">Signals</span><h3>Ambient signals → structure</h3><p>Research on grounding location in physical measurement: Wi‑Fi, BLE and geomagnetic maps built from crowds and kept current without a site survey.</p><ol><li><a href="https://cse.hkust.edu.hk/~gchan/papers/TMC24_leto.pdf" target="_blank" rel="noopener">Leto: Crowdsourced Radio Map Construction with Learned Topology and A Few Landmarks</a><small>Y. Wang, K.-S. Wong, <b>S.-H. Chan</b>, W. Mow · <em>IEEE TMC 2024</em></small></li><li><a href="https://cse.hkust.edu.hk/~gchan/papers/IMWUT25_GUFU.pdf" target="_blank" rel="noopener">Graph-based Fingerprint Update Using Unlabelled WiFi Signals</a><small>K. Chiu, H. Yin, W. Zhuo, C.-H. Lee, <b>S.-H. Chan</b> · <em>ACM IMWUT 2025</em></small></li><li><a href="https://cse.hkust.edu.hk/~gchan/papers/TMC23_ubifin.pdf" target="_blank" rel="noopener">Implicit Multimodal Crowdsourcing for Joint RF and Geomagnetic Fingerprinting</a><small>J. Tan, H. Wu, K.-H. Chow, <b>S.-H. Chan</b> · <em>IEEE TMC 2023</em></small></li><li><a href="https://cse.hkust.edu.hk/~gchan/papers/IoTJ23_SiFu.pdf" target="_blank" rel="noopener">SiFu: A Generic and Robust Multimodal Signal Fusion Platform for Pervasive Localization</a><small>M. Wong, Q. Lu, <b>S.-H. Chan</b> · <em>IEEE IoT‑J 2023</em></small></li><li><a href="https://cse.hkust.edu.hk/~gchan/papers/IMWUT19_DeepNavi.pdf" target="_blank" rel="noopener">DeepNavi: A Deep Signal-Fusion Framework for Accurate and Applicable Indoor Navigation</a><small>Q. Niu, N. Liu, J. Huang, Y. Luo, S. He, T. He, <b>S.-H. Chan</b>, X. Luo · <em>ACM IMWUT 2019</em></small></li></ol></div>
+<div class="rcol rv"><span class="tag">AI</span><h3>Learning from unlabelled crowds</h3><p>Research on learning from messy, unlabelled, crowd‑sourced data and transferring to venues not seen before.</p><ol><li><a href="https://cse.hkust.edu.hk/~gchan/papers/ICDCS22_GRAFICS.pdf" target="_blank" rel="noopener">GRAFICS: Graph Embedding-based Floor Identification Using Crowdsourced RF Signals</a><small>W. Zhuo, Z. Zhao, K. Chiu, S. Li, S. Ha, C.-H. Lee, <b>S.-H. Chan</b> · <em>IEEE ICDCS 2022</em></small></li><li><a href="https://cse.hkust.edu.hk/~gchan/papers/ICDCS23_FIS-1.pdf" target="_blank" rel="noopener">FIS-ONE: Floor Identification System with One Label for Crowdsourced RF Signals</a><small>W. Zhuo, K. Chiu, J. Chen, Z. Zhao, <b>S.-H. Chan</b>, S. Ha, C.-H. Lee · <em>IEEE ICDCS 2023</em></small></li><li><a href="https://cse.hkust.edu.hk/~gchan/papers/ICDE24_TASFAR.pdf" target="_blank" rel="noopener">Target-agnostic Source-free Domain Adaptation for Regression Tasks</a><small>T. He, Z. Xia, J. Chen, H. Li, <b>S.-H. Chan</b> · <em>IEEE ICDE 2024</em></small></li><li><a href="https://cse.hkust.edu.hk/~gchan/papers/KDD25_MTM.pdf" target="_blank" rel="noopener">MTM: A Multi-Scale Token Mixing Transformer for Irregular Multivariate Time Series Classification</a><small>S. Zhong, W. Zhuo, S. Song, G. Li, Z. Yu, <b>S.-H. Chan</b> · <em>ACM SIGKDD 2025</em></small></li></ol></div>
+<div class="rcol rv"><span class="tag">People &amp; objects</span><h3>Sensing the activity layer</h3><p>Research on sensing people and activity: how many, where, and how they move, from video and from the devices they carry.</p><ol><li><a href="https://cse.hkust.edu.hk/~gchan/papers/CVPR24_SDG.pdf" target="_blank" rel="noopener">Single Domain Generalization for Crowd Counting</a><small>Z. Peng, <b>S.-H. Chan</b> · <em>IEEE/CVF CVPR 2024</em></small></li><li><a href="https://cse.hkust.edu.hk/~gchan/papers/ECCV22_CounTr.pdf" target="_blank" rel="noopener">CounTr: An End-to-End Transformer Approach for Crowd Counting and Density Estimation</a><small>H. Bai, H. He, Z. Peng, T. Dai, <b>S.-H. Chan</b> · <em>ECCV 2022 Workshops</em></small></li><li><a href="https://cse.hkust.edu.hk/~gchan/papers/TMC23_cappuccino.pdf" target="_blank" rel="noopener">Self-Supervised Association of Wi-Fi Probe Requests Under MAC Address Randomization</a><small>T. He, J. Tan, <b>S.-H. Chan</b> · <em>IEEE TMC 2023</em></small></li><li><a href="https://cse.hkust.edu.hk/~gchan/papers/TMC25_DeMo.pdf" target="_blank" rel="noopener">DeMo: Experiences of Deploying a Large-Scale Indoor Delivery Monitoring System</a><small>X. Fan, Z. Lin, Y. Hu, Z. Hong, T. Jiang, F. Qian, Z. Yin, <b>S.-H. Chan</b>, D. Wu · <em>IEEE TMC 2025</em></small></li></ol></div>
+<div class="rcol rv"><span class="tag">Video &amp; 3D</span><h3>Cameras that know where they are</h3><p>Research on registering images and video into 3D and on completing missing geometry.</p><ol><li><a href="https://cse.hkust.edu.hk/~gchan/papers/CVPRF26_3DFA.pdf" target="_blank" rel="noopener">3DFA: Aligning the Features Between Point Cloud and Query Image for Scene-Specific Visual Localization</a><small>S. Song, Y. Chi, S. Zhong, <b>S.-H. Chan</b> · <em>CVPR 2026 Findings</em></small></li><li><a href="https://cse.hkust.edu.hk/~gchan/papers/MM26_SiteBuilder.pdf" target="_blank" rel="noopener">SiteBuilder: Sitemap-Grounded 3D Completion for Atrium Scene</a><small>S. Song, <b>S.-H. Chan</b> · <em>ACM Multimedia 2026</em></small></li><li><a href="https://cse.hkust.edu.hk/~gchan/papers/IMWUT18_sweeploc.pdf" target="_blank" rel="noopener">SweepLoc: Automatic Video-based Indoor Localization by Camera Sweeping</a><small>M. Li, N. Liu, Q. Niu, C. Liu, <b>S.-H. Chan</b>, C. Gao · <em>ACM IMWUT 2018</em></small></li><li><a href="https://cse.hkust.edu.hk/~gchan/papers/ToSN23_VILL.pdf" target="_blank" rel="noopener">VILL: Towards Efficient and Automatic Visual Landmark Labeling</a><small>Q. Niu, K. Zhu, S. He, S. Cen, <b>S.-H. Chan</b>, N. Liu · <em>ACM TOSN 2023</em></small></li><li><a href="https://cse.hkust.edu.hk/~gchan/papers/ToSN19_HAIL.pdf" target="_blank" rel="noopener">Resource-efficient and Automated Image-based Indoor Localization</a><small>Q. Niu, M. Li, S. He, C. Gao, <b>S.-H. Chan</b>, X. Luo · <em>ACM TOSN 2019</em></small></li></ol></div>
+    </div>
+    <p class="note" style="margin-top:22px">Selected peer‑reviewed papers · titles link to the authors' PDFs</p>
+  </div>
+</section>
+
+
+<section class="sec" style="padding-top:0">
+  <div class="wrap">
+    <div class="head rv">
+      <div><p class="eb">Side by side</p><h2>Static scan vs. <span class="gt">living model.</span></h2></div>
+    </div>
+    <div class="tblw rv">
+      <table class="tbl">
+        <thead><tr><th></th><th>Static scan / BIM</th><th>Deep World Model</th></tr></thead>
+        <tbody>
+          <tr><td>Capture</td><td>Laser rigs, survey crew, closures</td><td>2 phone photos + ambient signals</td></tr>
+          <tr><td>Refresh a zone</td><td>~3 weeks, ~$100K</td><td>Under an hour, crowdsourced</td></tr>
+          <tr><td>Currency</td><td>Stale within days</td><td>Self‑healing, continuously current</td></tr>
+          <tr><td>Live sensing</td><td>None</td><td>Existing CCTV, registered into the model</td></tr>
+          <tr><td>Semantics</td><td>Geometry only, or hand‑tagged</td><td>~1,200 classes, voxel‑level</td></tr>
+          <tr><td>Machine access</td><td>Files to download and convert</td><td>Live API, change feed, agent tools</td></tr>
+          <tr><td>Over time</td><td>Decays</td><td>Grows in accuracy and semantic value</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="sec dark" id="build">
+  <div class="wrap">
+    <div class="head rv">
+      <div><p class="eb">For builders · robots, agents and apps</p><h2>One model.<br><span class="gt">Every machine can ask it.</span></h2></div>
+      <p class="lede">Robots, AI agents and apps get the same live model: geometry to move through, objects to reason about, and a feed of what changed.</p>
+    </div>
+    <div class="api rv">
+      <div class="surf" role="tablist" aria-label="API surfaces">
+        <button role="tab" aria-selected="true" data-i="0"><span class="k">01</span><b>Geometry</b><span>Splats, point clouds and meshes for any level, at the resolution you need.</span></button>
+        <button role="tab" aria-selected="false" data-i="1"><span class="k">02</span><b>Semantics</b><span>Every door, lift, sign and exit, named, measured and placed.</span></button>
+        <button role="tab" aria-selected="false" data-i="2"><span class="k">03</span><b>Routing</b><span>Step‑free, robot‑safe or fastest paths on true geometry.</span></button>
+        <button role="tab" aria-selected="false" data-i="3"><span class="k">04</span><b>Change feed</b><span>Subscribe to what moved, so fleets never act on a stale map.</span></button>
+        <button role="tab" aria-selected="false" data-i="4"><span class="k">05</span><b>Live cameras</b><span>Register existing CCTV so the model keeps itself current.</span></button>
+      </div>
+      <div>
+        <div class="code" style="background:#0b111a">
+          <div class="bar"><i></i><i></i><i></i><span class="t" id="ct">dwm api · geometry</span></div>
+          <pre id="code" aria-live="polite"></pre>
+        </div>
+        <p class="note" style="margin-top:14px">Illustrative request and response shapes · API access by invitation · SDKs coming to this repo</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec dark sdk" id="sdk" style="padding-top:0">
+  <div class="wrap">
+    <div class="head rv">
+      <div><p class="eb">Developer preview · SDKs</p><h2>A few lines of code<br><span class="gt">to give a machine a sense of place.</span></h2></div>
+      <p class="lede">Python, TypeScript, ROS 2, an MCP server for AI agents, and a CLI, all on the same live model. Here is the surface we are shipping into this repository.</p>
+    </div>
+    <div class="ide rv">
+      <aside class="tree" aria-label="Repository files">
+        <div class="tt">deep-world-model</div>
+        <ul>
+          <li class="d">python/dwm/</li>
+          <li class="f i1">client.py</li><li class="f i1">live.py</li><li class="f i1">ros.py</li>
+          <li class="d">typescript/src/</li>
+          <li class="d">mcp/</li>
+          <li class="d">ros2/dwm_bridge/</li>
+          <li class="d">examples/</li>
+          <li class="f i1"><button data-f="0">quickstart.py</button></li>
+          <li class="f i1"><button data-f="1">live_cctv.py</button></li>
+          <li class="f i1"><button data-f="2">agent.ts</button></li>
+          <li class="f i1"><button data-f="3">robot_nav.py</button></li>
+          <li class="f i1"><button data-f="4">mcp.json</button></li>
+          <li class="f"><button data-f="5">terminal</button></li>
+          <li class="f">README.md</li>
+        </ul>
+      </aside>
+      <div class="ed">
+        <div class="etabs" role="tablist" aria-label="Example files">
+          <button role="tab" data-f="0">quickstart.py</button><button role="tab" data-f="1">live_cctv.py</button><button role="tab" data-f="2">agent.ts</button><button role="tab" data-f="3">robot_nav.py</button><button role="tab" data-f="4">mcp.json</button><button role="tab" data-f="5">terminal</button>
+        </div>
+        <pre class="src" id="src" aria-live="polite"></pre>
+        <div class="estat"><span id="elang">Python</span><span id="edesc"></span><button type="button" id="ecopy">Copy</button></div>
+      </div>
+    </div>
+    <p class="note" style="margin-top:14px">SDK preview · interfaces may change before release · API access by invitation</p>
+  </div>
+</section>
+<script type="text/plain" class="sdkf" data-lang="Python" data-desc="Open a space, query objects, plan a route">
+# quickstart.py · open a space, ask it questions, plan a route
+from dwm import Client
+
+dwm = Client()                       # reads DWM_API_KEY from the environment
+space = dwm.spaces.get("airport-t2")
+
+level = space.level("L7")
+print(level.summary())
+# Level L7 · 170,000 m² · 1,184 object classes · updated 41 s ago
+
+# Every object is named, measured and placed
+gates = level.objects(kind="boarding_gate", status="open")
+lifts = level.objects(kind="lift", step_free=True)
+
+# Route on true geometry, not a floor-plan guess
+route = space.route(
+    start=level.point(x=12.4, y=-3.1),
+    goal=gates.nearest(to="security_exit_C"),
+    profile="step_free",             # or "robot_safe", "fastest"
+)
+print(f"{route.length_m:.0f} m · {route.eta_s // 60} min · {len(route.turns)} turns")
+
+# Ask in plain language
+answer = space.ask("Nearest quiet seating to gate 23 with a power outlet?")
+for place in answer.places[:3]:
+    print(place.name, place.distance_m, place.confidence)
+</script>
+<script type="text/plain" class="sdkf" data-lang="Python" data-desc="Turn existing CCTV into a living model">
+# live_cctv.py · turn the cameras a venue already has into a living model
+import asyncio
+from dwm import Client
+from dwm.live import Camera
+
+dwm = Client()
+space = dwm.spaces.get("metro-central")
+
+async def main():
+    # 1 · Register once. The pose is solved from the camera's own footage.
+    cam = await space.cameras.register(
+        Camera(id="cctv-L1-014", stream="rtsp://10.0.4.21/stream1"),
+        hint_level="L1",
+    )
+    print(cam.pose)            # 6-DoF pose in model coordinates
+    print(cam.reprojection_px) # 1.4
+
+    # 2 · Watch. Frames are compared with what the model expects to see.
+    #     People and passing motion are filtered; only persistent change counts.
+    await space.live.enable(
+        cameras="all",
+        layers=["layout", "occupancy"],
+        privacy="edge",        # frames stay on-site; geometry and counts leave
+    )
+
+    # 3 · React. Only the changed micro-zone is regenerated and versioned.
+    async for change in space.changes.stream(kinds=["layout"]):
+        print(change.zone, change.kind, change.area_m2, change.model_version)
+        # L1-east  barrier_added  6.4  v2026.11.23-1412
+
+asyncio.run(main())
+</script>
+<script type="text/plain" class="sdkf" data-lang="TypeScript" data-desc="Give an AI agent spatial tools">
+// agent.ts · give any AI agent spatial awareness
+import { DWM } from "@collectiv/dwm";
+import { runAgent } from "./your-agent"; // any tool-calling LLM agent
+
+const dwm = new DWM({ apiKey: process.env.DWM_API_KEY });
+const space = await dwm.spaces.get("harbour-mall");
+
+// Expose the live model as tools the agent can call
+const tools = space.asTools(["locate", "route", "objects", "occupancy", "changes"]);
+
+const reply = await runAgent({
+  tools,
+  prompt:
+    "A visitor in a wheelchair is at the north entrance. " +
+    "Find the least crowded step-free route to the cinema on L4.",
+});
+
+console.log(reply.text);
+// Take lift B in the north atrium to L4, then 85 m along the east promenade.
+// Crowd density on this route is low. Escalator 3 is closed for maintenance.
+</script>
+<script type="text/plain" class="sdkf" data-lang="Python · ROS 2" data-desc="Keep a robot's map in sync with reality">
+# robot_nav.py · a ROS 2 node that navigates on the live model
+import rclpy
+from rclpy.node import Node
+from dwm.ros import LiveMapBridge
+
+class ServiceRobot(Node):
+    def __init__(self):
+        super().__init__("service_robot")
+        # Publishes /dwm/map and /dwm/keepout, refreshed whenever the model changes
+        self.bridge = LiveMapBridge(
+            self, space="airport-t2", level="L7",
+            frame_id="map", resolution=0.05, profile="robot_safe",
+        )
+        self.bridge.on_change(self.replan)
+
+    def replan(self, change):
+        self.get_logger().info(f"{change.zone}: {change.kind}, replanning")
+        self.bridge.request_route(goal="gate_23", avoid=["crowd_density>0.6"])
+
+def main():
+    rclpy.init()
+    rclpy.spin(ServiceRobot())
+
+if __name__ == "__main__":
+    main()
+</script>
+<script type="text/plain" class="sdkf" data-lang="JSON" data-desc="Plug the model into any MCP client">
+{
+  "mcpServers": {
+    "deep-world-model": {
+      "command": "npx",
+      "args": ["-y", "@collectiv/dwm-mcp"],
+      "env": {
+        "DWM_API_KEY": "<your key>",
+        "DWM_SPACE": "airport-t2"
+      }
+    }
+  }
+}
+</script>
+<script type="text/plain" class="sdkf" data-lang="Shell" data-desc="The dwm command-line tool">
+$ pip install deep-world-model
+$ dwm login
+✓ Authenticated
+$ dwm spaces list
+ID              SECTOR     LEVELS  UPDATED
+airport-t2      aviation   4       41 s ago
+metro-central   rail       3       2 min ago
+harbour-mall    retail     6       5 min ago
+arts-centre     culture    5       1 h ago
+$ dwm export airport-t2 --level L7 --format usd -o t2_L7.usdz
+⠿ Streaming 3.98M splats + 1,184 classes … done (14.2 s)
+✓ Wrote t2_L7.usdz
+$ dwm changes metro-central --follow
+14:12:07  L1-east    barrier_added   6.4 m²   conf 0.94   cctv-L1-014
+14:13:41  L1-gates   kiosk_moved     3.2 m    conf 0.88   cctv-L1-009
+</script>
+
+
+<section class="sec" id="live">
+  <div class="wrap">
+    <div class="head rv">
+      <div><p class="eb">Live today · not a concept</p><h2>Already mapping the spaces <span class="gt">millions move through.</span></h2></div>
+      <p class="lede"><strong>100+</strong> venues live. <strong>5M+</strong> people a day and <strong>1.7B+</strong> journeys a year move through spaces the model sees.</p>
+    </div>
+    <div class="venues">
+      <a class="venue rv" href="https://deep3d.world/#demos"><img src="assets/venue_aviation.jpg" alt="" loading="lazy"><div><span class="note">Aviation</span><b>One of the world's busiest international airports</b><small>170,000 m² terminal, modelled during full operations</small></div></a>
+      <a class="venue rv" href="https://deep3d.world/#demos"><img src="assets/venue_campus.jpg" alt="" loading="lazy"><div><span class="note">Campus</span><b>A globally top‑ranked research university</b><small>Full campus</small></div></a>
+      <a class="venue rv" href="https://deep3d.world/#demos"><img src="assets/venue_culture.jpg" alt="" loading="lazy"><div><span class="note">Culture</span><b>One of the world's largest cultural districts</b><small>Flagship performing‑arts venue</small></div></a>
+      <a class="venue rv" href="https://deep3d.world/#demos"><img src="assets/venue_retail.jpg" alt="" loading="lazy"><div><span class="note">Retail</span><b>A landmark harbourfront mall</b><small>Beneath one of Asia's tallest towers</small></div></a>
+    </div>
+    <div class="sectors rv">
+      <div><span class="note">Rail</span><b>One of the world's largest metro operators</b><small>The pioneer of "rail + property", building cities on top of stations · 99 stations, 1M+ daily riders</small></div>
+      <div><span class="note">High‑speed rail</span><b>A cross‑border high‑speed rail terminus</b><small>Multi‑level underground terminus</small></div>
+      <div><span class="note">Integrated resorts</span><b>A global integrated‑resort leader</b><small>5 resort properties on Asia's leading resort strip</small></div>
+      <div><span class="note">Retail</span><b>A megamall above a major airport‑rail interchange</b><small>Multi‑level retail and transport hub</small></div>
+      <div><span class="note">Public safety</span><b>A city government's smart‑patrolling programme</b><small>Patrol routes on a live, labelled model</small></div>
+      <div><span class="note">Semantics</span><b>Every object, named</b><small><img src="assets/airport_semantic.jpg" alt="Airport departure hall with detected objects" loading="lazy" style="border-radius:8px;margin-top:8px"></small></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="horizon" style="padding-top:0">
+  <div class="wrap">
+    <div class="head rv">
+      <div><p class="eb">From one building to every building</p><h2>The ground truth <span class="gt">physical AI runs on.</span></h2></div>
+      <p class="lede">What becomes possible when every space has a brain: airports that run themselves better, transit that is accessible by default, robots that work anywhere on day one, and AI agents that can act, not just answer.</p>
+    </div>
+    <div class="hz">
+      <div class="rv"><span class="note">Today</span><h3>100+ venues live</h3><p>Across some of Asia's busiest airports, rail networks, campuses, resorts and malls.</p></div>
+      <div class="rv"><span class="note">Next</span><h3>Every major airport, station and campus</h3><p>SDKs, an MCP server and open exporters, so any robot or agent can plug in.</p></div>
+      <div class="rv big"><span class="note">Ultimately</span><h3>A planet‑scale spatial memory</h3><p>A continuously updated model of the indoor world, the ground truth physical AI runs on.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="roadmap" style="padding-top:0">
+  <div class="wrap">
+    <div class="head rv">
+      <div><p class="eb">Roadmap · this repository</p><h2>Code is <span class="gt">coming.</span></h2></div>
+      <p class="lede">The model runs in production today. Here is what lands in this repo next. Star or watch it to follow along.</p>
+    </div>
+    <div class="road">
+      <div class="col now rv"><h3><span class="dot"></span>Shipped</h3><ul>
+        <li>Signal‑to‑Structure reconstruction at 100+ venues</li>
+        <li>Micro‑zone self‑healing from phone and CCTV</li>
+        <li>Vertical semantic heads: aviation, rail, campus, retail, government</li>
+        <li>Beetle crowdsourced capture app, iOS and Android</li></ul></div>
+      <div class="col next rv"><h3>Next</h3><ul>
+        <li>Python and TypeScript SDKs</li>
+        <li>MCP server for agent spatial query and routing</li>
+        <li>ROS 2 package</li>
+        <li>OpenUSD and Open‑RMF exporters</li></ul></div>
+      <div class="col rv"><h3>Later</h3><ul>
+        <li>Sample datasets and evaluation scripts</li>
+        <li>Technical report and model card</li>
+        <li>Community venue contributions</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" style="padding-top:0">
+  <div class="wrap">
+    <div class="head rv"><div><p class="eb">Cite</p><h2 style="font-size:clamp(30px,3.6vw,48px)">Referencing the Deep World Model</h2></div></div>
+    <div class="cite rv">
+<pre id="bib">@misc{collectiv2026deepworldmodel,
+  title        = {Deep World Model: The Spatial Brain for the Physical World},
+  author       = {{Collectiv}},
+  year         = {2026},
+  howpublished = {\url{https://deep3d.world}},
+  note         = {Real-time, signal-grounded 3D world model of complex infrastructure}
+}</pre>
+      <button type="button" id="copy">Copy BibTeX</button>
+    </div>
+  </div>
+</section>
+
+<section class="sec" style="padding-top:0">
+  <div class="wrap">
+    <div class="cta-band rv">
+      <p class="eb" style="color:#5cc8ff">Work with us</p>
+      <h2>Build the spatial layer <span class="gt" style="background:linear-gradient(95deg,#7aa8ff,#46e0cf 55%,#a8f04c);-webkit-background-clip:text;background-clip:text">with us.</span></h2>
+      <p class="lede">Venues, robotics teams, researchers and investors: if you believe every building deserves a brain, we want to hear from you.</p>
+      <div class="cta">
+        <a class="btn pri" href="mailto:info@collectiv.co?subject=Deep%20World%20Model">info@collectiv.co →</a>
+        <a class="btn" href="mailto:info@collectiv.co?subject=Deep%20World%20Model%20API%20access">Request API access</a>
+        <a class="btn" href="https://deep3d.world">deep3d.world ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Collectiv · Built in Hong Kong</span>
+    <span><a href="https://deep3d.world">deep3d.world</a><a href="https://collectiv.co">collectiv.co</a><a href="https://github.com/collectiv-co/deep-world-model">GitHub</a></span>
+  </div>
+</footer>
+
+<script>
+(()=>{
+const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* hero: signal field — access points emit rings, points condense into walls */
+const cv=document.getElementById('field'),cx=cv.getContext('2d');
+let W,H,dpr,pts=[],aps=[];
+function plan(w,h){ // a stylised floor plan polyline set, normalised 0..1
+  const P=[[.52,.28,.92,.28],[.92,.28,.92,.78],[.92,.78,.62,.78],[.62,.78,.62,.6],[.62,.6,.52,.6],[.52,.6,.52,.28],[.72,.28,.72,.48],[.78,.6,.92,.6]];
+  const out=[];P.forEach(([a,b,c,d])=>{const n=Math.round(Math.hypot((c-a)*w,(d-b)*h)/5);for(let i=0;i<n;i++){const t=i/n;out.push([(a+(c-a)*t)*w,(b+(d-b)*t)*h])}});return out}
+function size(){dpr=Math.min(devicePixelRatio||1,2);W=cv.clientWidth;H=cv.clientHeight;cv.width=W*dpr;cv.height=H*dpr;cx.setTransform(dpr,0,0,dpr,0,0);
+  const tg=plan(W,H);if(W<700)tg.forEach(p=>{p[0]=p[0]*1.0-W*.25;p[1]=p[1]*.7});
+  pts=tg.map(t=>({x:Math.random()*W,y:Math.random()*H,tx:t[0],ty:t[1],lit:0}));
+  aps=[[.6,.4],[.84,.5],[.7,.7]].map(([a,b])=>({x:a*W-(W<700?W*.25:0),y:b*H*(W<700?.7:1),r:0}));}
+size();addEventListener('resize',size);
+let last=0;
+function tick(t){const dt=Math.min(50,t-last)/1000;last=t;cx.clearRect(0,0,W,H);
+  aps.forEach((a,i)=>{a.r=(a.r+dt*120)%(Math.max(W,H)*.45);for(let k=0;k<3;k++){const r=(a.r+k*90)%(Math.max(W,H)*.45);cx.strokeStyle=`rgba(70,224,207,${.22*(1-r/(Math.max(W,H)*.45))})`;cx.lineWidth=1;cx.beginPath();cx.arc(a.x,a.y,r,0,7);cx.stroke()}
+    cx.fillStyle='#46e0cf';cx.beginPath();cx.arc(a.x,a.y,3,0,7);cx.fill();
+    pts.forEach(p=>{const d=Math.hypot(p.tx-a.x,p.ty-a.y);if(Math.abs(d-a.r)<14)p.lit=1})});
+  pts.forEach(p=>{p.x+=(p.tx-p.x)*Math.min(1,dt*.9);p.y+=(p.ty-p.y)*Math.min(1,dt*.9);p.lit=Math.max(.18,p.lit-dt*.5);
+    cx.fillStyle=`rgba(${p.lit>.5?'168,240,76':'122,168,255'},${p.lit})`;cx.fillRect(p.x-1,p.y-1,2.2,2.2)});
+  if(!RM)requestAnimationFrame(tick)}
+if(RM){pts.forEach(p=>{p.x=p.tx;p.y=p.ty;p.lit=.6});last=0;tick(16)}else requestAnimationFrame(tick);
+
+/* pipeline stepper */
+const imgs=[...document.querySelectorAll('#stage img')],steps=[...document.querySelectorAll('.step')],cap=document.getElementById('cap'),bar=document.getElementById('bar');
+const caps=['Input · performing‑arts venue · 2 photos','Signal fingerprint · performing‑arts venue','Inferred floor plan · L2','Point cloud · performing‑arts venue','Gaussian splats · real‑time render','Labelled objects · metro station'];
+let cur=0,timer,auto=!RM;
+function go(i){cur=i;imgs.forEach((im,k)=>im.classList.toggle('on',k===i));steps.forEach((s,k)=>s.setAttribute('aria-selected',k===i));cap.textContent=caps[i];
+  bar.style.transition='none';bar.style.width='0';if(auto){requestAnimationFrame(()=>{bar.style.transition='width 4.5s linear';bar.style.width='100%'});clearTimeout(timer);timer=setTimeout(()=>go((cur+1)%6),4500)}}
+steps.forEach((s,i)=>s.addEventListener('click',()=>{auto=false;clearTimeout(timer);go(i)}));
+new IntersectionObserver(e=>{if(e[0].isIntersecting&&auto&&!timer)go(0)},{threshold:.4}).observe(document.getElementById('stage'));
+
+/* compare slider */
+const cmp=document.getElementById('cmp'),rg=cmp.querySelector('input');
+rg.addEventListener('input',()=>cmp.style.setProperty('--x',rg.value+'%'));
+
+/* api tabs */
+const S=s=>`<span class="s">${s}</span>`,N=n=>`<span class="n">${n}</span>`,M=m=>`<span class="m">${m}</span>`,C=c=>`<span class="c">${c}</span>`;
+const ex=[
+['dwm api · geometry',`${C('# Fetch the live model for one level')}
+${M('GET')} /v1/spaces/arts-centre/levels/L2/model?format=splat
+
+{
+  ${S('"space"')}: ${S('"arts-centre"')},
+  ${S('"level"')}: ${S('"L2"')},
+  ${S('"format"')}: ${S('"gaussian-splat"')},
+  ${S('"updated"')}: ${S('"2026-11-18T09:42:10Z"')},
+  ${S('"bounds_m"')}: [${N('86.4')}, ${N('52.1')}, ${N('9.8')}],
+  ${S('"splats"')}: ${N('4180233')},
+  ${S('"url"')}: ${S('"https://…/arts-centre/L2.splat"')}
+}`],
+['dwm api · semantics',`${C('# What is near this point?')}
+${M('GET')} /v1/spaces/airport-t2/objects?near=412.3,88.0&radius=25
+
+{
+  ${S('"objects"')}: [
+    { ${S('"type"')}: ${S('"lift"')}, ${S('"id"')}: ${S('"lift-A"')}, ${S('"level"')}: ${S('"L6"')},
+      ${S('"door_width_m"')}: ${N('1.4')}, ${S('"step_free"')}: ${N('true')} },
+    { ${S('"type"')}: ${S('"exit"')}, ${S('"id"')}: ${S('"exit-W"')}, ${S('"level"')}: ${S('"L7"')},
+      ${S('"clear"')}: ${N('true')} },
+    { ${S('"type"')}: ${S('"sign"')}, ${S('"text"')}: ${S('"Gates 20-29"')}, ${S('"level"')}: ${S('"L7"')} }
+  ]
+}`],
+['dwm api · routing',`${C('# Step-free route to a gate')}
+${M('POST')} /v1/spaces/airport-t2/route
+{ ${S('"from"')}: ${S('"you"')}, ${S('"to"')}: ${S('"gate-23"')}, ${S('"profile"')}: ${S('"step-free"')} }
+
+{
+  ${S('"distance_m"')}: ${N('214')},
+  ${S('"eta_s"')}: ${N('240')},
+  ${S('"legs"')}: [${S('"lift-A"')}, ${S('"east-pier"')}],
+  ${S('"avoids"')}: [${S('"stairs-E2"')}]
+}`],
+['dwm api · change feed',`${C('# Stream changes as the space evolves')}
+${M('GET')} /v1/spaces/harbour-mall/changes?since=2026-11-18T00:00Z
+
+{
+  ${S('"changes"')}: [
+    { ${S('"zone"')}: ${S('"L3-atrium"')}, ${S('"kind"')}: ${S('"hoarding_added"')},
+      ${S('"area_m2"')}: ${N('18.5')}, ${S('"source"')}: ${S('"beetle"')}, ${S('"confidence"')}: ${N('0.94')} },
+    { ${S('"zone"')}: ${S('"L1-east"')}, ${S('"kind"')}: ${S('"kiosk_moved"')},
+      ${S('"shift_m"')}: ${N('3.2')}, ${S('"confidence"')}: ${N('0.88')} }
+  ]
+}`],
+['dwm api · live cameras',`${C('# Register an existing CCTV camera into the model')}
+${M('POST')} /v1/spaces/metro-central/cameras
+{ ${S('"id"')}: ${S('"cctv-L1-014"')}, ${S('"stream"')}: ${S('"rtsp://10.0.4.21/stream1"')}, ${S('"hint_level"')}: ${S('"L1"')} }
+
+${C('→ 201 Created')}
+{
+  ${S('"id"')}: ${S('"cctv-L1-014"')},
+  ${S('"status"')}: ${S('"registered"')},
+  ${S('"pose"')}: { ${S('"level"')}: ${S('"L1"')}, ${S('"xyz"')}: [${N('42.1')}, ${N('3.6')}, ${N('-17.8')}], ${S('"ypr"')}: [${N('184.2')}, ${N('-12.5')}, ${N('0.3')}] },
+  ${S('"reprojection_px"')}: ${N('1.4')},
+  ${S('"watching_zones"')}: [${S('"L1-east"')}, ${S('"L1-gates"')}],
+  ${S('"layers"')}: [${S('"layout"')}, ${S('"occupancy"')}],
+  ${S('"privacy"')}: ${S('"edge"')}
+}`]];
+const tabs=[...document.querySelectorAll('.surf button')],code=document.getElementById('code'),ct=document.getElementById('ct');
+function show(i){tabs.forEach((b,k)=>b.setAttribute('aria-selected',k===i));ct.textContent=ex[i][0];code.innerHTML=ex[i][1]}
+tabs.forEach((b,i)=>b.addEventListener('click',()=>show(i)));show(0);
+
+/* copy bibtex */
+const cb=document.getElementById('copy');
+cb.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(document.getElementById('bib').textContent);cb.textContent='Copied ✓'}catch(e){cb.textContent='Select & copy'}setTimeout(()=>cb.textContent='Copy BibTeX',1800)});
+
+/* count-up + reveal */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;const el=e.target;el.classList.add('in');io.unobserve(el);
+  if(el.dataset.count&&!RM){const to=+el.dataset.count,pre=el.dataset.pre||'',suf=el.dataset.suf||'',t0=performance.now();
+    const f=t=>{const k=Math.min(1,(t-t0)/1400),v=Math.round(to*(1-Math.pow(1-k,3)));el.textContent=pre+v.toLocaleString('en-US')+suf;if(k<1)requestAnimationFrame(f)};requestAnimationFrame(f)}}),{threshold:.15});
+document.querySelectorAll('.rv,[data-count]').forEach(el=>io.observe(el));
+})();
+</script>
+<script>
+/* paper-to-product filter + lightbox */
+(()=>{const st=[...document.querySelectorAll('.stages button')],fs=[...document.querySelectorAll('.pf')];
+st.forEach(b=>b.addEventListener('click',()=>{st.forEach(x=>x.setAttribute('aria-selected',x===b));const k=b.dataset.s;fs.forEach(f=>f.hidden=!(k==='all'||f.dataset.stage===k))}));
+const lb=document.getElementById('lb');if(!lb||!lb.showModal)return;const li=lb.querySelector('img'),lp=lb.querySelector('p');
+fs.forEach(f=>f.querySelector('.pimg').addEventListener('click',()=>{const im=f.querySelector('img');li.src=im.src;li.alt=im.alt;lp.textContent=f.querySelector('small').textContent+' · '+f.querySelector('.pt').textContent;lb.showModal()}));
+lb.addEventListener('click',e=>{if(e.target===lb||e.target.tagName==='BUTTON')lb.close()});
+})();
+/* sdk ide */
+(()=>{const files=[...document.querySelectorAll('script.sdkf')];if(!files.length)return;
+const src=document.getElementById('src'),lang=document.getElementById('elang'),desc=document.getElementById('edesc'),cp=document.getElementById('ecopy');
+const tabs=[...document.querySelectorAll('.etabs button')],tree=[...document.querySelectorAll('.tree button')];
+const esc=t=>t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const KW=/\b(import|from|as|async|await|def|class|for|in|if|return|const|let|new|with|while|True|False|None|self|super|export|function|print)\b/;
+function hl(code,l){
+  const re=l==='Shell'?/(^\$[^\n]*)|(✓[^\n]*|⠿[^\n]*)|(#[^\n]*)/gm
+    :/(#[^\n]*|\/\/[^\n]*)|(f?"(?:[^"\\\n]|\\.)*"|'(?:[^'\\\n]|\\.)*'|`[^`]*`)|\b(\d+(?:\.\d+)?)\b|\b(import|from|as|async|await|def|class|for|in|if|return|const|let|new|with|while|True|False|None|self|super|export|function|print)\b/g;
+  let out='',i=0,m;code=code.replace(/^\n+|\s+$/g,'');
+  while((m=re.exec(code))){out+=esc(code.slice(i,m.index));
+    const t=esc(m[0]);
+    if(l==='Shell')out+=m[1]?`<span class="p">${t}</span>`:m[2]?`<span class="s">${t}</span>`:`<span class="c">${t}</span>`;
+    else out+=m[1]?`<span class="c">${t}</span>`:m[2]?`<span class="s">${t}</span>`:m[3]?`<span class="n">${t}</span>`:`<span class="kw">${t}</span>`;
+    i=m.index+m[0].length}
+  out+=esc(code.slice(i));
+  return out.split('\n').map(x=>`<span class="ln">${x}</span>`).join('\n')}
+const cache=files.map(f=>hl(f.textContent,f.dataset.lang));
+function open(i){tabs.forEach((b,k)=>b.setAttribute('aria-selected',k===i));tree.forEach(b=>b.classList.toggle('on',+b.dataset.f===i));
+  src.innerHTML=cache[i];src.scrollTop=0;lang.textContent=files[i].dataset.lang;desc.textContent=files[i].dataset.desc;cur=i}
+let cur=0;[...tabs,...tree].forEach(b=>b.addEventListener('click',()=>open(+b.dataset.f)));open(0);
+cp.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(files[cur].textContent.replace(/^\n+|\s+$/g,''));cp.textContent='Copied ✓'}catch(e){cp.textContent='Select & copy'}setTimeout(()=>cp.textContent='Copy',1600)});
+})();
+</script>
+<script type="module">
+/* Step inside: Gaussian-splat tour (PlayCanvas engine, loaded only on click) */
+const V=document.getElementById('viewer');
+if(V){
+const canvas=document.getElementById('gs'),poster=document.getElementById('poster'),msg=document.getElementById('vmsg'),
+  playBtn=document.getElementById('vplay'),scrub=document.getElementById('vscrub'),tabs=[...V.querySelectorAll('.v-tabs button')];
+const SCENES={
+  airport:{sog:'assets/3d/airport/meta.json',path:'assets/3d/airport_path.json',poster:'assets/change_before.jpg',dur:170},
+  station:{sog:'assets/3d/station/meta.json',path:'assets/3d/station_path.json',poster:'assets/station_labels.jpg',dur:150}
+};
+let pc,app,cam,splat,asset,path=null,cur='airport',s=0,playing=true,yaw=0,pitch=0,lastTouch=0,started=false,token=0;
+const camPos=[0,0,0],camTgt=[0,0,0];let first=true;
+poster.src=SCENES[cur].poster;
+
+function setPlaying(p){playing=p;playBtn.textContent=p?'❚❚':'▶';playBtn.setAttribute('aria-label',p?'Pause tour':'Play tour')}
+function lerp(a,b,t){return a+(b-a)*t}
+function sample(arr,x){const n=arr.length-1,i=Math.max(0,Math.min(n-1,Math.floor(x))),f=Math.min(1,Math.max(0,x-i));const a=arr[i],b=arr[i+1]||a;return[lerp(a[0],b[0],f),lerp(a[1],b[1],f),lerp(a[2],b[2],f)]}
+
+async function boot(){
+  started=true;V.classList.add('started','loading');
+  try{
+    pc=await import('https://cdn.jsdelivr.net/npm/playcanvas@2.23.3/build/playcanvas.min.mjs');
+    app=new pc.Application(canvas,{graphicsDeviceOptions:{antialias:false,alpha:false,powerPreference:'high-performance'}});
+    if(!app.graphicsDevice.isWebGL2&&!app.graphicsDevice.isWebGPU)throw new Error('webgl2');
+    app.graphicsDevice.maxPixelRatio=Math.min(devicePixelRatio||1,1.5);
+    app.setCanvasFillMode(pc.FILLMODE_NONE);app.setCanvasResolution(pc.RESOLUTION_AUTO);
+    const fit=()=>app.resizeCanvas(canvas.clientWidth,canvas.clientHeight);new ResizeObserver(fit).observe(canvas);fit();
+    cam=new pc.Entity('cam');cam.addComponent('camera',{clearColor:new pc.Color(0.02,0.03,0.055),fov:68,nearClip:0.05,farClip:2000});
+    app.root.addChild(cam);app.start();
+    app.on('update',tick);
+    await load(cur);
+  }catch(e){
+    V.classList.remove('loading');msg.textContent='';
+    const b=document.getElementById('vstart');b.style.display='flex';b.disabled=true;
+    b.innerHTML=String(e&&e.message)==='webgl2'?'3D needs a browser with WebGL 2':'Could not load the 3D scene. Please refresh to try again.';
+    console.error(e);
+  }
+}
+
+async function load(name){
+  const my=++token;cur=name;V.classList.add('loading');V.classList.remove('ready');
+  poster.src=SCENES[name].poster;msg.textContent='Loading 4 million splats…';
+  if(splat){splat.destroy();splat=null}
+  if(asset){app.assets.remove(asset);asset.unload();asset=null}
+  const sc=SCENES[name];
+  path=await (await fetch(sc.path)).json();
+  if(my!==token)return;
+  const a=new pc.Asset(name,'gsplat',{url:sc.sog});asset=a;
+  await new Promise((res,rej)=>{a.once('load',res);a.once('error',rej);app.assets.add(a);app.assets.load(a)});
+  if(my!==token)return;
+  splat=new pc.Entity('splat');splat.addComponent('gsplat',{asset:a});splat.setLocalEulerAngles(0,0,180);app.root.addChild(splat);
+  s=0;yaw=0;pitch=0;first=true;setPlaying(true);
+  V.classList.remove('loading');V.classList.add('ready');
+}
+
+function tick(dt){
+  if(!path||!cam)return;
+  const n=path.p.length-1,sc=SCENES[cur];
+  if(playing){s+=dt*n/sc.dur;if(s>=n)s=0;
+    if(performance.now()-lastTouch>2500){yaw*=Math.pow(.25,dt);pitch*=Math.pow(.25,dt)}}
+  scrub.value=Math.round(s/n*1000);
+  const p=sample(path.p,s),t=sample(path.t,s);
+  const k=first?1:Math.min(1,dt*3);first=false;
+  for(let i=0;i<3;i++){camPos[i]=lerp(camPos[i],p[i],k);camTgt[i]=lerp(camTgt[i],t[i],k)}
+  let dx=camTgt[0]-camPos[0],dy=camTgt[1]-camPos[1],dz=camTgt[2]-camPos[2];
+  const h=Math.hypot(dx,dz)||1,base=Math.atan2(dx,dz)+yaw*Math.PI/180,el=Math.atan2(dy,h)+pitch*Math.PI/180;
+  dx=Math.sin(base)*Math.cos(el);dz=Math.cos(base)*Math.cos(el);dy=Math.sin(el);
+  cam.setPosition(camPos[0],camPos[1],camPos[2]);
+  cam.lookAt(camPos[0]+dx,camPos[1]+dy,camPos[2]+dz);
+}
+
+/* input */
+let drag=null;const pts=new Map();
+canvas.addEventListener('pointerdown',e=>{canvas.setPointerCapture(e.pointerId);pts.set(e.pointerId,[e.clientX,e.clientY]);drag=[e.clientX,e.clientY];lastTouch=performance.now()});
+canvas.addEventListener('pointermove',e=>{if(!pts.has(e.pointerId))return;lastTouch=performance.now();
+  if(pts.size===2){const [a,b]=[...pts.values()];const d0=Math.hypot(a[0]-b[0],a[1]-b[1]);pts.set(e.pointerId,[e.clientX,e.clientY]);const [c,d]=[...pts.values()];const d1=Math.hypot(c[0]-d[0],c[1]-d[1]);move((d1-d0)*0.02);return}
+  pts.set(e.pointerId,[e.clientX,e.clientY]);if(!drag)return;
+  yaw-=(e.clientX-drag[0])*0.15;pitch=Math.max(-60,Math.min(60,pitch+(e.clientY-drag[1])*0.12));drag=[e.clientX,e.clientY]});
+const up=e=>{pts.delete(e.pointerId);drag=pts.size?[...pts.values()][0]:null};
+canvas.addEventListener('pointerup',up);canvas.addEventListener('pointercancel',up);
+function move(d){if(!path)return;const n=path.p.length-1;s=Math.max(0,Math.min(n,s+d));setPlaying(false);lastTouch=performance.now()}
+canvas.addEventListener('wheel',e=>{if(!path)return;e.preventDefault();move(-e.deltaY*0.01)},{passive:false});
+scrub.addEventListener('input',()=>{if(!path)return;s=scrub.value/1000*(path.p.length-1);setPlaying(false)});
+playBtn.addEventListener('click',()=>setPlaying(!playing));
+document.getElementById('vstart').addEventListener('click',()=>{if(!started)boot()});
+tabs.forEach(b=>b.addEventListener('click',()=>{const n=b.dataset.scene;if(n===cur&&started)return;
+  tabs.forEach(x=>x.setAttribute('aria-selected',x===b));cur=n;poster.src=SCENES[n].poster;
+  if(started&&app)load(n).catch(err=>{console.error(err);msg.textContent='Could not load this scene.'});}));
+/* pause rendering when off screen */
+new IntersectionObserver(es=>{if(app)app.autoRender=es[0].isIntersecting}).observe(V);
+}
+</script>
+</body>
+</html>

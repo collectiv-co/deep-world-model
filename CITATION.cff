@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you reference the Deep World Model, please cite it as below."
+title: "Deep World Model: The Spatial Brain for the Physical World"
+type: software
+authors:
+  - name: "Collectiv"
+url: "https://deep3d.world"
+repository-code: "https://github.com/collectiv-co/deep-world-model"
+date-released: 2026-11-22
+keywords:
+  - world model
+  - spatial AI
+  - 3D reconstruction
+  - gaussian splatting
+  - indoor mapping
+  - robotics
+  - digital twin
