@@ -11,12 +11,14 @@
 [**Website**](https://deep3d.world) ·
 [**Project page**](https://collectiv-co.github.io/deep-world-model) ·
 [**Demos**](https://deep3d.world/#demos) ·
+[**World models**](#where-dwm-sits-among-world-models) ·
 [**Living model**](#a-living-world-model) ·
 [**Research**](#science-and-research) ·
 [**SDK preview**](#sdk-preview) ·
 [**API access**](mailto:info@collectiv.co?subject=Deep%20World%20Model%20API%20access) ·
 [**Collectiv**](https://collectiv.co)
 
+![World first](https://img.shields.io/badge/world%20first-real--time%203D%20world%20model-e23dff?style=flat-square)
 ![Status](https://img.shields.io/badge/status-live%20in%20production-0b9f90?style=flat-square)
 ![Venues](https://img.shields.io/badge/venues-100%2B-2156f5?style=flat-square)
 ![Model](https://img.shields.io/badge/model-35B%20params-4fae17?style=flat-square)
@@ -113,6 +115,41 @@ The Spatial Brain already runs inside some of the most demanding, most visited s
 | 🏨 **Integrated resorts** | A global integrated‑resort leader | 5 resort properties on Asia's leading resort strip |
 | 🛍️ **Retail** | A landmark harbourfront mall beneath one of Asia's tallest towers, and a megamall above a major airport‑rail interchange | Multi‑level retail |
 | 🛡️ **Public safety** | A city government's smart‑patrolling programme | City‑scale patrol routes |
+
+## Where DWM sits among world models
+
+> **A world model of the real world.**
+
+World models are AI's next frontier: an internal picture of the world that lets machines predict, plan and act. Most are generative, trained on video to imagine plausible worlds. Physical AI also needs the other half: a model of the actual places it works in, measured, labelled and current. The Deep World Model is the **world's first real‑time 3D world model for complex physical infrastructure**.
+
+| | Generative world models | Static digital twins | **Deep World Model** |
+|---|---|---|---|
+| Models | Plausible, imagined worlds | One building, as surveyed | **Real buildings, as they are right now** |
+| Learns from | Internet‑scale video | Laser scans and BIM files | **Phones, ambient Wi‑Fi, BLE and geomagnetic signals, existing CCTV** |
+| Grounding | Pixels, so it can hallucinate | Survey geometry | **Signal‑first: geometry anchored to physical measurement** |
+| Stays current | Not tied to any real place | Stale within days | **Self‑heals changed micro‑zones in under an hour** |
+| Knows what things are | Implicitly | Geometry only, or hand‑tagged | **~1,200 semantic classes, voxel‑level** |
+| Built for | Simulating and training agents | Design and facilities records | **Robots, AI agents and people acting in real buildings** |
+
+<table>
+<tr>
+<td width="25%" valign="top"><sub><b>🥇 WORLD'S FIRST</b></sub><br><b>Real‑time 3D world model for complex infrastructure</b><br><sub>Live across 100+ venues: airports, metro and high‑speed rail, campuses, resorts and malls.</sub></td>
+<td width="25%" valign="top"><sub><b>🥇 WORLD'S FIRST</b></sub><br><b>Signal‑first multimodal grounding</b><br><sub>Ambient Wi‑Fi, BLE and geomagnetic signals fused with vision, so pure‑vision hallucination drops sharply.</sub></td>
+<td width="25%" valign="top"><sub><b>🥇 WORLD'S FIRST</b></sub><br><b>Localised voxel patching</b><br><sub>Partial updates touch only the altered micro‑zone, from an ordinary phone or an existing CCTV feed.</sub></td>
+<td width="25%" valign="top"><sub><b>⚡ WORLD'S FASTEST</b></sub><br><b>Micro‑zone self‑healing</b><br><sub>A changed zone regenerated in under an hour, building open. A 170,000 m² terminal modelled in under 10 hours.</sub></td>
+</tr>
+</table>
+
+**Four layers, two moats.** 3D geometry is becoming a commodity. Knowing what every voxel is (**semantics**) and keeping it in sync with reality (**currency**) is the real moat, exposed to every robot, agent and app through one **universal agentic API**.
+
+| Layer | Role | What it means |
+|---|---|---|
+| 1 · 3D geometry | Commodity | Becoming table stakes |
+| 2 · Semantics | **Moat** | Knowing what every voxel is |
+| 3 · Currency | **Moat** | Staying in sync with reality |
+| 4 · Universal agentic API | Interface | One brain for every robot, agent and app |
+
+Generative world models teach machines what the world *could* look like. The Deep World Model tells them what it looks like **right now**, and gives simulation and training real ground truth to start from.
 
 ## How it works: Signal‑to‑Structure
 
@@ -566,7 +603,8 @@ deep-world-model/
 │   ├── index.html
 │   └── assets/
 ├── CITATION.cff
-└── CONTRIBUTING.md
+├── CONTRIBUTING.md
+└── LICENSE
 ```
 Code lands as it is released:
 
@@ -597,5 +635,5 @@ Venues, robotics teams, researchers and investors: if you believe every building
 **[info@collectiv.co](mailto:info@collectiv.co)** · [deep3d.world](https://deep3d.world) · [collectiv.co](https://collectiv.co)
 
 <div align="center">
-<sub>Built in Hong Kong by <a href="https://collectiv.co">Collectiv</a>. © 2026 Collectiv. All rights reserved.</sub>
+<sub>Built in Hong Kong by <a href="https://collectiv.co">Collectiv</a>. © 2026 Collectiv. All rights reserved. See <a href="LICENSE">LICENSE</a>.</sub>
 </div>

@@ -1,0 +1,33 @@
+Copyright (c) 2026 Collectiv. All rights reserved.
+
+Deep World Model, the Spatial Brain, Beetle and Collectiv are names and marks
+of Collectiv.
+
+This repository and everything in it, including the text, images, 3D captures,
+videos, design and the project page in docs/, are proprietary to Collectiv
+unless stated otherwise below. No licence is granted to copy, modify, publish,
+distribute, sublicense or sell any part of it, or to use it to train or
+evaluate machine-learning models, without prior written permission from
+Collectiv.
+
+You may:
+  - view this repository and the project page;
+  - link to them, and quote short excerpts with attribution;
+  - cite the Deep World Model using CITATION.cff.
+
+The SDK, API and code samples shown in this repository are previews of
+interfaces that are not yet released. They are provided for illustration only.
+When SDKs, tools or datasets are published here, each will carry its own
+licence, which will apply to that component.
+
+Third-party material:
+  Figures in docs/assets/research/ are reproduced from the cited peer-reviewed
+  publications for reference and commentary. They remain the property of their
+  respective authors and publishers and are not licensed by Collectiv.
+
+THE CONTENTS OF THIS REPOSITORY ARE PROVIDED "AS IS", WITHOUT WARRANTY OF ANY
+KIND, EXPRESS OR IMPLIED. IN NO EVENT SHALL COLLECTIV BE LIABLE FOR ANY CLAIM,
+DAMAGES OR OTHER LIABILITY ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+CONTENTS OF THIS REPOSITORY OR THEIR USE.
+
+Permissions, partnerships and API access: info@collectiv.co
