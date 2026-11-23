@@ -671,7 +671,7 @@ A 170,000 m² airport terminal was modelled in under 10 hours during full passen
 <details>
 <summary><b>How accurate is it?</b></summary>
 
-Up to 3 cm geometry and 5 cm semantics in priority zones. Resolution is set per zone, so lower‑priority areas can be coarser, up to about 1 m. The semantic layer covers about 1,200 base classes, plus domain extensions for aviation, rail, campus, retail and government.
+Up to 3 cm geometry and 5 cm semantics in priority zones. Resolution is set per zone, so lower‑priority areas can be coarser, up to about 5 m. The semantic layer covers about 1,200 base classes, plus domain extensions for aviation, rail, campus, retail and government.
 
 </details>
 
