@@ -59,7 +59,7 @@ We believe that model should be **one shared brain per building**, not a hundred
 **Why now**
 
 - **AI is moving into the physical world.** Robots, autonomous fleets and AI agents are leaving the lab for airports, stations, hospitals and malls: spaces that change every day.
-- **GPS stops at the door.** People spend roughly 90% of their lives inside buildings, yet that is the part of the world AI understands least, and the part that goes out of date fastest.
+- **GPS stops at the door.** People spend roughly 90% of their lives inside buildings, where satellite positioning cannot reach. It is the part of the world AI understands least, and the part that goes out of date fastest.
 - **Static scans cannot keep up.** A laser scan costs about **$100K and three weeks** per zone and starts going stale the day it is delivered.
 - **The signals are already there.** Every building is full of Wi‑Fi, Bluetooth and geomagnetic fields that encode its shape. Every visitor carries a sensor.
 
@@ -138,13 +138,13 @@ flowchart LR
 </table>
 <p align="center"><sub>Real capture at a flagship performing‑arts venue. Steps 05–06 render the cloud as Gaussian splats and label every object.</sub></p>
 
-## Six properties of a living world model
+## Six properties of the Spatial Brain
 
 | | Capability | What it means |
 |---|---|---|
 | 📡 | **Signal‑first grounding** | Fuses ambient Wi‑Fi, BLE and geomagnetic fields with vision, so geometry is anchored to physical measurement. |
 | ♻️ | **Micro‑zone self‑healing** | Detects a local change from a phone or CCTV feed and regenerates only that zone in under an hour. No full rescan. |
-| 👥 | **Zero‑downtime capture** | Built from everyday phones and crowd motion during normal hours. Zero closures, zero laser rigs. Crowdsourced through the [Beetle](https://deep3d.world/#contribute) app. |
+| 👥 | **Zero‑downtime capture** | Built from everyday phones and crowd motion during normal hours. Zero closures, zero laser rigs. Crowdsourced through the [Beetle](https://deep3d.world/#beetle) app. |
 | 🏷️ | **Machine‑readable world** | Knows what every voxel is: exits, fare gates, clearance limits, step‑free paths. Vertical heads pretrained for aviation, rail, campus, retail and government. |
 | 🤖 | **One brain for every agent** | Natural‑language spatial query and routing for staff and AI agents, exposed as MCP‑style tools for planning and lookup. |
 | 🔌 | **Open fleet standards** | VDA 5050 and Open‑RMF for fleets, OpenUSD for 3D, ROS 2 for motion. One shared world model instead of ten vendor silos. |
@@ -363,7 +363,7 @@ space = dwm.spaces.get("airport-t2")
 
 level = space.level("L7")
 print(level.summary())
-# Level L7 · 170,000 m² · 1,184 object classes · updated 41 s ago
+# Level L7 · 38,600 m² · 1,184 object classes · updated 41 s ago
 
 # Every object is named, measured and placed
 gates = level.objects(kind="boarding_gate", status="open")
@@ -540,15 +540,22 @@ $ dwm changes metro-central --follow
 
 ## Roadmap
 
+**Shipped**
 - [x] Signal‑to‑Structure reconstruction in production across 100+ venues
 - [x] Micro‑zone self‑healing from phone and CCTV
 - [x] Vertical semantic heads: aviation, rail, campus, retail, government
 - [x] Beetle crowdsourced capture app (iOS and Android)
-- [ ] Public SDKs (Python, TypeScript) and ROS 2 package
+
+**Next**
+- [ ] Python and TypeScript SDKs
 - [ ] MCP server for agent spatial query and routing
+- [ ] ROS 2 package
 - [ ] OpenUSD and Open‑RMF exporters
+
+**Later**
 - [ ] Sample datasets and evaluation scripts
 - [ ] Technical report and model card
+- [ ] Community venue contributions
 
 ## Repository layout
 

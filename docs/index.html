@@ -3,9 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Deep World Model · The Spatial Brain</title>
+<title>Deep World Model · The world model for physical AI</title>
+<link rel="canonical" href="https://collectiv-co.github.io/deep-world-model/">
 <meta name="description" content="Every building deserves a brain. The Deep World Model is the world model for physical AI: a living, real-time 3D understanding of the world's buildings for people, robot fleets and AI agents.">
-<meta property="og:title" content="Deep World Model · The Spatial Brain">
+<meta property="og:title" content="Deep World Model · The world model for physical AI">
 <meta property="og:description" content="A living world model of real buildings for physical AI: photoreal 3D from two photos and ambient signals, self-healing from CCTV, queryable by robots and AI agents.">
 <meta property="og:image" content="https://collectiv-co.github.io/deep-world-model/assets/og.jpg">
 <meta property="og:image:width" content="1200">
@@ -58,7 +59,7 @@ p{margin:0}
 .note{font:500 11.5px/1.5 var(--f-m);letter-spacing:.06em;text-transform:uppercase;color:var(--dim)}
 .sec{padding-block:clamp(72px,9vw,140px)}
 .head{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:20px 48px;align-items:end;margin-bottom:clamp(32px,4.5vw,60px)}
-@media (max-width:860px){.head{grid-template-columns:1fr}}
+@media (max-width:860px){.head{grid-template-columns:minmax(0,1fr)}}
 .btn{display:inline-flex;align-items:center;gap:10px;padding:13px 20px;border-radius:999px;font:600 15px/1 var(--f-b);text-decoration:none;border:1px solid var(--line-2);background:rgba(255,255,255,.06);backdrop-filter:blur(8px);transition:transform .2s,border-color .2s}
 .btn:hover{transform:translateY(-1px);border-color:var(--fg)}
 .btn.pri{background:var(--fg);color:var(--ink);border-color:var(--fg)}
@@ -106,7 +107,7 @@ nav.top .gh svg{width:16px;height:16px}
 .vs .big{font:700 clamp(40px,5.5vw,80px)/1 var(--f-d);letter-spacing:-.04em;margin:14px 0 14px}
 .vs .card p{color:var(--mute)}
 .vs .card.good p{color:#a5b3c2}
-@media (max-width:760px){.vs{grid-template-columns:1fr}}
+@media (max-width:760px){.vs{grid-template-columns:minmax(0,1fr)}}
 
 /* pipeline */
 .pipe{border-radius:calc(var(--r) + 4px);overflow:hidden;border:1px solid var(--line)}
@@ -136,7 +137,7 @@ nav.top .gh svg{width:16px;height:16px}
 .cap .ico{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:var(--ink);border:1px solid var(--line);margin-bottom:22px}
 .cap .ico svg{width:22px;height:22px;stroke:var(--cy);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
 @media (max-width:960px){.caps{grid-template-columns:1fr 1fr}}
-@media (max-width:620px){.caps{grid-template-columns:1fr}}
+@media (max-width:620px){.caps{grid-template-columns:minmax(0,1fr)}}
 
 /* compare slider */
 .cmp{position:relative;aspect-ratio:16/9;border-radius:var(--r);overflow:hidden;user-select:none;touch-action:pan-y;background:#05080e;cursor:ew-resize}
@@ -148,7 +149,7 @@ nav.top .gh svg{width:16px;height:16px}
 .cmp .lb.l{left:14px}.cmp .lb.r{right:14px}
 .cmp input{position:absolute;inset:0;opacity:0;width:100%;height:100%;cursor:ew-resize;margin:0}
 .two{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(24px,4vw,64px);align-items:center}
-@media (max-width:860px){.two{grid-template-columns:1fr}}
+@media (max-width:860px){.two{grid-template-columns:minmax(0,1fr)}}
 .kv{margin-top:28px;display:grid;gap:0}
 .kv div{display:flex;justify-content:space-between;gap:16px;padding:14px 0;border-top:1px solid var(--line);font-size:15px}
 .kv div span:first-child{color:var(--mute)}
@@ -167,7 +168,7 @@ nav.top .gh svg{width:16px;height:16px}
 
 /* api */
 .api{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(24px,4vw,64px);align-items:start}
-@media (max-width:960px){.api{grid-template-columns:1fr}}
+@media (max-width:960px){.api{grid-template-columns:minmax(0,1fr)}}
 .surf{display:grid;gap:10px}
 .surf button{all:unset;cursor:pointer;display:grid;grid-template-columns:40px 1fr;gap:4px 14px;padding:18px 20px;border:1px solid var(--line);border-radius:14px;background:var(--ink-2);transition:border-color .2s,background .2s}
 .surf button:hover{border-color:var(--line-2)}
@@ -193,6 +194,8 @@ nav.top .gh svg{width:16px;height:16px}
 .venue b{display:block;font:600 19px/1.2 var(--f-d);margin-top:6px}
 .venue small{display:block;color:#a5b3c2;font-size:13.5px;margin-top:4px}
 @media (max-width:960px){.venues{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.venues{grid-template-columns:minmax(0,1fr)}}
+.rnote{max-width:860px;margin:-12px 0 28px;color:var(--mute);font-size:16px;line-height:1.6}
 .logos{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
 .logos span{padding:10px 14px;border:1px solid var(--line-2);border-radius:999px;font:500 13.5px/1 var(--f-b);color:var(--mute);background:var(--ink-2)}
 .logos span b{color:var(--fg);font-weight:600}
@@ -208,7 +211,7 @@ nav.top .gh svg{width:16px;height:16px}
 .road .col.now li::before{background:#2fd6c0;border-color:#2fd6c0}
 .road .col.next li::before{border-color:var(--cy);background:radial-gradient(circle,var(--cy) 35%,transparent 40%)}
 .road h3{display:flex;align-items:center;gap:10px}
-@media (max-width:860px){.road{grid-template-columns:1fr}}
+@media (max-width:860px){.road{grid-template-columns:minmax(0,1fr)}}
 
 /* cite + cta */
 .cite{position:relative}
@@ -239,30 +242,31 @@ footer a:first-child{margin-left:0}
 .ladder div{padding:22px 0 22px 26px;position:relative}
 .ladder div::before{content:"";position:absolute;left:-5px;top:30px;width:9px;height:9px;border-radius:50%;background:var(--dim)}
 .ladder .now::before{background:#2fd6c0;box-shadow:0 0 0 6px rgba(47,214,192,.18)}
+.ladder .note{text-transform:none}
 .ladder b{display:block;font:600 clamp(20px,2vw,28px)/1.2 var(--f-d);letter-spacing:-.02em;margin-top:8px;color:var(--mute)}
 .ladder .now b{color:var(--fg);font-size:clamp(26px,2.8vw,40px)}
-@media (max-width:900px){.mv{grid-template-columns:1fr}}
+@media (max-width:900px){.mv{grid-template-columns:minmax(0,1fr)}}
 .why{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
 .why article{padding:26px;border-radius:var(--r);border:1px solid var(--line);background:var(--ink-2)}
 .why .k{font:500 12px/1 var(--f-m);color:var(--cy);letter-spacing:.1em}
 .why h3{margin:14px 0 10px}
 .why p{font-size:15px;color:var(--mute)}
 @media (max-width:960px){.why{grid-template-columns:1fr 1fr}}
-@media (max-width:560px){.why{grid-template-columns:1fr}}
+@media (max-width:560px){.why{grid-template-columns:minmax(0,1fr)}}
 .sectors{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:14px}
 .sectors>div{padding:22px;border-radius:14px;border:1px solid var(--line);background:var(--ink-2)}
 .sectors .note{color:var(--tl)}
 .sectors b{display:block;font:600 18px/1.25 var(--f-d);margin-top:8px}
 .sectors small{display:block;color:var(--mute);font-size:14px;margin-top:6px;line-height:1.45}
 @media (max-width:900px){.sectors{grid-template-columns:1fr 1fr}}
-@media (max-width:560px){.sectors{grid-template-columns:1fr}}
+@media (max-width:560px){.sectors{grid-template-columns:minmax(0,1fr)}}
 .hz{display:grid;grid-template-columns:1fr 1fr 1.3fr;gap:16px}
 .hz>div{padding:30px;border-radius:var(--r);border:1px solid var(--line);background:var(--ink-2)}
 .hz h3{margin:12px 0 10px;font-size:clamp(22px,2.2vw,30px)}
 .hz p{color:var(--mute);font-size:15.5px}
 .hz .big{background:#05080e;color:#f1f6fb;border-color:#05080e;background-image:radial-gradient(120% 120% at 100% 0%,rgba(70,224,207,.22),transparent 60%)}
 .hz .big p{color:#a5b3c2}.hz .big .note{color:#46e0cf}
-@media (max-width:860px){.hz{grid-template-columns:1fr}}
+@media (max-width:860px){.hz{grid-template-columns:minmax(0,1fr)}}
 
 /* 3D tour */
 .tour{background:#05080e}
@@ -502,7 +506,7 @@ footer a:first-child{margin-left:0}
     </div>
     <div class="why">
       <article class="rv"><span class="k">01</span><h3>AI is moving into the physical world</h3><p>Robots, autonomous fleets and AI agents are leaving the lab for airports, stations, hospitals and malls: spaces that change every day.</p></article>
-      <article class="rv"><span class="k">02</span><h3>GPS stops at the door</h3><p>People spend roughly 90% of their lives inside buildings, yet that is the part of the world AI understands least, and the part that goes out of date fastest.</p></article>
+      <article class="rv"><span class="k">02</span><h3>GPS stops at the door</h3><p>People spend roughly 90% of their lives inside buildings, where satellite positioning cannot reach. It is the part of the world AI understands least, and the part that goes out of date fastest.</p></article>
       <article class="rv"><span class="k">03</span><h3>Static scans cannot keep up</h3><p>A laser scan costs about $100K and three weeks per zone, and starts going stale the day it is delivered.</p></article>
       <article class="rv"><span class="k">04</span><h3>The signals are already there</h3><p>Every building is full of Wi‑Fi, Bluetooth and geomagnetic fields that encode its shape, and every visitor carries a sensor.</p></article>
     </div>
@@ -626,15 +630,16 @@ footer a:first-child{margin-left:0}
   <div class="wrap">
     <div class="head rv">
       <div><p class="eb">Science &amp; research</p><h2>Built by Collectiv.<br><span class="gt">Sharpened by open research.</span></h2></div>
-      <p class="lede">The Deep World Model is designed, built and run by the Collectiv team. That includes its architecture, the spatial‑semantic model, the Signal‑to‑Structure pipeline, micro‑zone self‑healing and the production system live across 100+ venues. Alongside this work, Collectiv's co‑founder and Chief Scientist, Professor S.‑H. Gary Chan, and his Smart IoT and Sensing Systems Group at HKUST publish academic research in areas the model touches: ambient‑signal positioning, learning from unlabelled crowd data, people sensing from video and camera‑based 3D localisation.</p>
+      <p class="lede">The Deep World Model is designed, built and run by the Collectiv team: its architecture, the spatial‑semantic model, the Signal‑to‑Structure pipeline, micro‑zone self‑healing and the production system live across 100+ venues.</p>
     </div>
+    <p class="rnote rv">Alongside this work, Collectiv's co‑founder and Chief Scientist, Professor S.‑H. Gary Chan, and his Smart IoT and Sensing Systems Group at HKUST publish academic research in areas the model touches: ambient‑signal positioning, learning from unlabelled crowd data, people sensing from video and camera‑based 3D localisation.</p>
     <div class="prof rv">
       <div class="pmark" aria-hidden="true">GC</div>
       <div>
         <span class="role">Co‑founder &amp; Chief Scientist · Collectiv</span>
         <h3>Professor S.‑H. Gary Chan</h3>
         <p>Professor, Department of Computer Science and Engineering, The Hong Kong University of Science and Technology · Associate Director, GREAT Smart Cities Institute</p>
-        <ul class="pfacts"><li>PhD, Stanford University</li><li>Fellow of Sigma Xi</li><li>World's Top 2% Scientists</li><li>Indoor positioning · IoT sensing · video analytics · edge AI</li></ul>
+        <ul class="pfacts"><li>PhD, Stanford University</li><li>Fellow of Sigma Xi</li><li>World's Top 2% Scientists</li><li>Location intelligence · IoT sensing · video analytics · edge AI</li></ul>
       </div>
       <a class="btn" href="https://cse.hkust.edu.hk/~gchan/garypub.html" target="_blank" rel="noopener">All publications ↗</a>
     </div>
@@ -835,7 +840,7 @@ space = dwm.spaces.get("airport-t2")
 
 level = space.level("L7")
 print(level.summary())
-# Level L7 · 170,000 m² · 1,184 object classes · updated 41 s ago
+# Level L7 · 38,600 m² · 1,184 object classes · updated 41 s ago
 
 # Every object is named, measured and placed
 gates = level.objects(kind="boarding_gate", status="open")
