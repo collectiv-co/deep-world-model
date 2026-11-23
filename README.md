@@ -1,12 +1,12 @@
 <div align="center">
 
-<a href="https://deep3d.world"><img src="docs/assets/banner.jpg" alt="Deep World Model by Collectiv: a living 3D brain for the physical world" width="100%"></a>
+<a href="https://deep3d.world"><img src="docs/assets/banner.webp" alt="Deep World Model by Collectiv: a living 3D brain for the physical world" width="100%"></a>
 
 # Every building deserves a brain.
 
 ### Deep World Model · The Spatial Brain for the physical world
 
-**We are building the spatial layer of physical AI: a living, real‑time 3D memory of the world's buildings, grown from ordinary phones and the signals already in the air, that people, robot fleets and AI agents can all query and act on.**
+**We are building the world model for physical AI: a living, real‑time 3D understanding of the world's buildings, grown from ordinary phones and the signals already in the air, that people, robot fleets and AI agents can all query and act on.**
 
 [**Website**](https://deep3d.world) ·
 [**Project page**](https://collectiv-co.github.io/deep-world-model) ·
@@ -41,7 +41,7 @@ AI has learned to read, write, see and reason. It still does not know **where it
 
 A language model can plan a journey but cannot see the closed escalator. A delivery robot can walk but not past last night's new hoarding. A digital twin is out of date the morning after it is delivered. Every machine entering the physical world needs the same missing piece: a model of the space that is **true right now**.
 
-We believe that model should be **one shared brain per building**, not a hundred private maps. It should be grown from the devices already in people's pockets, grounded in physics rather than guesswork, kept current by everyone who walks through, and open to every robot, agent and app through common standards.
+We believe that model should be **one shared brain per building**, not a hundred private models. It should be grown from the devices already in people's pockets, grounded in physics rather than guesswork, kept current by everyone who walks through, and open to every robot, agent and app through common standards.
 
 **Our vision is a world where every machine, in every building on Earth, knows where it is, what is around it, and what just changed.**
 
@@ -50,8 +50,8 @@ We believe that model should be **one shared brain per building**, not a hundred
 <td width="33%" valign="top">
 
 #### 🧭 The web indexed information.
-#### 🗺️ Maps indexed the streets.
-#### 🧠 We are indexing the indoors.
+#### 💬 Language models learned the world of words.
+#### 🧠 World models are learning the physical world.
 
 </td>
 <td width="67%" valign="top">
@@ -59,7 +59,7 @@ We believe that model should be **one shared brain per building**, not a hundred
 **Why now**
 
 - **AI is moving into the physical world.** Robots, autonomous fleets and AI agents are leaving the lab for airports, stations, hospitals and malls: spaces that change every day.
-- **GPS stops at the door.** People spend roughly 90% of their lives indoors, yet the indoors is the least mapped, least current part of the world.
+- **GPS stops at the door.** People spend roughly 90% of their lives inside buildings, yet that is the part of the world AI understands least, and the part that goes out of date fastest.
 - **Static scans cannot keep up.** A laser scan costs about **$100K and three weeks** per zone and starts going stale the day it is delivered.
 - **The signals are already there.** Every building is full of Wi‑Fi, Bluetooth and geomagnetic fields that encode its shape. Every visitor carries a sensor.
 
@@ -69,7 +69,7 @@ We believe that model should be **one shared brain per building**, not a hundred
 
 ## What the Spatial Brain is
 
-The **Deep World Model (DWM)** turns any indoor space into a living, machine‑readable 3D world. It:
+The **Deep World Model (DWM)** turns any building into a living, machine‑readable world model. It:
 
 - **starts from two photos, not two thousand**, by reading the radio and magnetic signals already in the space;
 - **heals itself in under an hour**, regenerating only the micro‑zone that changed from a phone or CCTV feed while the building stays open;
@@ -99,7 +99,7 @@ The **Deep World Model (DWM)** turns any indoor space into a living, machine‑r
 
 ## Live, not a concept
 
-**100+** venues mapped and live · **5M+** people a day move through spaces the model sees · **1.7B+** journeys a year
+**100+** venues modelled and live · **5M+** people a day move through spaces the model sees · **1.7B+** journeys a year
 
 The Spatial Brain already runs inside some of the most demanding, most visited spaces in Asia:
 
@@ -116,12 +116,12 @@ The Spatial Brain already runs inside some of the most demanding, most visited s
 
 ## How it works: Signal‑to‑Structure
 
-Most 3D capture starts with pixels. DWM starts with **physics**: the radio signals that fill every indoor space already encode its walls, openings and scale. Vision is layered on top, so the reconstruction rests on measurement rather than guesswork, and pure‑vision hallucinations drop sharply.
+Most 3D capture starts with pixels. DWM starts with **physics**: the radio signals that fill every building already encode its walls, openings and scale. Vision is layered on top, so the reconstruction rests on measurement rather than guesswork, and pure‑vision hallucinations drop sharply.
 
 ```mermaid
 flowchart LR
     A["📷 Capture<br/>2 phone photos"] --> B["📡 Sense<br/>Wi‑Fi · BLE · geomagnetic<br/>signal fingerprint"]
-    B --> C["📐 Structure<br/>inferred floor plan<br/>boundaries · openings · scale"]
+    B --> C["📐 Structure<br/>inferred layout<br/>boundaries · openings · scale"]
     C --> D["☁️ Points<br/>signal‑guided<br/>3D point cloud"]
     D --> E["✨ Splats<br/>photoreal Gaussian<br/>splatting, real time"]
     E --> F["🧠 Understand<br/>semantics · routing<br/>change feed"]
@@ -132,7 +132,7 @@ flowchart LR
 <tr>
 <td align="center" width="25%"><img src="docs/assets/capture_photo.jpg" alt="Input photo"><br><sub><b>01 Capture</b><br>Two ordinary photos</sub></td>
 <td align="center" width="25%"><img src="docs/assets/capture_fingerprint.jpg" alt="Signal fingerprint"><br><sub><b>02 Sense</b><br>The signal fingerprint</sub></td>
-<td align="center" width="25%"><img src="docs/assets/capture_floorplan.jpg" alt="Inferred floor plan"><br><sub><b>03 Structure</b><br>A floor plan, inferred</sub></td>
+<td align="center" width="25%"><img src="docs/assets/capture_floorplan.jpg" alt="Inferred floor plan"><br><sub><b>03 Structure</b><br>Layout, inferred from signals</sub></td>
 <td align="center" width="25%"><img src="docs/assets/capture_pointcloud.jpg" alt="Point cloud"><br><sub><b>04 Points</b><br>Signal‑guided point cloud</sub></td>
 </tr>
 </table>
@@ -147,14 +147,14 @@ flowchart LR
 | 👥 | **Zero‑downtime capture** | Built from everyday phones and crowd motion during normal hours. Zero closures, zero laser rigs. Crowdsourced through the [Beetle](https://deep3d.world/#contribute) app. |
 | 🏷️ | **Machine‑readable world** | Knows what every voxel is: exits, fare gates, clearance limits, step‑free paths. Vertical heads pretrained for aviation, rail, campus, retail and government. |
 | 🤖 | **One brain for every agent** | Natural‑language spatial query and routing for staff and AI agents, exposed as MCP‑style tools for planning and lookup. |
-| 🔌 | **Open fleet standards** | VDA 5050 and Open‑RMF for fleets, OpenUSD for 3D, ROS 2 for motion. One shared map instead of ten vendor silos. |
+| 🔌 | **Open fleet standards** | VDA 5050 and Open‑RMF for fleets, OpenUSD for 3D, ROS 2 for motion. One shared world model instead of ten vendor silos. |
 
 
 ## A living world model
 
-> **Most maps are memories. Ours is alive.**
+> **Most 3D models are memories. Ours is alive.**
 
-A scan records how a building looked on the day of the survey. The Deep World Model keeps watching. **The CCTV cameras a venue already runs become its eyes.** Each camera is registered into the model, each frame is checked against what the model expects to see, and only the part that changed is rebuilt. The building stays open and the map stays current.
+A scan records how a building looked on the day of the survey. The Deep World Model keeps watching. **The CCTV cameras a venue already runs become its eyes.** Each camera is registered into the model, each frame is checked against what the model expects to see, and only the part that changed is rebuilt. The building stays open and the world model stays current.
 
 | Layer | What it holds | How fast it updates |
 |---|---|---|
@@ -287,7 +287,7 @@ Full list: [Prof. Chan's publications](https://cse.hkust.edu.hk/~gchan/garypub.h
 | **Geometry** | Gaussian splats, point clouds and meshes for any level, at the resolution you need |
 | **Semantics** | Every door, lift, sign and exit, named, measured and placed |
 | **Routing** | Step‑free, robot‑safe or fastest paths on true geometry |
-| **Change feed** | Subscribe to what moved, so fleets and agents never act on a stale map |
+| **Change feed** | Subscribe to what moved, so fleets and agents never act on a stale world model |
 | **Live cameras** | Register existing CCTV so the model keeps itself current |
 
 <details open>
@@ -450,7 +450,7 @@ console.log(reply.text);
 </details>
 
 <details>
-<summary><b><code>robot_nav.py</code></b> · Keep a robot's map in sync (ROS 2)</summary>
+<summary><b><code>robot_nav.py</code></b> · Keep a robot's world model in sync (ROS 2)</summary>
 
 ```python
 # robot_nav.py · a ROS 2 node that navigates on the live model
@@ -525,9 +525,9 @@ $ dwm changes metro-central --follow
 ## What becomes possible
 
 - **Airports that run themselves better.** Task dispatch that knows where every staff member, robot and asset is; queue and late‑passenger forecasting; energy heatmaps on true geometry.
-- **Transit that is accessible by default.** Step‑free routing, live lift and gate status, robot patrols on a map that matches tonight's hoarding.
+- **Transit that is accessible by default.** Step‑free routing, live lift and gate status, robot patrols on a world model that matches tonight's hoarding.
 - **Safer public spaces.** Smart patrolling, emergency egress and asset management on a live, labelled model.
-- **Robots that work anywhere on day one.** A shared, standards‑based map for heterogeneous fleets, so no vendor has to build its own.
+- **Robots that work anywhere on day one.** A shared, standards‑based world model for heterogeneous fleets, so no vendor has to build its own.
 - **AI agents that can act, not just answer.** "Where is the nearest step‑free route to Gate 23?" answered from the building itself.
 
 ## From one building to every building
@@ -536,7 +536,7 @@ $ dwm changes metro-central --follow
 |---|---|
 | **Today** | 100+ venues live across some of Asia's busiest airports, rail networks, campuses, resorts and malls |
 | **Next** | Every major airport, station and campus: SDKs, an MCP server and open exporters so any robot or agent can plug in |
-| **Ultimately** | A planet‑scale, continuously updated spatial memory of the indoor world: the ground truth physical AI runs on |
+| **Ultimately** | A planet‑scale, continuously updated world model of the built environment: the ground truth physical AI runs on |
 
 ## Roadmap
 
@@ -583,7 +583,7 @@ Code lands as it is released:
 }
 ```
 
-## Build the spatial layer with us
+## Build the world model for physical AI with us
 
 Venues, robotics teams, researchers and investors: if you believe every building deserves a brain, we want to hear from you.
 

@@ -4,10 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Deep World Model · The Spatial Brain</title>
-<meta name="description" content="Every building deserves a brain. The Deep World Model is the spatial layer of physical AI: a living, real-time 3D memory of the world's buildings for people, robot fleets and AI agents.">
+<meta name="description" content="Every building deserves a brain. The Deep World Model is the world model for physical AI: a living, real-time 3D understanding of the world's buildings for people, robot fleets and AI agents.">
 <meta property="og:title" content="Deep World Model · The Spatial Brain">
-<meta property="og:description" content="Real-time 3D of any indoor space from two photos and ambient signals. Self-healing, semantic, machine-readable.">
-<meta property="og:image" content="assets/og.jpg">
+<meta property="og:description" content="A living world model of real buildings for physical AI: photoreal 3D from two photos and ambient signals, self-healing from CCTV, queryable by robots and AI agents.">
+<meta property="og:image" content="https://collectiv-co.github.io/deep-world-model/assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://collectiv-co.github.io/deep-world-model/">
+<meta name="twitter:image" content="https://collectiv-co.github.io/deep-world-model/assets/og.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="assets/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -420,7 +424,7 @@ footer a:first-child{margin-left:0}
     <div class="pill"><b>LIVE</b><span class="dot"></span>100+ venues across Asia</div>
     <p class="eb" style="color:#5cc8ff">Deep World Model · The Spatial Brain for the physical world</p>
     <h1>Every building<br>deserves a <span class="gt">brain.</span></h1>
-    <p class="lede">We are building the spatial layer of physical AI: a living, real‑time 3D memory of the world's buildings, grown from ordinary phones and the signals already in the air, and shared by <strong style="color:#f1f6fb">people, robot fleets and AI agents</strong>.</p>
+    <p class="lede">We are building the world model for physical AI: a living, real‑time 3D understanding of the world's buildings, grown from ordinary phones and the signals already in the air, and shared by <strong style="color:#f1f6fb">people, robot fleets and AI agents</strong>.</p>
     <div class="cta">
       <a class="btn pri" href="#how">See how it works <span aria-hidden="true">↓</span></a>
       <a class="btn" href="https://github.com/collectiv-co/deep-world-model"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2l3 6.5 7 .9-5.1 4.8 1.3 7L12 17.8 5.8 21.2l1.3-7L2 9.4l7-.9z"/></svg>Star on GitHub</a>
@@ -450,13 +454,13 @@ footer a:first-child{margin-left:0}
         <p class="eb" style="margin-top:0">Our vision</p>
         <p class="vis">AI has learned to read, write, see and reason. It still does not know <strong>where it is</strong>.</p>
         <p class="vis-sub">A language model can plan a journey but cannot see the closed escalator. A delivery robot can walk, but not past last night's new hoarding. A digital twin is out of date the morning after it is delivered. Every machine entering the physical world needs the same missing piece: a model of the space that is true <em>right now</em>.</p>
-        <p class="vis-sub">We believe that model should be <strong>one shared brain per building</strong>, not a hundred private maps: grown from the devices already in people's pockets, grounded in physics, kept current by everyone who walks through, and open to every robot, agent and app.</p>
+        <p class="vis-sub">We believe that model should be <strong>one shared brain per building</strong>, not a hundred private models: grown from the devices already in people's pockets, grounded in physics, kept current by everyone who walks through, and open to every robot, agent and app.</p>
         <p class="vis" style="margin-top:28px">A world where every machine, in every building on Earth, knows <span class="gt">where it is, what is around it, and what just changed.</span></p>
       </div>
-      <div class="ladder rv" aria-label="Indexing the world">
+      <div class="ladder rv" aria-label="From words to worlds">
         <div><span class="note">1990s</span><b>The web indexed information.</b></div>
-        <div><span class="note">2000s</span><b>Maps indexed the streets.</b></div>
-        <div class="now"><span class="note">Now</span><b>We are indexing the <span class="gt">indoors.</span></b></div>
+        <div><span class="note">2010s</span><b>Large language models learned the world of words.</b></div>
+        <div class="now"><span class="note">Now</span><b>World models are learning <span class="gt">the physical world.</span></b></div>
       </div>
     </div>
   </div>
@@ -466,7 +470,7 @@ footer a:first-child{margin-left:0}
   <div class="wrap">
     <div class="head rv">
       <div><p class="eb">Step inside · real captures, not renders</p><h2>Walk through a <span class="gt">living memory.</span></h2></div>
-      <p class="lede">Two of the busiest indoor spaces in Asia, reconstructed by the Deep World Model as photoreal Gaussian splats. Running live in your browser. Drag to look around, scroll to move.</p>
+      <p class="lede">Two of the busiest public spaces in Asia, reconstructed by the Deep World Model as photoreal Gaussian splats. Running live in your browser. Drag to look around, scroll to move.</p>
     </div>
     <div class="viewer rv" id="viewer">
       <canvas id="gs" aria-label="Interactive 3D reconstruction"></canvas>
@@ -493,12 +497,12 @@ footer a:first-child{margin-left:0}
 <section class="sec" id="why" style="padding-bottom:0">
   <div class="wrap">
     <div class="head rv">
-      <div><p class="eb">Why now</p><h2>Physical AI is coming indoors. <span class="gt">It needs a map.</span></h2></div>
-      <p class="lede">Four shifts are converging, and the spaces we live in are the last unmapped frontier.</p>
+      <div><p class="eb">Why now</p><h2>Physical AI is here. <span class="gt">It needs a world model.</span></h2></div>
+      <p class="lede">Four shifts are converging, and the buildings we live in are the frontier AI understands least.</p>
     </div>
     <div class="why">
       <article class="rv"><span class="k">01</span><h3>AI is moving into the physical world</h3><p>Robots, autonomous fleets and AI agents are leaving the lab for airports, stations, hospitals and malls: spaces that change every day.</p></article>
-      <article class="rv"><span class="k">02</span><h3>GPS stops at the door</h3><p>People spend roughly 90% of their lives indoors, yet the indoors is the least mapped, least current part of the world.</p></article>
+      <article class="rv"><span class="k">02</span><h3>GPS stops at the door</h3><p>People spend roughly 90% of their lives inside buildings, yet that is the part of the world AI understands least, and the part that goes out of date fastest.</p></article>
       <article class="rv"><span class="k">03</span><h3>Static scans cannot keep up</h3><p>A laser scan costs about $100K and three weeks per zone, and starts going stale the day it is delivered.</p></article>
       <article class="rv"><span class="k">04</span><h3>The signals are already there</h3><p>Every building is full of Wi‑Fi, Bluetooth and geomagnetic fields that encode its shape, and every visitor carries a sensor.</p></article>
     </div>
@@ -509,7 +513,7 @@ footer a:first-child{margin-left:0}
   <div class="wrap">
     <div class="head rv">
       <div><p class="eb">The problem</p><h2>Everyone can scan a building <span class="gt">once.</span></h2></div>
-      <p class="lede">Robots and AI agents need a map that is true <em>right now</em>. Laser scans and BIM files go stale within days, and stale maps make robots crash and queries fail, confidently.</p>
+      <p class="lede">Robots and AI agents need a world model that is true <em>right now</em>. Laser scans and BIM files go stale within days, and stale models make robots crash and agents answer wrongly, confidently.</p>
     </div>
     <div class="vs rv">
       <div class="card">
@@ -567,7 +571,7 @@ footer a:first-child{margin-left:0}
       <article class="cap rv"><div class="ico"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.4"/><path d="M3 20c.6-3.4 3-5 6-5s5.4 1.6 6 5M15 15.5c2.6-.4 5 .9 6 4.5"/></svg></div><span class="tag">Crowd ingest</span><h3>Zero‑downtime capture</h3><p>Built from mobile devices and crowd motion during normal operating hours, through the Beetle app. Zero closures, zero laser rigs.</p></article>
       <article class="cap rv"><div class="ico"><svg viewBox="0 0 24 24"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 12l9 4 9-4M3 17l9 4 9-4"/></svg></div><span class="tag">Semantics</span><h3>Machine‑readable world</h3><p>Knows what every voxel is: exits, fare gates, clearance limits, step‑free paths. Vertical heads pretrained for aviation, rail, campus, retail and government.</p></article>
       <article class="cap rv"><div class="ico"><svg viewBox="0 0 24 24"><rect x="5" y="7" width="14" height="11" rx="3"/><path d="M12 3v4M9 12h.01M15 12h.01M9.5 15h5"/></svg></div><span class="tag">Agentic API</span><h3>One brain for all</h3><p>Natural‑language spatial query and routing for staff and AI agents, exposed through MCP‑style tools for planning and lookup.</p></article>
-      <article class="cap rv"><div class="ico"><svg viewBox="0 0 24 24"><path d="M8 3v5M16 3v5M6 8h12v3a6 6 0 01-12 0V8zM12 17v4"/></svg></div><span class="tag">Interop</span><h3>Open fleet standards</h3><p>VDA 5050 and Open‑RMF for fleets, OpenUSD for 3D, ROS 2 for motion. One shared map instead of ten vendor silos.</p></article>
+      <article class="cap rv"><div class="ico"><svg viewBox="0 0 24 24"><path d="M8 3v5M16 3v5M6 8h12v3a6 6 0 01-12 0V8zM12 17v4"/></svg></div><span class="tag">Interop</span><h3>Open fleet standards</h3><p>VDA 5050 and Open‑RMF for fleets, OpenUSD for 3D, ROS 2 for motion. One shared world model instead of ten vendor silos.</p></article>
     </div>
   </div>
 </section>
@@ -575,8 +579,8 @@ footer a:first-child{margin-left:0}
 <section class="sec dark living" id="living">
   <div class="wrap">
     <div class="head rv">
-      <div><p class="eb">Living World Model · always current</p><h2>Most maps are memories.<br><span class="gt">Ours is alive.</span></h2></div>
-      <p class="lede">A scan records how a building looked on the day of the survey. The Deep World Model keeps watching. The CCTV cameras a venue already runs become its eyes. Each camera is registered into the model, each frame is checked against what the model expects to see, and only the part that changed is rebuilt. The building stays open and the map stays current.</p>
+      <div><p class="eb">Living World Model · always current</p><h2>Most 3D models are memories.<br><span class="gt">Ours is alive.</span></h2></div>
+      <p class="lede">A scan records how a building looked on the day of the survey. The Deep World Model keeps watching. The CCTV cameras a venue already runs become its eyes. Each camera is registered into the model, each frame is checked against what the model expects to see, and only the part that changed is rebuilt. The building stays open and the world model stays current.</p>
     </div>
 
     <div class="clocks">
@@ -772,7 +776,7 @@ footer a:first-child{margin-left:0}
         <button role="tab" aria-selected="true" data-i="0"><span class="k">01</span><b>Geometry</b><span>Splats, point clouds and meshes for any level, at the resolution you need.</span></button>
         <button role="tab" aria-selected="false" data-i="1"><span class="k">02</span><b>Semantics</b><span>Every door, lift, sign and exit, named, measured and placed.</span></button>
         <button role="tab" aria-selected="false" data-i="2"><span class="k">03</span><b>Routing</b><span>Step‑free, robot‑safe or fastest paths on true geometry.</span></button>
-        <button role="tab" aria-selected="false" data-i="3"><span class="k">04</span><b>Change feed</b><span>Subscribe to what moved, so fleets never act on a stale map.</span></button>
+        <button role="tab" aria-selected="false" data-i="3"><span class="k">04</span><b>Change feed</b><span>Subscribe to what moved, so fleets never act on a stale world model.</span></button>
         <button role="tab" aria-selected="false" data-i="4"><span class="k">05</span><b>Live cameras</b><span>Register existing CCTV so the model keeps itself current.</span></button>
       </div>
       <div>
@@ -905,7 +909,7 @@ console.log(reply.text);
 // Take lift B in the north atrium to L4, then 85 m along the east promenade.
 // Crowd density on this route is low. Escalator 3 is closed for maintenance.
 </script>
-<script type="text/plain" class="sdkf" data-lang="Python · ROS 2" data-desc="Keep a robot's map in sync with reality">
+<script type="text/plain" class="sdkf" data-lang="Python · ROS 2" data-desc="Keep a robot's world model in sync with reality">
 # robot_nav.py · a ROS 2 node that navigates on the live model
 import rclpy
 from rclpy.node import Node
@@ -968,7 +972,7 @@ $ dwm changes metro-central --follow
 <section class="sec" id="live">
   <div class="wrap">
     <div class="head rv">
-      <div><p class="eb">Live today · not a concept</p><h2>Already mapping the spaces <span class="gt">millions move through.</span></h2></div>
+      <div><p class="eb">Live today · not a concept</p><h2>Already modelling the spaces <span class="gt">millions move through.</span></h2></div>
       <p class="lede"><strong>100+</strong> venues live. <strong>5M+</strong> people a day and <strong>1.7B+</strong> journeys a year move through spaces the model sees.</p>
     </div>
     <div class="venues">
@@ -997,7 +1001,7 @@ $ dwm changes metro-central --follow
     <div class="hz">
       <div class="rv"><span class="note">Today</span><h3>100+ venues live</h3><p>Across some of Asia's busiest airports, rail networks, campuses, resorts and malls.</p></div>
       <div class="rv"><span class="note">Next</span><h3>Every major airport, station and campus</h3><p>SDKs, an MCP server and open exporters, so any robot or agent can plug in.</p></div>
-      <div class="rv big"><span class="note">Ultimately</span><h3>A planet‑scale spatial memory</h3><p>A continuously updated model of the indoor world, the ground truth physical AI runs on.</p></div>
+      <div class="rv big"><span class="note">Ultimately</span><h3>A planet‑scale spatial memory</h3><p>A continuously updated world model of the built environment, the ground truth physical AI runs on.</p></div>
     </div>
   </div>
 </section>
@@ -1047,7 +1051,7 @@ $ dwm changes metro-central --follow
   <div class="wrap">
     <div class="cta-band rv">
       <p class="eb" style="color:#5cc8ff">Work with us</p>
-      <h2>Build the spatial layer <span class="gt" style="background:linear-gradient(95deg,#7aa8ff,#46e0cf 55%,#a8f04c);-webkit-background-clip:text;background-clip:text">with us.</span></h2>
+      <h2>Build physical AI's world model <span class="gt" style="background:linear-gradient(95deg,#7aa8ff,#46e0cf 55%,#a8f04c);-webkit-background-clip:text;background-clip:text">with us.</span></h2>
       <p class="lede">Venues, robotics teams, researchers and investors: if you believe every building deserves a brain, we want to hear from you.</p>
       <div class="cta">
         <a class="btn pri" href="mailto:info@collectiv.co?subject=Deep%20World%20Model">info@collectiv.co →</a>
@@ -1092,7 +1096,7 @@ if(RM){pts.forEach(p=>{p.x=p.tx;p.y=p.ty;p.lit=.6});last=0;tick(16)}else request
 
 /* pipeline stepper */
 const imgs=[...document.querySelectorAll('#stage img')],steps=[...document.querySelectorAll('.step')],cap=document.getElementById('cap'),bar=document.getElementById('bar');
-const caps=['Input · performing‑arts venue · 2 photos','Signal fingerprint · performing‑arts venue','Inferred floor plan · L2','Point cloud · performing‑arts venue','Gaussian splats · real‑time render','Labelled objects · metro station'];
+const caps=['Input · performing‑arts venue · 2 photos','Signal fingerprint · performing‑arts venue','Inferred layout · L2','Point cloud · performing‑arts venue','Gaussian splats · real‑time render','Labelled objects · metro station'];
 let cur=0,timer,auto=!RM;
 function go(i){cur=i;imgs.forEach((im,k)=>im.classList.toggle('on',k===i));steps.forEach((s,k)=>s.setAttribute('aria-selected',k===i));cap.textContent=caps[i];
   bar.style.transition='none';bar.style.width='0';if(auto){requestAnimationFrame(()=>{bar.style.transition='width 4.5s linear';bar.style.width='100%'});clearTimeout(timer);timer=setTimeout(()=>go((cur+1)%6),4500)}}
