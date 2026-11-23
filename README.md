@@ -1,6 +1,6 @@
 <div align="center">
 
-<a href="https://deep3d.world"><img src="docs/assets/og.jpg" alt="Deep World Model" width="100%"></a>
+<a href="https://deep3d.world"><img src="docs/assets/banner.jpg" alt="Deep World Model by Collectiv: a living 3D brain for the physical world" width="100%"></a>
 
 # Every building deserves a brain.
 
@@ -12,7 +12,7 @@
 [**Project page**](https://collectiv-co.github.io/deep-world-model) ·
 [**Demos**](https://deep3d.world/#demos) ·
 [**Living model**](#a-living-world-model) ·
-[**Research**](#research-foundations) ·
+[**Research**](#science-and-research) ·
 [**SDK preview**](#sdk-preview) ·
 [**API access**](mailto:info@collectiv.co?subject=Deep%20World%20Model%20API%20access) ·
 [**Collectiv**](https://collectiv.co)
@@ -194,13 +194,17 @@ flowchart LR
 | Machine access | Files to download and convert | **Live API, change feed, agent tools** |
 | Over time | Decays | **Grows in accuracy and semantic value** |
 
-## Research foundations
+## Science and research
 
-The Deep World Model is informed by the research of Collectiv's **co‑founder and Chief Scientist, Professor S.‑H. Gary Chan** (Professor, Department of Computer Science and Engineering, The Hong Kong University of Science and Technology; Associate Director, GREAT Smart Cities Institute) and the Smart IoT and Sensing Systems Group at HKUST. The work covers ambient‑signal positioning, learning from unlabelled crowd data, people sensing from video, and camera‑based 3D localisation. Each strand relates to a layer of the model.
+**Built by Collectiv. Sharpened by open research.**
+
+The Deep World Model is designed, built and run by the Collectiv team. That includes its architecture, the spatial‑semantic model, the Signal‑to‑Structure pipeline, micro‑zone self‑healing and the production system live across 100+ venues.
+
+Alongside this work, Collectiv's **co‑founder and Chief Scientist, Professor S.‑H. Gary Chan** (Professor, Department of Computer Science and Engineering, The Hong Kong University of Science and Technology; Associate Director, GREAT Smart Cities Institute), and his Smart IoT and Sensing Systems Group at HKUST publish academic research in areas the model touches: ambient‑signal positioning, learning from unlabelled crowd data, people sensing from video and camera‑based 3D localisation.
 
 ### Research behind the ideas
 
-Selected figures from Professor Chan's peer‑reviewed research, shown next to the parts of the Deep World Model they relate to. They illustrate the problems and ideas that shape our approach. The Deep World Model is its own system, and its methods may differ from those published.
+Selected figures from Professor Chan's peer‑reviewed research, shown next to the parts of the Deep World Model they relate to. They illustrate the science around the problems we work on. The Deep World Model, its methods and its production system are Collectiv's own engineering, and may differ from what is published.
 
 <table>
 <tr>
