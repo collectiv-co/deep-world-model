@@ -25,7 +25,7 @@
 ![Venues](https://img.shields.io/badge/venues-100%2B-2156f5?style=flat-square)
 ![Model](https://img.shields.io/badge/model-35B%20params-4fae17?style=flat-square)
 ![Interop](https://img.shields.io/badge/interop-OpenUSD%20·%20ROS2%20·%20VDA%205050%20·%20Open--RMF-0c1626?style=flat-square)
-![Live](https://img.shields.io/badge/updates-live%20from%20CCTV-46e0cf?style=flat-square)
+[![Live](https://img.shields.io/badge/updates-live%20from%20CCTV-46e0cf?style=flat-square)](#-two-cameras-the-airport-already-had-one-living-3d-world)
 ![Code](https://img.shields.io/badge/SDK-preview-d9822b?style=flat-square)
 
 </div>
@@ -194,6 +194,24 @@ flowchart LR
 > **Most 3D models are memories. Ours is alive.**
 
 A scan records how a building looked on the day of the survey. The Deep World Model keeps watching. **The CCTV cameras a venue already runs become its eyes.** Each camera is registered into the model, each frame is checked against what the model expects to see, and only the part that changed is rebuilt. The building stays open and the world model stays current.
+
+### ▶ Two cameras the airport already had. One living 3D world.
+
+<a href="https://collectiv-co.github.io/deep-world-model/#living-demo"><img src="docs/assets/video/cctv-living-preview.webp" alt="Two existing airport CCTV cameras fused into the Deep World Model: travellers tracked across both feeds and placed as anonymous avatars inside a photoreal 3D model of the terminal" width="100%"></a>
+
+<p align="center"><sub><b>Real footage, not a render.</b> One of the world's busiest airports, two existing ceiling cameras. <a href="https://collectiv-co.github.io/deep-world-model/#living-demo"><b>Watch the full 43‑second video ▶</b></a></sub></p>
+
+Two ordinary CCTV cameras, fused into the Deep World Model. Every traveller is detected, followed across both feeds, measured and placed in metric 3D inside a photoreal model of the hall. **No new sensors, no tags, no app.** People appear as anonymous avatars: the model knows where someone is and how they move, not who they are.
+
+| | What you see |
+|---|---|
+| **00:00 · The world loads** | The terminal's photoreal Gaussian‑splat model, pop‑up art installation and all |
+| **00:08 · People enter the world** | Travellers seen on CCTV appear as anonymous avatars, standing exactly where they are |
+| **00:12 · Two cameras, one person** | Each traveller is re‑identified across both feeds and kept as a single track |
+| **00:18 · Measured, not guessed** | Heights from 102 to 187 cm, groups detected, departures remembered: "last seen 15 s ago" |
+| **00:26 · Cameras inside the model** | Pull back: each camera sits in the 3D world at its solved pose, and the whole hall is live |
+
+**2** existing cameras, no new hardware · **12** travellers tracked in under 30 seconds · **3** groups recognised · **1** shared metric 3D frame for every camera, robot and agent
 
 | Layer | What it holds | How fast it updates |
 |---|---|---|

@@ -391,6 +391,36 @@ footer a:first-child{margin-left:0}
 .faq details p{margin:0 0 20px;font-size:15px;line-height:1.6;color:var(--mute)}
 .faq details p b{color:var(--fg)}
 @media (max-width:860px){.faq{grid-template-columns:minmax(0,1fr)}}
+
+/* cctv demo */
+.cctv{margin:clamp(8px,2vw,20px) 0 clamp(40px,5vw,72px)}
+.cctv-top{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:20px 48px;align-items:end;margin-bottom:22px}
+.cctv-top h3{font:600 clamp(28px,3.4vw,46px)/1.08 var(--f-d);letter-spacing:-.02em;color:#fff;margin:10px 0 0}
+.cctv-top p.sub{color:#a5b3c2;font-size:16.5px;line-height:1.6;margin:0}
+.cctv-top .note{color:#46e0cf}
+.cctv-vid{position:relative;border-radius:var(--r);overflow:hidden;border:1px solid rgba(120,170,255,.22);background:#000;box-shadow:0 30px 80px -30px rgba(33,86,245,.45),0 0 0 1px rgba(70,224,207,.06)}
+.cctv-vid video{display:block;width:100%;height:auto;aspect-ratio:1600/844;background:#000}
+.cctv-tag{position:absolute;left:14px;top:14px;display:flex;gap:8px;pointer-events:none}
+.cctv-tag span{font:600 11px/1 var(--f-m);letter-spacing:.12em;padding:8px 10px;border-radius:999px;background:rgba(5,8,16,.78);color:#e9f0f7;border:1px solid rgba(255,255,255,.16);backdrop-filter:blur(6px)}
+.cctv-tag span:first-child{color:#ff5b6b}
+.cctv-snd{all:unset;cursor:pointer;position:absolute;right:14px;top:14px;font:600 12px/1 var(--f-m);letter-spacing:.06em;padding:9px 12px;border-radius:999px;background:rgba(5,8,16,.78);color:#fff;border:1px solid rgba(255,255,255,.22)}
+.cctv-snd:hover{border-color:#46e0cf}
+.beats{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-top:14px}
+.beats button{all:unset;box-sizing:border-box;cursor:pointer;display:block;padding:16px 16px 18px;border-radius:14px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.03);transition:border-color .2s,background .2s;position:relative;overflow:hidden}
+.beats button:hover{border-color:rgba(255,255,255,.25)}
+.beats button.on{border-color:#46e0cf;background:rgba(70,224,207,.07)}
+.beats button.on::after{content:"";position:absolute;left:0;bottom:0;height:2px;width:var(--p,0%);background:var(--grad)}
+.beats .t{font:500 11.5px/1 var(--f-m);letter-spacing:.1em;color:#46e0cf}
+.beats b{display:block;font:600 16px/1.25 var(--f-d);color:#fff;margin:8px 0 6px}
+.beats span.d{display:block;font-size:13.5px;line-height:1.45;color:#a5b3c2}
+.cctv-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin-top:14px;border:1px solid rgba(255,255,255,.1);border-radius:var(--r);overflow:hidden}
+.cctv-stats div{padding:18px 20px;border-left:1px solid rgba(255,255,255,.1)}
+.cctv-stats div:first-child{border-left:0}
+.cctv-stats b{display:block;font:600 clamp(26px,2.6vw,36px)/1 var(--f-d);background:linear-gradient(95deg,#7aa8ff,#46e0cf 55%,#a8f04c);-webkit-background-clip:text;background-clip:text;color:transparent}
+.cctv-stats span{display:block;margin-top:8px;font-size:13.5px;color:#a5b3c2;line-height:1.4}
+.cctv-foot{margin-top:14px;font:500 11.5px/1.6 var(--f-m);letter-spacing:.06em;text-transform:uppercase;color:#7a8593}
+@media (max-width:1020px){.beats{grid-template-columns:repeat(2,minmax(0,1fr))}.beats button:last-child{grid-column:1/-1}.cctv-top{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:620px){.beats{grid-template-columns:minmax(0,1fr)}.cctv-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.cctv-stats div:nth-child(3){border-left:0}.cctv-stats div:nth-child(n+3){border-top:1px solid rgba(255,255,255,.1)}.cctv-tag span:last-child{display:none}}
 /* sdk ide */
 .ide{display:grid;grid-template-columns:230px minmax(0,1fr);border-radius:var(--r);border:1px solid var(--line);overflow:hidden;background:#0b111a}
 .tree{border-right:1px solid var(--line);padding:16px 0;font:13px/1.9 var(--f-m);color:#8796a8;background:#080d15}
@@ -483,6 +513,7 @@ footer a:first-child{margin-left:0}
     <div class="cta">
       <a class="btn pri" href="#how">See how it works <span aria-hidden="true">↓</span></a>
       <a class="btn" href="https://github.com/collectiv-co/deep-world-model"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2l3 6.5 7 .9-5.1 4.8 1.3 7L12 17.8 5.8 21.2l1.3-7L2 9.4l7-.9z"/></svg>Star on GitHub</a>
+      <a class="btn" href="#living-demo">▶ Watch CCTV become 3D</a>
       <a class="btn" href="https://deep3d.world/#demos">Live demos ↗</a>
     </div>
   </div>
@@ -671,6 +702,33 @@ footer a:first-child{margin-left:0}
     <div class="head rv">
       <div><p class="eb">Living World Model · always current</p><h2>Most 3D models are memories.<br><span class="gt">Ours is alive.</span></h2></div>
       <p class="lede">A scan records how a building looked on the day of the survey. The Deep World Model keeps watching. The CCTV cameras a venue already runs become its eyes. Each camera is registered into the model, each frame is checked against what the model expects to see, and only the part that changed is rebuilt. The building stays open and the world model stays current.</p>
+    </div>
+
+
+    <div class="cctv" id="living-demo">
+      <div class="cctv-top rv">
+        <div><p class="note">Real footage · one of the world's busiest airports · 2 existing CCTV cameras</p><h3>Two cameras the airport already had.<br><span class="gt">One living 3D world.</span></h3></div>
+        <p class="sub">Two ordinary ceiling cameras, fused into the Deep World Model. Every traveller is detected, followed across both feeds, measured and placed in metric 3D inside a photoreal model of the hall. No new sensors, no tags, no app. People appear as anonymous avatars: the model knows where someone is and how they move, not who they are.</p>
+      </div>
+      <div class="cctv-vid rv">
+        <video id="cctvv" src="assets/video/cctv-living.mp4" poster="assets/video/cctv-living-poster.jpg" muted loop playsinline preload="metadata" controls aria-label="Two existing airport CCTV cameras fused into the Deep World Model: travellers tracked across cameras and placed as anonymous avatars in a live 3D model of the terminal"></video>
+        <div class="cctv-tag"><span>● REAL FOOTAGE</span><span>NOT A RENDER</span></div>
+        <button class="cctv-snd" id="cctvs" type="button" aria-pressed="false">🔇 Sound off</button>
+      </div>
+      <div class="beats rv" id="beats">
+        <button type="button" data-t="0" class="on"><span class="t">00:00</span><b>The world loads</b><span class="d">The terminal's photoreal Gaussian‑splat model, pop‑up art installation and all.</span></button>
+        <button type="button" data-t="8"><span class="t">00:08</span><b>People enter the world</b><span class="d">Travellers seen on CCTV appear as anonymous avatars, standing exactly where they are.</span></button>
+        <button type="button" data-t="12"><span class="t">00:12</span><b>Two cameras, one person</b><span class="d">Each traveller is re‑identified across both feeds and kept as a single track.</span></button>
+        <button type="button" data-t="18"><span class="t">00:18</span><b>Measured, not guessed</b><span class="d">Heights from 102 to 187 cm, groups detected, departures remembered: “last seen 15 s ago”.</span></button>
+        <button type="button" data-t="26"><span class="t">00:26</span><b>Cameras inside the model</b><span class="d">Pull back: each camera sits in the 3D world at its solved pose, and the whole hall is live.</span></button>
+      </div>
+      <div class="cctv-stats rv">
+        <div><b>2</b><span>existing CCTV cameras, no new hardware</span></div>
+        <div><b>12</b><span>travellers tracked in under 30 seconds</span></div>
+        <div><b>3</b><span>groups recognised as moving together</span></div>
+        <div><b>1</b><span>shared metric 3D frame for every camera, robot and agent</span></div>
+      </div>
+      <p class="cctv-foot">Screen recording of the Deep World Model live view · camera feeds shown for illustration · in the model, people are anonymous tracks</p>
     </div>
 
     <div class="clocks">
@@ -1445,6 +1503,16 @@ tabs.forEach(b=>b.addEventListener('click',()=>{const n=b.dataset.scene;if(n===c
 /* pause rendering when off screen */
 new IntersectionObserver(es=>{if(app)app.autoRender=es[0].isIntersecting}).observe(V);
 }
+
+</script>
+<script>
+/* cctv demo */
+(()=>{const v=document.getElementById('cctvv');if(!v)return;const bs=[...document.querySelectorAll('#beats button')],ts=bs.map(b=>+b.dataset.t);
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){v.play().catch(()=>{})}else v.pause()}),{threshold:.35});io.observe(v);
+bs.forEach(b=>b.addEventListener('click',()=>{v.currentTime=+b.dataset.t;v.play().catch(()=>{})}));
+v.addEventListener('timeupdate',()=>{const t=v.currentTime;let k=0;ts.forEach((x,i)=>{if(t>=x)k=i});const end=ts[k+1]??v.duration;bs.forEach((b,i)=>{b.classList.toggle('on',i===k);if(i===k)b.style.setProperty('--p',Math.min(100,(t-ts[k])/(end-ts[k])*100)+'%')})});
+const s=document.getElementById('cctvs');const lab=()=>{s.textContent=v.muted?'🔇 Sound off':'🔊 Sound on';s.setAttribute('aria-pressed',String(!v.muted))};
+s.addEventListener('click',()=>{v.muted=!v.muted;if(!v.muted)v.play().catch(()=>{});lab()});v.addEventListener('volumechange',lab);})();
 </script>
 </body>
 </html>
